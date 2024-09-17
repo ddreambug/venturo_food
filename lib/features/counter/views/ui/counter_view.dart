@@ -10,56 +10,61 @@ class CounterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        appBar: AppBar(
-          backgroundColor: MainColor.primary,
-          title: Text(
-            "Counter App",
-            style: GoogleFonts.roboto(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w700,
-              color: MainColor.white,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: MainColor.primary,
+        title: Text(
+          "Counter App",
+          style: GoogleFonts.roboto(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w700,
+            color: MainColor.white,
           ),
         ),
-        body: Container(
-          padding: EdgeInsets.symmetric(
-            vertical: 10.h,
-            horizontal: 10.w,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Jumlah Penambahan",
-                  style: GoogleFonts.roboto(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  textAlign: TextAlign.center,
+        leading: IconButton(
+          onPressed: Get.back,
+          icon: const Icon(Icons.arrow_back),
+          color: MainColor.white,
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 10.h,
+          horizontal: 10.w,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Jumlah Penambahan",
+                style: GoogleFonts.roboto(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w400,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        CounterController.to.decrement();
-                      },
-                      icon: const Icon(Icons.remove),
-                    ),
-                    Text('${CounterController.to.count.value}'),
-                    IconButton(
-                      onPressed: () {
-                        CounterController.to.increment();
-                      },
-                      icon: const Icon(Icons.add),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      CounterController.to.decrement();
+                    },
+                    icon: const Icon(Icons.remove),
+                  ),
+                  Obx(
+                    () => Text('${CounterController.to.count.value}'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      CounterController.to.increment();
+                    },
+                    icon: const Icon(Icons.add),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),

@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                 height: 30,
                 child: ElevatedButton(
                     onPressed: () {
-                      Get.offNamed('/counter');
+                      Get.toNamed('/counter');
                     },
                     child: const Text('Masuk')),
               ),
