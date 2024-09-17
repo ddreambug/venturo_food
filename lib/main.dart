@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => GetMaterialApp(
         title: 'Trainee Skeleton',
-        initialRoute: MainRoute.initial,
+        initialRoute: MainRoute.splashScreen,
         theme: mainTheme,
         defaultTransition: Transition.native,
         getPages: MainPage.main,
