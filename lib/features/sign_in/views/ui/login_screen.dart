@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/features/sign_in/controllers/login_controller.dart';
-import 'package:venturo_food/shared/controllers/analytics_controller.dart';
+import 'package:venturo_food/shared/global_controllers/analytics_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -24,8 +25,8 @@ class LoginScreen extends StatelessWidget {
               Hero(
                 tag: 'splashImage',
                 child: Image.asset(
-                  'lib/assets/images/ic_splash.png',
-                  width: 150, // Set consistent width
+                  ImageConstant.splashLogo,
+                  width: 200,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -37,21 +38,20 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 10),
               TextFormField(
                 onChanged: (value) {},
+                style: const TextStyle(fontSize: 12),
                 decoration: const InputDecoration(
                   labelText: 'Alamat Email',
                   hintText: 'Lorem.ipsum@gmail.com',
-                  hintStyle: TextStyle(color: MainColor.grey, fontSize: 12),
                 ),
               ),
               Obx(
                 () => TextFormField(
+                  style: const TextStyle(fontSize: 12),
                   obscureText: controller.obscureText.value,
                   onChanged: (value) {},
                   decoration: InputDecoration(
                     labelText: 'Kata Sandi',
                     hintText: '***************',
-                    hintStyle:
-                        const TextStyle(color: MainColor.grey, fontSize: 12),
                     suffixIcon: IconButton(
                       onPressed: () {
                         controller.changePasswordVisibility();
@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                 height: 30,
                 child: ElevatedButton(
                     onPressed: () {
-                      Get.toNamed('/counter');
+                      Get.toNamed('/noInternet');
                       analyticsController.logButtonClick('Button Masuk');
                     },
                     child: const Text('Masuk')),
@@ -107,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SvgPicture.asset('lib/assets/svg/ic_google.svg'),
+                    SvgPicture.asset(ImageConstant.googleLogo),
                     const Text.rich(
                       TextSpan(
                         style: TextStyle(color: MainColor.black),
@@ -131,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SvgPicture.asset('lib/assets/svg/ic_apple.svg'),
+                    SvgPicture.asset(ImageConstant.appleLogo),
                     const Text.rich(
                       TextSpan(
                         style: TextStyle(color: MainColor.white),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/shared/controllers/analytics_controller.dart';
+import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/shared/global_controllers/analytics_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -22,8 +23,8 @@ class SplashScreen extends StatelessWidget {
             Hero(
               tag: 'splashImage',
               child: Image.asset(
-                'lib/assets/images/ic_splash.png',
-                width: 150, // Set consistent width
+                ImageConstant.splashLogo,
+                width: 200,
                 fit: BoxFit.contain,
               ),
             ),
