@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 class AnalyticsController extends GetxController {
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
-  void setCurrentScreen() {
-    analytics.logScreenView(screenName: 'screenName');
+  static AnalyticsController get to => Get.find();
+
+  void setCurrentScreen(String screenName) {
+    analytics.logScreenView(screenName: screenName);
   }
 
   void logPageView(String page) {

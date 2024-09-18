@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/shared/controllers/analytics_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AnalyticsController().setCurrentScreen('Splash Screen');
+
     Future.delayed(const Duration(seconds: 3), () {
       Get.offNamed('/login');
     });

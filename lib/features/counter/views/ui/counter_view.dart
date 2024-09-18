@@ -12,6 +12,7 @@ class CounterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final analyticsController = AnalyticsController();
+    analyticsController.setCurrentScreen('Counter Screen');
     analyticsController.logPageView('Counter Page');
 
     return Scaffold(
@@ -54,6 +55,7 @@ class CounterView extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       CounterController.to.decrement();
+                      analyticsController.logButtonClick('Decrement');
                     },
                     icon: const Icon(Icons.remove),
                   ),
@@ -63,6 +65,7 @@ class CounterView extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       CounterController.to.increment();
+                      analyticsController.logButtonClick('Increment');
                     },
                     icon: const Icon(Icons.add),
                   ),

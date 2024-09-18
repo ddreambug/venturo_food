@@ -11,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final analyticsController = AnalyticsController();
+    analyticsController.setCurrentScreen('Login Screen');
 
     final LoginController controller = LoginController.to;
     return Scaffold(

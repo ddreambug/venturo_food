@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +11,7 @@ import 'package:venturo_food/shared/controllers/analytics_controller.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  Get.put(AnalyticsController.analytics);
+  Get.put(AnalyticsController());
 
   runApp(const MyApp());
 }
@@ -22,9 +21,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final analyticsController = AnalyticsController();
-    analyticsController.setCurrentScreen();
-
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       minTextAdapt: true,
