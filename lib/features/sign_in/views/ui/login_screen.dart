@@ -3,12 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/sign_in/controllers/login_controller.dart';
+import 'package:venturo_food/shared/controllers/analytics_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final analyticsController = AnalyticsController();
+
     final LoginController controller = LoginController.to;
     return Scaffold(
       body: Padding(
@@ -66,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       Get.toNamed('/counter');
+                      analyticsController.logButtonClick('Button Masuk');
                     },
                     child: const Text('Masuk')),
               ),

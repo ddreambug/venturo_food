@@ -4,12 +4,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/counter/controllers/counter_controller.dart';
+import 'package:venturo_food/shared/controllers/analytics_controller.dart';
 
 class CounterView extends StatelessWidget {
   const CounterView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final analyticsController = AnalyticsController();
+    analyticsController.logPageView('Counter Page');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MainColor.primary,

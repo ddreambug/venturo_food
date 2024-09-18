@@ -5,6 +5,7 @@ import 'package:venturo_food/features/counter/views/ui/counter_view.dart';
 import 'package:venturo_food/features/sign_in/bindings/login_binding.dart';
 import 'package:venturo_food/features/sign_in/views/ui/login_screen.dart';
 import 'package:venturo_food/features/sign_in/views/ui/splash_screen.dart';
+import 'package:venturo_food/shared/bindings/analytics_binding.dart';
 
 abstract class MainPage {
   static final main = [
@@ -13,16 +14,20 @@ abstract class MainPage {
       page: () => const SplashScreen(),
     ),
     GetPage(
-      name: MainRoute.login,
-      page: () => const LoginScreen(),
-      transition: Transition.fade,
-      transitionDuration: const Duration(seconds: 1),
-      binding: LoginBinding(),
-    ),
+        name: MainRoute.login,
+        page: () => const LoginScreen(),
+        transition: Transition.fade,
+        transitionDuration: const Duration(seconds: 1),
+        bindings: [
+          LoginBinding(),
+          AnalyticsBinding(),
+        ]),
     GetPage(
-      name: MainRoute.counter,
-      page: () => const CounterView(),
-      binding: CounterBindings(),
-    ),
+        name: MainRoute.counter,
+        page: () => const CounterView(),
+        bindings: [
+          CounterBindings(),
+          AnalyticsBinding(),
+        ]),
   ];
 }

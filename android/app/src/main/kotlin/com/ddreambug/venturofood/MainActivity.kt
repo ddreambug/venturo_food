@@ -1,4 +1,4 @@
-package com.example.venturo_food
+package com.ddreambug.venturofood
 
 import io.flutter.embedding.android.FlutterActivity
 
