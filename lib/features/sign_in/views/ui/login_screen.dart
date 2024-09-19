@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                 height: 30,
                 child: ElevatedButton(
                     onPressed: () {
-                      Get.toNamed('/noInternet');
+                      Get.toNamed('/no-internet');
                       analyticsController.logButtonClick('Button Masuk');
                     },
                     child: const Text('Masuk')),
