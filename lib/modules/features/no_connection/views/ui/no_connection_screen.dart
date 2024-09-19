@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
-import 'package:venturo_food/features/no_connection/controllers/no_internet_controller.dart';
+import 'package:venturo_food/modules/features/no_connection/controllers/no_internet_controller.dart';
+import 'package:venturo_food/modules/global_controllers/global_controller.dart';
 
-class NoInternet extends StatelessWidget {
-  const NoInternet({super.key});
+class NoConnectionScreen extends StatelessWidget {
+  const NoConnectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,17 @@ class NoInternet extends StatelessWidget {
               height: 30,
               child: ElevatedButton(
                   onPressed: () {
-                    Get.offNamed('/login');
+                    Get.closeAllSnackbars();
+                    GlobalController.to.checkConnectionInPage();
+                    if (GlobalController.to.isConnect.value == true) {
+                      Get.offNamed(MainRoute.login);
+                    } else {
+                      Get.snackbar(
+                        duration: const Duration(milliseconds: 1500),
+                        'Terjadi Kesalahan',
+                        'Koneksi masih belum tersambung',
+                      );
+                    }
                   },
                   child: const Text('Coba Lagi')),
             ),

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:venturo_food/shared/global_controllers/analytics_controller.dart';
+import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
 
 class AnalyticsBinding implements Bindings {
   @override

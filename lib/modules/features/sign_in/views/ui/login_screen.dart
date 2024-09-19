@@ -3,18 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
-import 'package:venturo_food/features/sign_in/controllers/login_controller.dart';
-import 'package:venturo_food/shared/global_controllers/analytics_controller.dart';
+import 'package:venturo_food/modules/features/sign_in/controllers/login_controller.dart';
+import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final analyticsController = AnalyticsController();
+    final analyticsController = Get.find<AnalyticsController>();
+    final loginController = LoginController.to;
     analyticsController.setCurrentScreen('Login Screen');
 
-    final LoginController controller = LoginController.to;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 100, 25, 100),
@@ -47,16 +47,16 @@ class LoginScreen extends StatelessWidget {
               Obx(
                 () => TextFormField(
                   style: const TextStyle(fontSize: 12),
-                  obscureText: controller.obscureText.value,
+                  obscureText: loginController.obscureText.value,
                   onChanged: (value) {},
                   decoration: InputDecoration(
                     labelText: 'Kata Sandi',
                     hintText: '***************',
                     suffixIcon: IconButton(
                       onPressed: () {
-                        controller.changePasswordVisibility();
+                        loginController.changePasswordVisibility();
                       },
-                      icon: Icon(controller.obscureText.value
+                      icon: Icon(loginController.obscureText.value
                           ? Icons.visibility
                           : Icons.visibility_off),
                     ),
@@ -69,8 +69,8 @@ class LoginScreen extends StatelessWidget {
                 height: 30,
                 child: ElevatedButton(
                     onPressed: () {
-                      Get.toNamed('/no-internet');
                       analyticsController.logButtonClick('Button Masuk');
+                      loginController.changeScreen();
                     },
                     child: const Text('Masuk')),
               ),

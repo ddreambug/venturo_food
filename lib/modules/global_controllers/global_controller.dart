@@ -23,7 +23,7 @@ class GlobalController extends GetxController {
         stackTrace: stackTrace,
       );
 
-      Get.offAllNamed(MainRoute.noInternet);
+      Get.offAllNamed(MainRoute.noConnection);
     }
   }
 
