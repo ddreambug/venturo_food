@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -11,23 +13,44 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final analyticsController = Get.find<AnalyticsController>();
     final loginController = LoginController.to;
-    analyticsController.setCurrentScreen('Login Screen');
+
+    ///google analytic
+    final analyticsController = Get.find<AnalyticsController>();
+    if (Platform.isAndroid) {
+      analyticsController.setCurrentScreen(
+        'Sign In Screen',
+        screenClass: 'Android',
+      );
+    } else if (Platform.isIOS) {
+      analyticsController.setCurrentScreen(
+        'Sign In Screen',
+        screenClass: 'IOS',
+      );
+    } else if (Platform.isMacOS) {
+      analyticsController.setCurrentScreen(
+        'Sign In Screen',
+        screenClass: 'MacOS',
+      );
+    }
 
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 100, 25, 100),
-        child: Center(
+        child: Form(
+          key: loginController.formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Hero(
                 tag: 'splashImage',
-                child: Image.asset(
-                  ImageConstant.splashLogo,
-                  width: 200,
-                  fit: BoxFit.contain,
+                child: GestureDetector(
+                  onDoubleTap: () => loginController.flavorSeting(),
+                  child: Image.asset(
+                    ImageConstant.splashLogo,
+                    width: 200,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               const Spacer(),
@@ -37,18 +60,35 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                onChanged: (value) {},
+                controller: loginController.emailController,
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Isikan Email';
+                  } else if (value.contains(RegExp(r'[!#$%^&*(),?":{}|<>]'))) {
+                    return 'Format Email harus benar!';
+                  }
+                  return null;
+                },
                 style: const TextStyle(fontSize: 12),
                 decoration: const InputDecoration(
                   labelText: 'Alamat Email',
                   hintText: 'Lorem.ipsum@gmail.com',
                 ),
+                onSaved: (newValue) =>
+                    loginController.emailValue.value = newValue!,
               ),
               Obx(
                 () => TextFormField(
+                  controller: loginController.passwordController,
                   style: const TextStyle(fontSize: 12),
                   obscureText: loginController.obscureText.value,
-                  onChanged: (value) {},
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Isikan Password';
+                    }
+                    return null;
+                  },
                   decoration: InputDecoration(
                     labelText: 'Kata Sandi',
                     hintText: '***************',
@@ -61,6 +101,8 @@ class LoginScreen extends StatelessWidget {
                           : Icons.visibility_off),
                     ),
                   ),
+                  onSaved: (newValue) =>
+                      loginController.passwordValue.value = newValue!,
                 ),
               ),
               const SizedBox(height: 10),
@@ -70,7 +112,7 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       analyticsController.logButtonClick('Button Masuk');
-                      loginController.changeScreen();
+                      LoginController.to.validateForm(context);
                     },
                     child: const Text('Masuk')),
               ),

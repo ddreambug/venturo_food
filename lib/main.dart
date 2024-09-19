@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_food/configs/pages/main_page.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
@@ -12,6 +14,12 @@ import 'package:venturo_food/modules/global_controllers/analytics_controller.dar
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //hive init
+  await Hive.initFlutter();
+  await Hive.openBox("venturo");
+
+  //firebase init
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(AnalyticsController());
 
@@ -44,6 +52,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.native,
         getPages: MainPage.main,
         initialBinding: GlobalBinding(),
+        builder: EasyLoading.init(),
       ),
     );
   }
