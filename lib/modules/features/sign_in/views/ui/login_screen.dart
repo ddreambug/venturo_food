@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       );
     } else if (Platform.isMacOS) {
       analyticsController.setCurrentScreen(
-       screenName:  'Sign In Screen',
+        screenName: 'Sign In Screen',
         screenClass: 'MacOS',
       );
     }
@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                 controller: loginController.emailController,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Isikan Email';
                   } else if (value.contains(RegExp(r'[!#$%^&*(),?":{}|<>]'))) {
                     return 'Format Email harus benar!';
@@ -85,8 +85,10 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 12.sp),
                   obscureText: loginController.obscureText.value,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Isikan Password';
+                    } else if (value.contains(RegExp(r' '))) {
+                      return 'Tidak boleh ada Whitespace!';
                     }
                     return null;
                   },
@@ -109,13 +111,26 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 10.r),
               SizedBox(
                 width: double.infinity,
-                height: 30.r,
+                height: 30.w,
                 child: ElevatedButton(
                     onPressed: () {
                       analyticsController.logButtonClick('Button Masuk');
                       LoginController.to.validateForm(context);
                     },
                     child: const Text('Masuk')),
+              ),
+              SizedBox(
+                height: 32.w,
+                child: TextButton(
+                  onPressed: () {
+                    Get.toNamed('forgot-password');
+                  },
+                  child: Text(
+                    'Lupa Password?',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
+                ),
               ),
               const Spacer(),
               Row(

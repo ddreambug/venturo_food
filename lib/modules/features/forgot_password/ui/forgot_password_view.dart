@@ -55,29 +55,28 @@ class ForgotPasswordView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 121.h),
+              SizedBox(height: 50.h),
               GestureDetector(
                 child: Image.asset(
                   ImageConstant.logo,
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(height: 121.h),
+              SizedBox(height: 70.h),
               Text(
                 'Masukkan alamat email untuk mengubah password anda',
                 style: TextStyle(
-                  fontSize: 22.sp,
+                  fontSize: 20.sp,
                   color: MainColor.black,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 20.h),
               Form(
                 key: ForgotPasswordController.to.formKey,
                 child: TextFormField(
                   controller: ForgotPasswordController.to.emailCtrl,
                   keyboardType: TextInputType.emailAddress,
-                  initialValue: ForgotPasswordController.to.emailValue.value,
                   decoration: const InputDecoration(
                     labelText: "Email Address",
                     hintText: "Input Email Address",
@@ -90,7 +89,7 @@ class ForgotPasswordView extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 20.h),
               ElevatedButton(
                 onPressed: () {},
                 child: Text(
