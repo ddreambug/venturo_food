@@ -6,7 +6,8 @@ class AnalyticsController extends GetxController {
 
   static AnalyticsController get to => Get.find();
 
-  void setCurrentScreen(String screenName, {String screenClass = 'default'}) {
+  void setCurrentScreen(
+      {String screenName = 'default', String screenClass = 'default'}) {
     analytics.logScreenView(screenName: screenName, screenClass: screenClass);
   }
 

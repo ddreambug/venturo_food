@@ -26,8 +26,8 @@ final ThemeData mainTheme = ThemeData(
       backgroundColor: WidgetStatePropertyAll(MainColor.primary),
     ),
   ),
-  inputDecorationTheme: const InputDecorationTheme(
-    labelStyle: TextStyle(fontSize: 14),
-    hintStyle: TextStyle(color: MainColor.grey, fontSize: 12),
+  inputDecorationTheme: InputDecorationTheme(
+    labelStyle: TextStyle(fontSize: 14.sp),
+    hintStyle: TextStyle(color: MainColor.grey, fontSize: 12.sp),
   ),
 );

@@ -7,6 +7,7 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/modules/features/sign_in/controllers/login_controller.dart';
 import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -19,24 +20,24 @@ class LoginScreen extends StatelessWidget {
     final analyticsController = Get.find<AnalyticsController>();
     if (Platform.isAndroid) {
       analyticsController.setCurrentScreen(
-        'Sign In Screen',
+        screenName: 'Sign In Screen',
         screenClass: 'Android',
       );
     } else if (Platform.isIOS) {
       analyticsController.setCurrentScreen(
-        'Sign In Screen',
+        screenName: 'Sign In Screen',
         screenClass: 'IOS',
       );
     } else if (Platform.isMacOS) {
       analyticsController.setCurrentScreen(
-        'Sign In Screen',
+       screenName:  'Sign In Screen',
         screenClass: 'MacOS',
       );
     }
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 100, 25, 100),
+        padding: const EdgeInsets.fromLTRB(25, 100, 25, 100).r,
         child: Form(
           key: loginController.formKey,
           child: Column(
@@ -47,18 +48,18 @@ class LoginScreen extends StatelessWidget {
                 child: GestureDetector(
                   onDoubleTap: () => loginController.flavorSeting(),
                   child: Image.asset(
-                    ImageConstant.splashLogo,
-                    width: 200,
+                    ImageConstant.logo,
+                    width: 200.r,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               const Spacer(),
-              const Text(
+              Text(
                 'Masuk untuk melanjutkan!',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18.sp),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.r),
               TextFormField(
                 controller: loginController.emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -70,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                   }
                   return null;
                 },
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12.sp),
                 decoration: const InputDecoration(
                   labelText: 'Alamat Email',
                   hintText: 'Lorem.ipsum@gmail.com',
@@ -81,7 +82,7 @@ class LoginScreen extends StatelessWidget {
               Obx(
                 () => TextFormField(
                   controller: loginController.passwordController,
-                  style: const TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12.sp),
                   obscureText: loginController.obscureText.value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -105,10 +106,10 @@ class LoginScreen extends StatelessWidget {
                       loginController.passwordValue.value = newValue!,
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.r),
               SizedBox(
                 width: double.infinity,
-                height: 30,
+                height: 30.r,
                 child: ElevatedButton(
                     onPressed: () {
                       analyticsController.logButtonClick('Button Masuk');
@@ -117,27 +118,27 @@ class LoginScreen extends StatelessWidget {
                     child: const Text('Masuk')),
               ),
               const Spacer(),
-              const Row(
+              Row(
                 children: [
                   Expanded(
                     child: Divider(
                       color: MainColor.grey,
-                      indent: 5,
-                      endIndent: 10,
+                      indent: 5.r,
+                      endIndent: 10.r,
                     ),
                   ),
                   Text(
                     'atau',
                     style: TextStyle(
                         color: MainColor.grey,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w100),
                   ),
                   Expanded(
                     child: Divider(
                       color: MainColor.grey,
-                      indent: 10,
-                      endIndent: 5,
+                      indent: 10.r,
+                      endIndent: 5.r,
                     ),
                   ),
                 ],

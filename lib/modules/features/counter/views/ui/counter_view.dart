@@ -12,7 +12,7 @@ class CounterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final analyticsController = Get.find<AnalyticsController>();
-    analyticsController.setCurrentScreen('Counter Screen');
+    analyticsController.setCurrentScreen(screenName: 'Counter Screen');
     analyticsController.logPageView('Counter Page');
 
     return Scaffold(
