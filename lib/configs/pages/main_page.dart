@@ -3,7 +3,7 @@ import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/modules/features/counter/bindings/counter_bindings.dart';
 import 'package:venturo_food/modules/features/counter/views/ui/counter_view.dart';
 import 'package:venturo_food/modules/features/forgot_password/bindings/forgot_password_binding.dart';
-import 'package:venturo_food/modules/features/forgot_password/ui/forgot_password_view.dart';
+import 'package:venturo_food/modules/features/forgot_password/views/ui/forgot_password_view.dart';
 import 'package:venturo_food/modules/features/sign_in/bindings/login_binding.dart';
 import 'package:venturo_food/modules/features/sign_in/bindings/splash_binding.dart';
 import 'package:venturo_food/modules/features/sign_in/views/ui/login_screen.dart';

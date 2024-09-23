@@ -36,177 +36,181 @@ class LoginScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 100, 25, 100).r,
-        child: Form(
-          key: loginController.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Hero(
-                tag: 'splashImage',
-                child: GestureDetector(
-                  onDoubleTap: () => loginController.flavorSeting(),
-                  child: Image.asset(
-                    ImageConstant.logo,
-                    width: 200.r,
-                    fit: BoxFit.contain,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(25, 100, 25, 100).r,
+          child: Form(
+            key: loginController.formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Hero(
+                  tag: 'splashImage',
+                  child: GestureDetector(
+                    onDoubleTap: () => loginController.flavorSeting(),
+                    child: Image.asset(
+                      ImageConstant.logo,
+                      width: 200.r,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
-              ),
-              const Spacer(),
-              Text(
-                'Masuk untuk melanjutkan!',
-                style: TextStyle(fontSize: 18.sp),
-              ),
-              SizedBox(height: 10.r),
-              TextFormField(
-                controller: loginController.emailController,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Isikan Email';
-                  } else if (value.contains(RegExp(r'[!#$%^&*(),?":{}|<>]'))) {
-                    return 'Format Email harus benar!';
-                  }
-                  return null;
-                },
-                style: TextStyle(fontSize: 12.sp),
-                decoration: const InputDecoration(
-                  labelText: 'Alamat Email',
-                  hintText: 'Lorem.ipsum@gmail.com',
+                SizedBox(height: 60.w),
+                Text(
+                  'Masuk untuk melanjutkan!',
+                  style: TextStyle(fontSize: 18.sp),
                 ),
-                onSaved: (newValue) =>
-                    loginController.emailValue.value = newValue!,
-              ),
-              Obx(
-                () => TextFormField(
-                  controller: loginController.passwordController,
-                  style: TextStyle(fontSize: 12.sp),
-                  obscureText: loginController.obscureText.value,
+                SizedBox(height: 10.r),
+                TextFormField(
+                  controller: loginController.emailController,
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Isikan Password';
-                    } else if (value.contains(RegExp(r' '))) {
-                      return 'Tidak boleh ada Whitespace!';
+                      return 'Isikan Email';
+                    } else if (value
+                        .contains(RegExp(r'[!#$%^&*(),?":{}|<>]'))) {
+                      return 'Format Email harus benar!';
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    labelText: 'Kata Sandi',
-                    hintText: '***************',
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        loginController.changePasswordVisibility();
-                      },
-                      icon: Icon(loginController.obscureText.value
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
+                  style: TextStyle(fontSize: 12.sp),
+                  decoration: const InputDecoration(
+                    labelText: 'Alamat Email',
+                    hintText: 'Lorem.ipsum@gmail.com',
                   ),
                   onSaved: (newValue) =>
-                      loginController.passwordValue.value = newValue!,
+                      loginController.emailValue.value = newValue!,
                 ),
-              ),
-              SizedBox(height: 10.r),
-              SizedBox(
-                width: double.infinity,
-                height: 30.w,
-                child: ElevatedButton(
-                    onPressed: () {
-                      analyticsController.logButtonClick('Button Masuk');
-                      LoginController.to.validateForm(context);
-                    },
-                    child: const Text('Masuk')),
-              ),
-              SizedBox(
-                height: 32.w,
-                child: TextButton(
-                  onPressed: () {
-                    Get.toNamed('forgot-password');
-                  },
-                  child: Text(
-                    'Lupa Password?',
-                    textAlign: TextAlign.left,
+                Obx(
+                  () => TextFormField(
+                    controller: loginController.passwordController,
                     style: TextStyle(fontSize: 12.sp),
+                    obscureText: loginController.obscureText.value,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Isikan Password';
+                      } else if (value.contains(RegExp(r' '))) {
+                        return 'Tidak boleh ada Whitespace!';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Kata Sandi',
+                      hintText: '***************',
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          loginController.changePasswordVisibility();
+                        },
+                        icon: Icon(loginController.obscureText.value
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                      ),
+                    ),
+                    onSaved: (newValue) =>
+                        loginController.passwordValue.value = newValue!,
                   ),
                 ),
-              ),
-              const Spacer(),
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                      color: MainColor.grey,
-                      indent: 5.r,
-                      endIndent: 10.r,
+                SizedBox(height: 10.r),
+                SizedBox(
+                  width: double.infinity,
+                  height: 35.w,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        analyticsController.logButtonClick('Button Masuk');
+                        LoginController.to.validateForm(context);
+                      },
+                      child: const Text('Masuk')),
+                ),
+                SizedBox(
+                  height: 32.w,
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed('forgot-password');
+                    },
+                    child: Text(
+                      'Lupa Password?',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 12.sp),
                     ),
                   ),
-                  Text(
-                    'atau',
-                    style: TextStyle(
+                ),
+                SizedBox(height: 70.w),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
                         color: MainColor.grey,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w100),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color: MainColor.grey,
-                      indent: 10.r,
-                      endIndent: 5.r,
+                        indent: 5.r,
+                        endIndent: 10.r,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(MainColor.white)),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SvgPicture.asset(ImageConstant.googleLogo),
-                    const Text.rich(
-                      TextSpan(
-                        style: TextStyle(color: MainColor.black),
-                        text: 'Masuk Menggunakan ',
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Google',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ))
-                        ],
+                    Text(
+                      'atau',
+                      style: TextStyle(
+                          color: MainColor.grey,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w100),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: MainColor.grey,
+                        indent: 10.r,
+                        endIndent: 5.r,
                       ),
                     ),
                   ],
                 ),
-              ),
-              ElevatedButton(
-                style: const ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(MainColor.black)),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SvgPicture.asset(ImageConstant.appleLogo),
-                    const Text.rich(
-                      TextSpan(
-                        style: TextStyle(color: MainColor.white),
-                        text: 'Masuk Menggunakan ',
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Apple',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ))
-                        ],
+                ElevatedButton(
+                  style: const ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(MainColor.white)),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SvgPicture.asset(ImageConstant.googleLogo),
+                      const Text.rich(
+                        TextSpan(
+                          style: TextStyle(color: MainColor.black),
+                          text: 'Masuk Menggunakan ',
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Google',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                ElevatedButton(
+                  style: const ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(MainColor.black)),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SvgPicture.asset(ImageConstant.appleLogo),
+                      const Text.rich(
+                        TextSpan(
+                          style: TextStyle(color: MainColor.white),
+                          text: 'Masuk Menggunakan ',
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Apple',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

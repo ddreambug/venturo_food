@@ -26,7 +26,7 @@ void main() async {
   await SentryFlutter.init(
     (options) {
       options.dsn =
-          'https://86e887d5dc9744c090e86f9b303e8d44@o4505368078254080.ingest.sentry.io/4505368079499264';
+          'https://3568268c0ddc5887b9b0c185423fb1e2@o4507999775752192.ingest.us.sentry.io/4507999795478528';
       options.tracesSampleRate = 1.0;
     },
     appRunner: () => runApp(const MyApp()),
