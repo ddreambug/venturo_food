@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/constants/cores/assets/image_constant.dart';
-import 'package:venturo_food/modules/features/no_connection/controllers/no_internet_controller.dart';
 import 'package:venturo_food/modules/global_controllers/global_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class NoConnectionScreen extends StatelessWidget {
-  const NoConnectionScreen({super.key});
+class NoConnection extends StatelessWidget {
+  const NoConnection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final noInternetController = Get.find<NoInternetController>();
-
-    Widget content = Padding(
+    return Padding(
       padding: EdgeInsets.all(20.0.r),
       child: Center(
         child: Column(
@@ -53,30 +49,6 @@ class NoConnectionScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-
-    return Scaffold(
-      body: Stack(
-        children: [
-          Obx(() {
-            return AnimatedPositioned(
-              curve: Curves.ease,
-              top: noInternetController.animationPlay.value ? 20.r : 50.r,
-              left: 0,
-              right: 0,
-              duration: const Duration(seconds: 4),
-              child: Center(
-                child: Image.asset(
-                  ImageConstant.patternBackground,
-                  width: 260.r,
-                  color: MainColor.primary,
-                ),
-              ),
-            );
-          }),
-          content
-        ],
       ),
     );
   }

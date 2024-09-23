@@ -42,7 +42,7 @@ class LoginController extends GetxController {
       if (emailController.text == "admin@gmail.com" &&
           passwordController.text == "admin") {
         EasyLoading.dismiss();
-        Get.toNamed('/counter');
+        Get.toNamed('/search-location');
       } else {
         EasyLoading.dismiss();
         PanaraInfoDialog.show(

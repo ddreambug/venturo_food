@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/modules/features/forgot_password/views/component/otp_component.dart';
 import 'package:venturo_food/modules/global_controllers/global_controller.dart';
@@ -36,9 +37,18 @@ class ForgotPasswordController extends GetxController {
     }
   }
 
-  void onOtpComplete(String value) {
+  void onOtpComplete(BuildContext context, String value) {
     if (value == "1234") {
-      Get.offAllNamed('/login');
+      PanaraInfoDialog.show(
+        context,
+        message: 'Password telah di Reset!',
+        buttonText: 'OK',
+        onTapDismiss: () {
+          Get.offAllNamed('/login');
+        },
+        panaraDialogType: PanaraDialogType.success,
+        barrierDismissible: false,
+      );
       Get.snackbar("Sukses", "Kode Otp Valid",
           backgroundColor: MainColor.white,
           duration: const Duration(seconds: 2));

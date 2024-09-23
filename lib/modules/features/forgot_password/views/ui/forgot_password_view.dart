@@ -55,10 +55,13 @@ class ForgotPasswordView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 50.h),
-              Image.asset(
-                ImageConstant.logo,
-                width: 200.w,
-                fit: BoxFit.contain,
+              Hero(
+                tag: 'splashImage',
+                child: Image.asset(
+                  ImageConstant.logo,
+                  width: 200.r,
+                  fit: BoxFit.contain,
+                ),
               ),
               SizedBox(height: 70.h),
               Column(

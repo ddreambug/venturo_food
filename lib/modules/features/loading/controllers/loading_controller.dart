@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'dart:async';
 
-class NoInternetController extends GetxController {
-  static NoInternetController get to => Get.find();
+class LoadingController extends GetxController {
+  static LoadingController get to => Get.find();
 
   var animationPlay = false.obs;
   Timer? _animationTimer;

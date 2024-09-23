@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/modules/features/forgot_password/controllers/forgot_password_controller.dart';
 import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
 
@@ -48,7 +47,7 @@ class OtpView extends StatelessWidget {
 
     return Center(
       child: Container(
-        height: 280.r,
+        height: 300.r,
         width: 300.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -83,7 +82,9 @@ class OtpView extends StatelessWidget {
                 }
                 return null;
               },
-              onCompleted: ForgotPasswordController.to.onOtpComplete,
+              onCompleted: (value) {
+                ForgotPasswordController.to.onOtpComplete(context, value);
+              },
             ),
           ],
         ),

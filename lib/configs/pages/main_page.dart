@@ -8,8 +8,8 @@ import 'package:venturo_food/modules/features/sign_in/bindings/login_binding.dar
 import 'package:venturo_food/modules/features/sign_in/bindings/splash_binding.dart';
 import 'package:venturo_food/modules/features/sign_in/views/ui/login_screen.dart';
 import 'package:venturo_food/modules/features/sign_in/views/ui/splash_screen.dart';
-import 'package:venturo_food/modules/features/no_connection/bindings/no_internet_binding.dart';
-import 'package:venturo_food/modules/features/no_connection/views/ui/no_connection_screen.dart';
+import 'package:venturo_food/modules/features/loading/bindings/loading_binding.dart';
+import 'package:venturo_food/modules/features/loading/views/ui/loading_view.dart';
 
 abstract class MainPage {
   static final main = [
@@ -20,9 +20,15 @@ abstract class MainPage {
     ),
     GetPage(
       name: MainRoute.noConnection,
-      page: () => const NoConnectionScreen(),
+      page: () => const LoadingView(),
       transition: Transition.noTransition,
-      binding: NoInternetBinding(),
+      binding: LoadingBinding(),
+    ),
+    GetPage(
+      name: MainRoute.searchLocation,
+      page: () => const LoadingView(searchLocation: true),
+      transition: Transition.noTransition,
+      binding: LoadingBinding(),
     ),
     GetPage(
       name: MainRoute.login,
