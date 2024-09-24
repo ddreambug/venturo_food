@@ -13,7 +13,9 @@ class LoadingController extends GetxController {
 
   /// Animasi loading
   var animationPlay = false.obs;
+  var buttonToggled = false.obs;
   var loadingDots = ''.obs;
+  var loadingNextPage = 11.obs;
   Timer? _animationTimer;
 
   /// Properti lokasi
@@ -26,8 +28,10 @@ class LoadingController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    startAnimationLoop();
-    startLoadingTextAnimation();
+    toggleBackgroundLoop();
+    toggleLoadingTextAnimation();
+    toggleButtonAnimation();
+    toggleCountdownAnimation();
     getCurrentLocation();
   }
 
@@ -37,18 +41,8 @@ class LoadingController extends GetxController {
     super.onClose();
   }
 
-  void toggleAnimation() {
-    animationPlay.value = !animationPlay.value;
-  }
-
-  void startAnimationLoop() {
-    _animationTimer =
-        Timer.periodic(const Duration(milliseconds: 1200), (timer) {
-      toggleAnimation();
-    });
-  }
-
-  void startLoadingTextAnimation() {
+  /// Animation Text ...
+  void toggleLoadingTextAnimation() {
     _animationTimer =
         Timer.periodic(const Duration(milliseconds: 500), (timer) {
       if (loadingDots.value.length < 3) {
@@ -59,7 +53,38 @@ class LoadingController extends GetxController {
     });
   }
 
-  /// ini digunakan untuk membypass global controller > location service karena belum bisa
+  /// Animation auto next
+  void toggleCountdownAnimation() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (loadingNextPage.value > 0) {
+        loadingNextPage.value--;
+      } else {
+        timer.cancel();
+        Get.offAllNamed('/counter');
+      }
+    });
+  }
+
+  /// Animation delay button cancel
+  void toggleButtonAnimation() {
+    Future.delayed(const Duration(seconds: 2));
+    buttonToggled.value = true;
+  }
+
+  /// Toggle posisi background
+  void toggleBackgroundAnimation() {
+    animationPlay.value = !animationPlay.value;
+  }
+
+  /// Looping posisi background
+  void toggleBackgroundLoop() {
+    _animationTimer =
+        Timer.periodic(const Duration(milliseconds: 1200), (timer) {
+      toggleBackgroundAnimation();
+    });
+  }
+
+  /// Ambil alamat pake pub Location
   void getCurrentLocation() async {
     loc.Location location = loc.Location();
 
@@ -91,7 +116,7 @@ class LoadingController extends GetxController {
     isLoading.value = false;
   }
 
-  ///parse alamat
+  /// Parse alamat pake api googlemaps
   Future<void> getLocationAddress(double lat, double long) async {
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=$gMapsApiKey');

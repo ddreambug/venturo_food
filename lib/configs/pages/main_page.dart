@@ -6,7 +6,7 @@ import 'package:venturo_food/modules/features/forgot_password/bindings/forgot_pa
 import 'package:venturo_food/modules/features/forgot_password/views/ui/forgot_password_view.dart';
 import 'package:venturo_food/modules/features/sign_in/bindings/login_binding.dart';
 import 'package:venturo_food/modules/features/sign_in/bindings/splash_binding.dart';
-import 'package:venturo_food/modules/features/sign_in/views/ui/login_screen.dart';
+import 'package:venturo_food/modules/features/sign_in/views/ui/login_view.dart';
 import 'package:venturo_food/modules/features/sign_in/views/ui/splash_screen.dart';
 import 'package:venturo_food/modules/features/loading/bindings/loading_binding.dart';
 import 'package:venturo_food/modules/features/loading/views/ui/loading_view.dart';
@@ -32,7 +32,7 @@ abstract class MainPage {
     ),
     GetPage(
       name: MainRoute.login,
-      page: () => const LoginScreen(),
+      page: () => const LoginView(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(seconds: 2),
       binding: LoginBinding(),

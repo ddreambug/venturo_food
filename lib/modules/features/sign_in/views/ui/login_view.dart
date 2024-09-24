@@ -9,8 +9,8 @@ import 'package:venturo_food/modules/features/sign_in/controllers/login_controll
 import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +68,13 @@ class LoginScreen extends StatelessWidget {
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Isikan Email';
-                    } else if (value
-                        .contains(RegExp(r'[!#$%^&*(),?":{}|<>]'))) {
+                    } else if (!RegExp(r"^[a-zA-Z0-9._%+-]+@gmail\.com$")
+                        .hasMatch(value)) {
                       return 'Format Email harus benar!';
                     }
                     return null;
                   },
-                  style: TextStyle(fontSize: 12.sp),
+                  style: TextStyle(fontSize: 14.sp),
                   decoration: const InputDecoration(
                     labelText: 'Alamat Email',
                     hintText: 'Lorem.ipsum@gmail.com',
@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                 Obx(
                   () => TextFormField(
                     controller: loginController.passwordController,
-                    style: TextStyle(fontSize: 12.sp),
+                    style: TextStyle(fontSize: 14.sp),
                     obscureText: loginController.obscureText.value,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {

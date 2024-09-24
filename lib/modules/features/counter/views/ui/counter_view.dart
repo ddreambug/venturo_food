@@ -26,11 +26,6 @@ class CounterView extends StatelessWidget {
             color: MainColor.white,
           ),
         ),
-        leading: IconButton(
-          onPressed: Get.back,
-          icon: const Icon(Icons.arrow_back),
-          color: MainColor.white,
-        ),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(

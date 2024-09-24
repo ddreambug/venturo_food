@@ -9,16 +9,15 @@ class SearchLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget contentTitle;
-    Widget contentBody;
-
     return Padding(
       padding: EdgeInsets.all(20.0.r),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            ///reactive widget untuk title loading
             Obx(() {
+              Widget contentTitle;
               if (LoadingController.to.isLoading.value) {
                 contentTitle = Text(
                   'searching location${LoadingController.to.loadingDots.value}',
@@ -36,8 +35,11 @@ class SearchLocation extends StatelessWidget {
               }
               return contentTitle;
             }),
+
+            //reactive widget untuk loadingbar dan lokasi
             SizedBox(height: 20.r),
             Obx(() {
+              Widget contentBody;
               if (LoadingController.to.isLoading.value) {
                 contentBody = const CircularProgressIndicator();
               } else {
@@ -46,14 +48,43 @@ class SearchLocation extends StatelessWidget {
               return contentBody;
             }),
             SizedBox(height: 20.r),
-            SizedBox(
-              height: 30.r,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: const Text('Cancel')),
-            ),
+
+            ///reactive widget untuk button
+            Obx(() {
+              Widget? contentButton;
+              if (LoadingController.to.isLoading.value) {
+                if (LoadingController.to.buttonToggled.value) {
+                  contentButton = SizedBox(
+                    height: 30.r,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text('Cancel')),
+                  );
+                }
+                return contentButton = const SizedBox(height: 1);
+              } else {
+                contentButton = Column(
+                  children: [
+                    SizedBox(
+                      height: 30.r,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Get.offAllNamed('/counter');
+                          },
+                          child: const Text('Okay')),
+                    ),
+                    SizedBox(height: 10.w),
+                    Text(
+                      'auto next dalam ${LoadingController.to.loadingNextPage.value}',
+                      style: TextStyle(color: MainColor.grey, fontSize: 12.sp),
+                    )
+                  ],
+                );
+              }
+              return contentButton;
+            }),
           ],
         ),
       ),
