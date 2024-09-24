@@ -25,6 +25,11 @@ class LoadingController extends GetxController {
   RxBool isLoading = true.obs;
   String gMapsApiKey = 'AIzaSyDXNtvjPjr5keR8Vk6f6aX1V-0XeSQRbsc';
 
+  /// getter url snapshot lokasi
+  String get locationSnapshot {
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long&zoom=18&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C$lat,$long&key=$gMapsApiKey';
+  }
+
   @override
   void onInit() async {
     super.onInit();

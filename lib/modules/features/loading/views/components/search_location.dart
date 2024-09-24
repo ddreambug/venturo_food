@@ -43,7 +43,23 @@ class SearchLocation extends StatelessWidget {
               if (LoadingController.to.isLoading.value) {
                 contentBody = const CircularProgressIndicator();
               } else {
-                contentBody = Text(LoadingController.to.address.value!);
+                contentBody = Column(
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        LoadingController.to.locationSnapshot,
+                        fit: BoxFit.cover,
+                        height: 200.w,
+                        width: 200.w,
+                      ),
+                    ),
+                    SizedBox(height: 15.w),
+                    Text(
+                      LoadingController.to.address.value!,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
               }
               return contentBody;
             }),
