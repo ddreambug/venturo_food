@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class LocalStorageService extends GetxService {
-  LocalStorageService._();
+class HiveService extends GetxService {
+  HiveService._();
   static final box = Hive.box("venturo");
 
   /// Kode untuk setting localstorage sesuai dengan repository

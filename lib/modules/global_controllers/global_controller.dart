@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/constants/cores/api/api_constant.dart';
+import 'package:venturo_food/utils/services/location_service.dart';
 
 class GlobalController extends GetxController {
   static GlobalController get to => Get.find();
@@ -10,6 +11,13 @@ class GlobalController extends GetxController {
   /// API
   var baseUrl = ApiConstant.staging;
   var isStaging = false.obs;
+
+  /// Location property
+  RxString statusLocation = RxString('loading');
+  RxnString messageLocation = RxnString();
+  RxnDouble longitude = RxnDouble();
+  RxnDouble latitude = RxnDouble();
+  RxnString address = RxnString();
 
   /// Check Connection Variable
   var isConnect = false.obs;
@@ -44,6 +52,18 @@ class GlobalController extends GetxController {
         exception,
         stackTrace: stackTrace,
       );
+    }
+  }
+
+  Future<void> getLocation() async {
+    /// Mendapatkan Lokasi saat ini
+    try {
+      statusLocation.value = 'loading';
+      await LocationService.getCurrentLocation();
+      statusLocation.value = 'success';
+    } catch (e) {
+      statusLocation.value = 'error';
+      messageLocation.value = '$e';
     }
   }
 }

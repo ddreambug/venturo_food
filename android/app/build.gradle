@@ -10,13 +10,19 @@ plugins {
 
 android {
     namespace = "com.ddreambug.venturofood"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        
+        tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:-options"
+        }
     }
+
+    
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
