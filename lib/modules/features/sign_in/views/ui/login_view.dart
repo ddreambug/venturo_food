@@ -74,7 +74,7 @@ class LoginView extends StatelessWidget {
                     }
                     return null;
                   },
-                  style: TextStyle(fontSize: 14.sp),
+                  style: TextStyle(fontSize: 16.sp),
                   decoration: const InputDecoration(
                     labelText: 'Alamat Email',
                     hintText: 'Lorem.ipsum@gmail.com',
@@ -85,7 +85,7 @@ class LoginView extends StatelessWidget {
                 Obx(
                   () => TextFormField(
                     controller: loginController.passwordController,
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 16.sp),
                     obscureText: loginController.obscureText.value,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {

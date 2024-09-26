@@ -87,7 +87,7 @@ class SearchLocation extends StatelessWidget {
                       height: 30.r,
                       child: ElevatedButton(
                           onPressed: () {
-                            Get.offAllNamed('/list');
+                            LoadingController.to.toNextScreen();
                           },
                           child: const Text('Okay')),
                     ),

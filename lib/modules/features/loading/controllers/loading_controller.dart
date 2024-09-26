@@ -15,7 +15,7 @@ class LoadingController extends GetxController {
   var animationPlay = false.obs;
   var buttonToggled = false.obs;
   var loadingDots = ''.obs;
-  var loadingNextPage = 11.obs;
+  var loadingNextPage = 10.obs;
   Timer? _animationTimer;
 
   /// Properti lokasi
@@ -60,12 +60,11 @@ class LoadingController extends GetxController {
 
   /// Animation auto next
   void toggleCountdownAnimation() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    _animationTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (loadingNextPage.value > 0) {
         loadingNextPage.value--;
       } else {
-        timer.cancel();
-        Get.offAllNamed('/list');
+        toNextScreen();
       }
     });
   }
@@ -87,6 +86,11 @@ class LoadingController extends GetxController {
         Timer.periodic(const Duration(milliseconds: 1200), (timer) {
       toggleBackgroundAnimation();
     });
+  }
+
+  /// Pergi ke screen selanjutnya
+  void toNextScreen() {
+    Get.offAllNamed('/list');
   }
 
   /// Ambil alamat pake pub Location
