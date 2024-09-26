@@ -63,7 +63,8 @@ class ListRepository {
       "category": "food",
       "harga": 15000,
       "deskripsi": "AG",
-      "foto": null,
+      "foto":
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMiX5F4A6GovnkUztggJyX8h21dKS8gjASPO0McSjTcWJR6vOtnLomhqsRJXn4zq5_s5s&usqp=CAU',
       "status": 1
     },
     {
@@ -255,7 +256,8 @@ class ListRepository {
       "category": "drink",
       "harga": 11000,
       "deskripsi": "Greentea, Susu,Creamer",
-      "foto": "https://javacode.landa.id/img/menu/gambar_625d1b75a4077.png",
+      "foto":
+          "https://t4.ftcdn.net/jpg/06/49/44/19/360_F_649441929_JZGvp4GcO38ZX4QqtjrukttYrVJje5EO.jpg",
       "status": 1
     },
     {
@@ -273,7 +275,8 @@ class ListRepository {
       "category": "drink",
       "harga": 10000,
       "deskripsi": "Chocolate original + Susu ",
-      "foto": "https://javacode.landa.id/img/menu/gambar_625d1b45adee8.png",
+      "foto":
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHGGe7lxf6sgNXMWEBiCVda_UhxdEzcNYL1g&s",
       "status": 1
     },
     {

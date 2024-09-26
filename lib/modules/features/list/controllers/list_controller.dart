@@ -64,7 +64,7 @@ class ListController extends GetxController {
   Future<bool> getListOfData() async {
     try {
       final result = repository.getListOfData(
-        offset: page.value * 10,
+        offset: page.value,
       );
 
       if (result['previous'] == null) {
@@ -74,10 +74,12 @@ class ListController extends GetxController {
       if (result['next'] == null) {
         canLoadMore(false);
         refreshController.loadNoData();
+        return false;
       }
 
       items.addAll(result['data']);
-      page.value++;
+      print('page number ${page.value }');
+      page.value += 5;
       refreshController.loadComplete();
 
       return true;
@@ -87,6 +89,7 @@ class ListController extends GetxController {
         stackTrace: stacktrace,
       );
 
+      print('total item added ${items.length}');
       refreshController.loadFailed();
       return false;
     }
