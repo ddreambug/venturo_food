@@ -4,7 +4,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:venturo_food/modules/features/list/controllers/list_controller.dart';
-import 'package:venturo_food/modules/features/list/repositories/list_repository.dart';
 import 'package:venturo_food/modules/features/list/views/components/menu_card.dart';
 import 'package:venturo_food/modules/features/list/views/components/promo_card.dart';
 
@@ -165,8 +164,7 @@ class ListItemView extends StatelessWidget {
                                               .add(item);
                                         }
                                         // edit ontap untuk nampilin detail disini
-                                        print(ListController
-                                            .to.repository.data.length);
+                    
                                       },
                                     ),
                                   ),

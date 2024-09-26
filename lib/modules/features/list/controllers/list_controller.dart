@@ -78,7 +78,6 @@ class ListController extends GetxController {
       }
 
       items.addAll(result['data']);
-      print('page number ${page.value }');
       page.value += 5;
       refreshController.loadComplete();
 
@@ -89,7 +88,6 @@ class ListController extends GetxController {
         stackTrace: stacktrace,
       );
 
-      print('total item added ${items.length}');
       refreshController.loadFailed();
       return false;
     }
