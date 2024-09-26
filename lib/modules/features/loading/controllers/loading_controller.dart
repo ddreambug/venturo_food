@@ -65,7 +65,7 @@ class LoadingController extends GetxController {
         loadingNextPage.value--;
       } else {
         timer.cancel();
-        Get.offAllNamed('/counter');
+        Get.offAllNamed('/list');
       }
     });
   }

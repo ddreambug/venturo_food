@@ -87,7 +87,7 @@ class SearchLocation extends StatelessWidget {
                       height: 30.r,
                       child: ElevatedButton(
                           onPressed: () {
-                            Get.offAllNamed('/counter');
+                            Get.offAllNamed('/list');
                           },
                           child: const Text('Okay')),
                     ),

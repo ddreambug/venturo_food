@@ -47,7 +47,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         title: 'Trainee Skeleton',
         debugShowCheckedModeBanner: false,
-        initialRoute: MainRoute.splashScreen,
+
+        ///debugging purpose
+        initialRoute: MainRoute.list,
+        // initialRoute: MainRoute.splashScreen,
         theme: mainTheme,
         defaultTransition: Transition.native,
         getPages: MainPage.main,
