@@ -4,6 +4,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:venturo_food/modules/features/list/controllers/list_controller.dart';
+import 'package:venturo_food/modules/features/list/repositories/list_repository.dart';
+import 'package:venturo_food/modules/features/list/views/components/custom_bottomnavbar.dart';
 import 'package:venturo_food/modules/features/list/views/components/menu_card.dart';
 import 'package:venturo_food/modules/features/list/views/components/promo_card.dart';
 
@@ -19,9 +21,9 @@ class ListItemView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: SearchAppBar(
-          onChange: (value) => ListController.to.keyword(value),
-        ),
+        appBar:
+            SearchAppBar(onChange: (value) => ListController.to.keyword(value)),
+        bottomNavigationBar: CustomBottomnavbar(),
         body: NestedScrollView(
             physics: const ClampingScrollPhysics(),
             headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -44,12 +46,26 @@ class ListItemView extends StatelessWidget {
                       shrinkWrap: true,
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       itemBuilder: (context, index) {
-                        return PromoCard(
-                          enableShadow: false,
-                          promoName: 'Promo $index',
-                          discountNominal: '${index * 10}',
-                          thumbnailUrl:
-                              "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                        // List<Map<String, dynamic>> promoItem =  ;
+                        return Hero(
+                          tag: 'promo $index',
+                          child: PromoCard(
+                            onTap: () {
+                              Get.toNamed(
+                                '/detail-promo',
+                                arguments: {
+                                  'index': index,
+                                  'thumbnailUrl':
+                                      "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                                },
+                              );
+                            },
+                            enableShadow: false,
+                            promoName: 'Promo $index',
+                            discountNominal: '${index * 10}',
+                            thumbnailUrl:
+                                "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                          ),
                         );
                       },
                       separatorBuilder: (context, index) => 26.horizontalSpace,
@@ -164,7 +180,6 @@ class ListItemView extends StatelessWidget {
                                               .add(item);
                                         }
                                         // edit ontap untuk nampilin detail disini
-                    
                                       },
                                     ),
                                   ),

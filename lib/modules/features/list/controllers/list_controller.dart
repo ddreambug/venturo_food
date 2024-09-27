@@ -1,31 +1,33 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_food/modules/features/list/repositories/list_repository.dart';
+import 'package:venturo_food/modules/features/list/views/components/search_app_bar.dart';
 
 class ListController extends GetxController {
   static ListController get to => Get.find<ListController>();
 
+  /// menu related item
   late final ListRepository repository;
-
   final RxInt page = 0.obs;
-
+  final RxList<Map<String, dynamic>> promo = <Map<String, dynamic>>[].obs;
   final RxList<Map<String, dynamic>> items = <Map<String, dynamic>>[].obs;
-
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
-
   final RxBool canLoadMore = true.obs;
-
   final RxString selectedCategory = 'all'.obs;
-
   final RxString keyword = ''.obs;
-
   final List<String> categories = [
     'All',
     'Food',
     'Drink',
   ];
+
+  ///conditional appbar
+  RxString appbarType = 'main'.obs;
+  Widget appBar =
+      SearchAppBar(onChange: (value) => ListController.to.keyword(value));
 
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);

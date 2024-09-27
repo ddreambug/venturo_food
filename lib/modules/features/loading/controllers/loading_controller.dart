@@ -64,6 +64,7 @@ class LoadingController extends GetxController {
       if (loadingNextPage.value > 0) {
         loadingNextPage.value--;
       } else {
+        _animationTimer!.cancel();
         toNextScreen();
       }
     });

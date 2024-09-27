@@ -6,6 +6,7 @@ import 'package:venturo_food/modules/features/forgot_password/bindings/forgot_pa
 import 'package:venturo_food/modules/features/forgot_password/views/ui/forgot_password_view.dart';
 import 'package:venturo_food/modules/features/list/bindings/list_binding.dart';
 import 'package:venturo_food/modules/features/list/views/ui/list_item_view.dart';
+import 'package:venturo_food/modules/features/list/views/ui/promo_detail_view.dart';
 import 'package:venturo_food/modules/features/sign_in/bindings/login_binding.dart';
 import 'package:venturo_food/modules/features/sign_in/bindings/splash_binding.dart';
 import 'package:venturo_food/modules/features/sign_in/views/ui/login_view.dart';
@@ -53,6 +54,12 @@ abstract class MainPage {
       name: MainRoute.list,
       page: () => const ListItemView(),
       binding: ListBinding(),
+      transition: Transition.circularReveal,
+      transitionDuration: const Duration(seconds: 2),
     ),
+    GetPage(
+        name: MainRoute.detailPromo,
+        page: () => const PromoDetailView(),
+        transition: Transition.fadeIn),
   ];
 }

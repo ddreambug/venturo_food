@@ -359,6 +359,33 @@ class ListRepository {
     }
   ];
 
+  // Dummy Promo
+  final List<Map<String, dynamic>> promo = [
+    {
+      'promo_name': 'Voucher',
+      'promo_property': 'Rp.200.000',
+      'promo_description':
+          'Berhasil mereferensikan rekan/teman untuk menjadi karyawan',
+      'promo_requirement': [
+        'Calon karyawan harus manusia',
+        'Bisa membaca',
+        'Mengerti setidaknya angka 1-10',
+        'Mandiri secara harfiah',
+      ]
+    },
+    {
+      'promo_name': 'Diskon',
+      'promo_property': '10%',
+      'promo_description': 'Mengikuti kegiatan tahsin/mengaji',
+      'promo_requirement': [
+        'Ikut kegiatan tahsin',
+        'Beragama Islam',
+        '(opsional) Bisa membaca Al-Quran',
+        '(opsional) Sudah Baligh',
+      ]
+    },
+  ];
+
   // Get list of data
   Map<String, dynamic> getListOfData({int offset = 0}) {
     int limit = 5 + offset;
@@ -367,6 +394,12 @@ class ListRepository {
       'data': data.getRange(offset, limit).toList(),
       'next': limit < data.length ? true : null,
       'previous': offset > 0 ? true : null,
+    };
+  }
+
+  Map<String, dynamic> getListOfPromo() {
+    return {
+      'promo': promo.toList(),
     };
   }
 
