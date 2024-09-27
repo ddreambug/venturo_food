@@ -4,18 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class PromoCard extends StatelessWidget {
-  const PromoCard({
-    super.key,
-    this.enableShadow,
-    required this.promoName,
-    required this.discountNominal,
-    required this.thumbnailUrl,
-    this.width,
-    required this.onTap,
-  });
+  const PromoCard(
+      {super.key,
+      this.enableShadow,
+      required this.promoName,
+      required this.discountNominal,
+      required this.thumbnailUrl,
+      this.width,
+      required this.onTap,
+      required this.promoDesc});
 
   final bool? enableShadow;
   final String promoName;
+  final String promoDesc;
   final String discountNominal;
   final String thumbnailUrl;
   final double? width;
@@ -60,16 +61,16 @@ class PromoCard extends StatelessWidget {
                 softWrap: true,
                 textAlign: TextAlign.center,
                 TextSpan(
-                  text: 'Diskon',
-                  style: Get.textTheme.titleLarge?.copyWith(
+                  text: promoName,
+                  style: Get.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
                   ),
                   children: [
                     TextSpan(
-                      text: ' $discountNominal %',
-                      style: Get.textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                      text: ' $discountNominal',
+                      style: Get.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w100,
                         foreground: Paint()
                           ..style = PaintingStyle.stroke
                           ..strokeWidth = 1
@@ -80,9 +81,9 @@ class PromoCard extends StatelessWidget {
                 ),
               ),
               Text(
-                promoName,
+                promoDesc,
                 textAlign: TextAlign.center,
-                style: Get.textTheme.labelMedium?.copyWith(
+                style: Get.textTheme.labelSmall?.copyWith(
                   color: Colors.white,
                 ),
               ),

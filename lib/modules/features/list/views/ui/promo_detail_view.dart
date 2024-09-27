@@ -13,8 +13,8 @@ class PromoDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     ///variable dari list item
     final arguments = Get.arguments as Map<String, dynamic>;
-    final index = arguments['index'];
-    final thumbnailUrl = arguments['thumbnailUrl'];
+    final item = arguments['promoItem'];
+    final List<String> promoRequirement = item['promo_requirement'];
 
     return SafeArea(
       child: Scaffold(
@@ -29,13 +29,14 @@ class PromoDetailView extends StatelessWidget {
               height: 150,
               width: 300,
               child: Hero(
-                tag: 'promo $index',
+                tag: 'promo $item',
                 child: PromoCard(
                   onTap: () {},
                   enableShadow: false,
-                  promoName: 'Promo $index',
-                  discountNominal: '${index * 10}',
-                  thumbnailUrl: thumbnailUrl,
+                  promoName: item['promo_name'],
+                  promoDesc: item['promo_description'],
+                  discountNominal: item['promo_property'],
+                  thumbnailUrl: item['promo_thumbnail'],
                 ),
               ),
             ),
@@ -68,7 +69,7 @@ class PromoDetailView extends StatelessWidget {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        'Berhasil mereferensikan rekan atau teman untuk menjadi karyawan',
+                        item['promo_description'],
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: MainColor.primary,
                             fontWeight: FontWeight.w900),
@@ -86,12 +87,17 @@ class PromoDetailView extends StatelessWidget {
                           const Text('Syarat dan Ketentuan')
                         ],
                       ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(30, 5, 0, 0),
-                        child: Text(
-                          '''Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea vommodo consequat.\n\n Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et''',
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.labelMedium,
+                      SizedBox(
+                        height: 300.h,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.fromLTRB(30, 5, 0, 0),
+                          itemCount: promoRequirement.length,
+                          itemBuilder: (context, index) {
+                            return Text(
+                              '- ${promoRequirement[index]}',
+                              style: Theme.of(context).textTheme.labelSmall,
+                            );
+                          },
                         ),
                       )
                     ],

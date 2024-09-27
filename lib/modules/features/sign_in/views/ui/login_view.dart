@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -102,9 +103,12 @@ class LoginView extends StatelessWidget {
                         onPressed: () {
                           loginController.changePasswordVisibility();
                         },
-                        icon: Icon(loginController.obscureText.value
-                            ? Icons.visibility
-                            : Icons.visibility_off),
+                        icon: Icon(
+                          loginController.obscureText.value
+                              ? CupertinoIcons.eye_fill
+                              : CupertinoIcons.eye_slash_fill,
+                          color: const Color.fromARGB(255, 87, 87, 87),
+                        ),
                       ),
                     ),
                     onSaved: (newValue) =>

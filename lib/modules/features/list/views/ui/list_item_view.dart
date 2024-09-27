@@ -18,6 +18,8 @@ class ListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> promoRepo = ListRepository().promo;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
@@ -30,10 +32,10 @@ class ListItemView extends StatelessWidget {
               return [
                 SliverToBoxAdapter(child: 22.verticalSpace),
                 // list of promo
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: SectionHeader(
                     icon: Icons.note_alt_outlined,
-                    title: 'Available promo',
+                    title: 'Available promo (${promoRepo.length})',
                   ),
                 ),
                 SliverToBoxAdapter(child: 22.verticalSpace),
@@ -46,30 +48,28 @@ class ListItemView extends StatelessWidget {
                       shrinkWrap: true,
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       itemBuilder: (context, index) {
-                        // List<Map<String, dynamic>> promoItem =  ;
+                        final promoItem = promoRepo[index];
                         return Hero(
-                          tag: 'promo $index',
+                          tag: promoItem,
                           child: PromoCard(
                             onTap: () {
                               Get.toNamed(
                                 '/detail-promo',
                                 arguments: {
-                                  'index': index,
-                                  'thumbnailUrl':
-                                      "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                                  'promoItem': promoItem,
                                 },
                               );
                             },
                             enableShadow: false,
-                            promoName: 'Promo $index',
-                            discountNominal: '${index * 10}',
-                            thumbnailUrl:
-                                "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                            promoName: promoItem['promo_name'],
+                            promoDesc: promoItem['promo_description'],
+                            discountNominal: promoItem['promo_property'],
+                            thumbnailUrl: promoItem['promo_thumbnail'],
                           ),
                         );
                       },
                       separatorBuilder: (context, index) => 26.horizontalSpace,
-                      itemCount: 2,
+                      itemCount: promoRepo.length,
                     ),
                   ),
                 ),

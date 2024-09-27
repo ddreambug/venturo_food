@@ -371,7 +371,9 @@ class ListRepository {
         'Bisa membaca',
         'Mengerti setidaknya angka 1-10',
         'Mandiri secara harfiah',
-      ]
+      ],
+      'promo_thumbnail':
+          'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
     },
     {
       'promo_name': 'Diskon',
@@ -380,9 +382,36 @@ class ListRepository {
       'promo_requirement': [
         'Ikut kegiatan tahsin',
         'Beragama Islam',
-        '(opsional) Bisa membaca Al-Quran',
-        '(opsional) Sudah Baligh',
-      ]
+        'Bisa membaca Al-Quran',
+        'Sudah Baligh',
+      ],
+      'promo_thumbnail':
+          'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
+    },
+    {
+      'promo_name': 'Diskon',
+      'promo_property': '100%',
+      'promo_description': 'Mengambil Makanan diam diam',
+      'promo_requirement': [
+        'Berseragam',
+        'Memakai topi',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+        'item desc',
+      ],
+      'promo_thumbnail':
+          'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
     },
   ];
 
