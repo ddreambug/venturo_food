@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
               tag: 'splashImage',
               child: Image.asset(
                 ImageConstant.logo,
-                width: 200.r,
+                width: 300.r,
                 fit: BoxFit.contain,
               ),
             ),

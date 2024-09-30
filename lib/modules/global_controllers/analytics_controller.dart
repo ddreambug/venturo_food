@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get/get.dart';
 
@@ -6,9 +8,23 @@ class AnalyticsController extends GetxController {
 
   static AnalyticsController get to => Get.find();
 
-  void setCurrentScreen(
-      {String screenName = 'default', String screenClass = 'default'}) {
-    analytics.logScreenView(screenName: screenName, screenClass: screenClass);
+  void logCurrentScreen() {
+    if (Platform.isAndroid) {
+      analytics.logScreenView(
+        screenName: 'Sign In Screen',
+        screenClass: 'Android',
+      );
+    } else if (Platform.isIOS) {
+      analytics.logScreenView(
+        screenName: 'Sign In Screen',
+        screenClass: 'IOS',
+      );
+    } else if (Platform.isMacOS) {
+      analytics.logScreenView(
+        screenName: 'Sign In Screen',
+        screenClass: 'MacOS',
+      );
+    }
   }
 
   void logPageView(String page) {

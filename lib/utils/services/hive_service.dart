@@ -3,7 +3,15 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveService extends GetxService {
   HiveService._();
+
   static final box = Hive.box("venturo");
+
+  static void initHiveUser() {
+    box.put('account', {
+      'admin@gmail.com': 'admin',
+      'user': 'user',
+    });
+  }
 
   /// Kode untuk setting localstorage sesuai dengan repository
   // static Future<void> setAuth(Data serverSelected) async {

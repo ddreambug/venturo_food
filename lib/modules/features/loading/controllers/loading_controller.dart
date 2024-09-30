@@ -4,9 +4,7 @@ import 'dart:async';
 ///package alt geolocator
 import 'package:location/location.dart' as loc;
 
-///package alt geocoding
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 class LoadingController extends GetxController {
   static LoadingController get to => Get.find();
@@ -128,20 +126,27 @@ class LoadingController extends GetxController {
 
   /// Parse alamat pake api googlemaps
   Future<void> getLocationAddress(double lat, double long) async {
-    final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=$gMapsApiKey');
+    final dio = Dio();
 
-    final response = await http.get(url);
-    final responseData = json.decode(response.body);
-    final jalan =
-        responseData['results'][0]['address_components'][1]['long_name'];
-    final kelurahan =
-        responseData['results'][0]['address_components'][2]['long_name'];
-    final kecamatan =
-        responseData['results'][0]['address_components'][4]['long_name'];
-    final kota =
-        responseData['results'][0]['address_components'][5]['long_name'];
+    final url =
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=$gMapsApiKey';
 
-    address.value = '$jalan, $kelurahan, $kecamatan, $kota';
+    try {
+      final response = await dio.get(url);
+
+      final responseData = response.data;
+      final jalan =
+          responseData['results'][0]['address_components'][1]['long_name'];
+      final kelurahan =
+          responseData['results'][0]['address_components'][2]['long_name'];
+      final kecamatan =
+          responseData['results'][0]['address_components'][4]['long_name'];
+      final kota =
+          responseData['results'][0]['address_components'][5]['long_name'];
+
+      address.value = '$jalan, $kelurahan, $kecamatan, $kota';
+    } catch (e) {
+      print('retrieve alamat gagal, $e');
+    }
   }
 }

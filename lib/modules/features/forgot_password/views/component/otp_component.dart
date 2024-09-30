@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,36 +11,9 @@ class OtpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final analytics = AnalyticsController.to;
-
-    /// Google analytics untuk tracking user di setiap halaman
-    if (Platform.isAndroid) {
-      /// Tracking bawah dia masuk screen otp di device android
-      analytics.setCurrentScreen(
-        screenName: 'OTP Screen',
-        screenClass: 'Android',
-      );
-    } else if (Platform.isIOS) {
-      /// Tracking bawah dia masuk screen otp di device ios
-      analytics.setCurrentScreen(
-        screenName: 'OTP Screen',
-        screenClass: 'IOS',
-      );
-    } else if (Platform.isMacOS) {
-      /// Tracking bawah dia masuk screen otp di device macos
-      analytics.setCurrentScreen(
-        screenName: 'OTP Screen',
-        screenClass: 'MacOS',
-      );
-    }
-
-    if (kIsWeb) {
-      /// Tracking bahwa dia masuk screen otp di device web
-      analytics.setCurrentScreen(
-        screenName: 'OTP Screen',
-        screenClass: 'Web',
-      );
-    }
+    ///google analytics
+    final analyticsController = Get.find<AnalyticsController>();
+    analyticsController.logCurrentScreen();
 
     return Center(
       child: Container(

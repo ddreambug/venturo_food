@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/modules/features/sign_in/controllers/login_controller.dart';
+import 'package:venturo_food/modules/features/sign_in/views/components/api_login.dart';
+import 'package:venturo_food/modules/features/sign_in/views/components/divider_custom.dart';
 import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,22 +17,7 @@ class LoginView extends StatelessWidget {
 
     ///google analytic
     final analyticsController = Get.find<AnalyticsController>();
-    if (Platform.isAndroid) {
-      analyticsController.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClass: 'Android',
-      );
-    } else if (Platform.isIOS) {
-      analyticsController.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClass: 'IOS',
-      );
-    } else if (Platform.isMacOS) {
-      analyticsController.setCurrentScreen(
-        screenName: 'Sign In Screen',
-        screenClass: 'MacOS',
-      );
-    }
+    analyticsController.logCurrentScreen();
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -52,7 +35,7 @@ class LoginView extends StatelessWidget {
                     onDoubleTap: () => loginController.flavorSeting(),
                     child: Image.asset(
                       ImageConstant.logo,
-                      width: 200.r,
+                      width: 300.r,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -140,79 +123,8 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 70.w),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: MainColor.grey,
-                        indent: 5.r,
-                        endIndent: 10.r,
-                      ),
-                    ),
-                    Text(
-                      'atau',
-                      style: TextStyle(
-                          color: MainColor.grey,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w100),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: MainColor.grey,
-                        indent: 10.r,
-                        endIndent: 5.r,
-                      ),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  style: const ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(MainColor.white)),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SvgPicture.asset(ImageConstant.googleLogo),
-                      const Text.rich(
-                        TextSpan(
-                          style: TextStyle(color: MainColor.black),
-                          text: 'Masuk Menggunakan ',
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: 'Google',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ))
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  style: const ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(MainColor.black)),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SvgPicture.asset(ImageConstant.appleLogo),
-                      const Text.rich(
-                        TextSpan(
-                          style: TextStyle(color: MainColor.white),
-                          text: 'Masuk Menggunakan ',
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: 'Apple',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ))
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const DividerCustom(),
+                ApiLogin(onPress: () {})
               ],
             ),
           ),
