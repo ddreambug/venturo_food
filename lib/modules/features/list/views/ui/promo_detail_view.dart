@@ -20,7 +20,7 @@ class PromoDetailView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: const CustomAppbar(appBarTitle: 'Promo Detail'),
-        bottomNavigationBar: CustomBottomnavbar(),
+        bottomNavigationBar: const CustomBottomnavbar(),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

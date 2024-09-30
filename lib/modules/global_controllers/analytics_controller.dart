@@ -8,20 +8,20 @@ class AnalyticsController extends GetxController {
 
   static AnalyticsController get to => Get.find();
 
-  void logCurrentScreen() {
+  void logCurrentScreen({String screenName = 'default'}) {
     if (Platform.isAndroid) {
       analytics.logScreenView(
-        screenName: 'Sign In Screen',
+        screenName: screenName,
         screenClass: 'Android',
       );
     } else if (Platform.isIOS) {
       analytics.logScreenView(
-        screenName: 'Sign In Screen',
+        screenName: screenName,
         screenClass: 'IOS',
       );
     } else if (Platform.isMacOS) {
       analytics.logScreenView(
-        screenName: 'Sign In Screen',
+        screenName: screenName,
         screenClass: 'MacOS',
       );
     }

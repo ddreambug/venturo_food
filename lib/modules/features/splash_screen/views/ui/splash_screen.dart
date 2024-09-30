@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AnalyticsController().setCurrentScreen(screenName: 'Splash Screen');
+    AnalyticsController().logCurrentScreen(screenName: 'Splash Screen');
 
     return Scaffold(
       body: Center(

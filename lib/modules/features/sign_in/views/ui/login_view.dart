@@ -17,7 +17,7 @@ class LoginView extends StatelessWidget {
 
     ///google analytic
     final analyticsController = Get.find<AnalyticsController>();
-    analyticsController.logCurrentScreen();
+    analyticsController.logCurrentScreen(screenName: 'Login Screen');
 
     return Scaffold(
       body: SingleChildScrollView(
