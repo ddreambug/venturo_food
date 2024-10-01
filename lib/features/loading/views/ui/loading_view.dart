@@ -28,7 +28,7 @@ class LoadingView extends StatelessWidget {
               child: Center(
                 child: Image.asset(
                   ImageConstant.patternBackground,
-                  width: 300.w,
+                  width: 380.w,
                   color: MainColor.primary,
                 ),
               ),

@@ -21,11 +21,11 @@ class SearchLocation extends StatelessWidget {
               () {
                 if (loadingController.isLoading.value) {
                   return Text(
-                    'searching location${loadingController.loadingDots.value}',
+                    'Mencari Lokasimu${loadingController.loadingDots.value}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: MainColor.primary,
-                      fontWeight: FontWeight.w800,
+                      color: MainColor.grey,
+                      fontWeight: FontWeight.w400,
                     ),
                   );
                 } else {
@@ -42,7 +42,7 @@ class SearchLocation extends StatelessWidget {
             ),
 
             //reactive widget untuk loadingbar dan lokasi
-            SizedBox(height: 20.r),
+            SizedBox(height: 40.w),
             Obx(
               () {
                 if (loadingController.isLoading.value) {
@@ -58,17 +58,20 @@ class SearchLocation extends StatelessWidget {
                           width: 200.w,
                         ),
                       ),
-                      SizedBox(height: 15.w),
-                      Text(
-                        loadingController.address.value!,
-                        textAlign: TextAlign.center,
+                      SizedBox(height: 25.w),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          loadingController.address.value!,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ],
                   );
                 }
               },
             ),
-            SizedBox(height: 20.r),
+            SizedBox(height: 25.w),
 
             ///reactive widget untuk button
             Obx(

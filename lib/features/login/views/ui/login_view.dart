@@ -47,18 +47,18 @@ class LoginView extends StatelessWidget {
                   'Masuk untuk melanjutkan!',
                   style: TextStyle(fontSize: 22.sp),
                 ),
-                SizedBox(height: 15.w),
+                SizedBox(height: 30.w),
                 const TextFormFieldCustom(
                   fieldType: 'emailInput',
                 ),
-                SizedBox(height: 15.w),
+                SizedBox(height: 30.w),
                 Obx(
                   () => TextFormFieldCustom(
                     fieldType: 'passwordInput',
                     obscureText: loginController.obscureText.value,
                   ),
                 ),
-                SizedBox(height: 30.w),
+                SizedBox(height: 40.w),
                 SizedBox(
                   width: double.infinity,
                   height: 44.w,

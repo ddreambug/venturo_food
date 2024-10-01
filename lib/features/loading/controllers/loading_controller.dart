@@ -8,22 +8,6 @@ import 'package:location/location.dart' as loc;
 class LoadingController extends GetxController {
   static LoadingController get to => Get.find();
 
-  @override
-  void onInit() async {
-    super.onInit();
-    toggleBackgroundLoop();
-    toggleLoadingTextAnimation();
-    toggleButtonAnimation();
-    toggleCountdownAnimation();
-    getCurrentLocation();
-  }
-
-  @override
-  void onClose() {
-    _animationTimer?.cancel();
-    super.onClose();
-  }
-
   /// Animasi loading
   var animationPlay = false.obs;
   var buttonToggled = false.obs;
@@ -40,7 +24,23 @@ class LoadingController extends GetxController {
   /// getter url snapshot lokasi
   String gMapsApiKey = 'AIzaSyDXNtvjPjr5keR8Vk6f6aX1V-0XeSQRbsc';
   String get locationSnapshot {
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$long&zoom=18&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C$lat,$long&key=$gMapsApiKey';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=${lat.value! - 0.0003},$long&zoom=17&size=200x200&maptype=terrain&markers=color:black%7Clabel:O%7C$lat,$long&key=$gMapsApiKey';
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+    toggleBackgroundLoop();
+    toggleLoadingTextAnimation();
+    toggleButtonAnimation();
+    toggleCountdownAnimation();
+    getCurrentLocation();
+  }
+
+  @override
+  void onClose() {
+    _animationTimer?.cancel();
+    super.onClose();
   }
 
   /// Animation Text ...
