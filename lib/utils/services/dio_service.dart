@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:venturo_food/modules/global_controllers/global_controller.dart';
+import 'package:venturo_food/global_controllers/global_controller.dart';
 
 class DioService extends GetxService {
   DioService._();

@@ -10,8 +10,8 @@ import 'package:venturo_food/configs/pages/main_page.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/configs/themes/main_theme.dart';
 import 'package:venturo_food/firebase_options.dart';
-import 'package:venturo_food/modules/global_bindings/global_binding.dart';
-import 'package:venturo_food/modules/global_controllers/analytics_controller.dart';
+import 'package:venturo_food/global_bindings/global_binding.dart';
+import 'package:venturo_food/global_controllers/analytics_controller.dart';
 import 'package:venturo_food/utils/services/hive_service.dart';
 
 void main() async {

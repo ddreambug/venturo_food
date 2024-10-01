@@ -1,6 +1,6 @@
 import 'package:location/location.dart' as loc;
 import 'package:geocoding/geocoding.dart' as geo;
-import 'package:venturo_food/modules/global_controllers/global_controller.dart';
+import 'package:venturo_food/global_controllers/global_controller.dart';
 
 /// package geolocation belum bisa, temporary pakai location
 // import 'package:geolocation/geolocation.dart';

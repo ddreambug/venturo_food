@@ -39,12 +39,13 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_screenutil: ^5.9.3
   flutter_slidable: ^3.1.1
-  flutter_svg: ^2.0.10+1
+  flutter_svg: 1.1.6
   geocoding: ^3.0.0
   get: ^4.6.6
   get_storage: ^2.1.1
   google_fonts: ^6.2.1
   hive_flutter: ^1.1.0
+  iconify_flutter: ^0.0.5
   loadmore: ^2.1.0
   location: ^6.0.2
   panara_dialogs: ^0.1.5
