@@ -30,7 +30,7 @@ class ForgotPasswordView extends StatelessWidget {
               Hero(
                 tag: 'splashImage',
                 child: Image.asset(
-                  ImageConstant.logo,
+                  ImageConstant.logoIcon,
                   width: 200.r,
                   fit: BoxFit.contain,
                 ),

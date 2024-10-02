@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/features/list/controllers/list_controller.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SearchAppBar({
@@ -16,10 +18,10 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 68.h,
+      height: 68.w,
       padding: EdgeInsets.symmetric(
         horizontal: 25.w,
-        vertical: 10.h,
+        vertical: 12.w,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -28,43 +30,50 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(111, 24, 24, 24),
+            color: Color.fromARGB(33, 24, 24, 24),
             blurRadius: 15,
             spreadRadius: -1,
             offset: Offset(0, 1),
           ),
         ],
       ),
-      child: TextField(
-        controller: searchController,
-        style: Get.textTheme.labelSmall?.copyWith(
-          fontSize: 18.sp,
-          letterSpacing: 0,
-        ),
-        maxLines: 1,
-        onChanged: onChange,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.r),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.r),
-            borderSide: BorderSide(
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-          isDense: true,
-          prefixIcon: Icon(
-            Icons.search,
-            size: 26.h,
-          ),
-          prefixIconColor: Theme.of(context).primaryColor,
-          hintText: 'Search'.tr,
-          hintStyle: Get.textTheme.labelSmall?.copyWith(
-            color: Colors.black87,
-            fontSize: 14.sp,
+      child: Obx(
+        () => TextField(
+          controller: searchController,
+          style: Get.textTheme.labelSmall?.copyWith(
+            fontSize: 18.sp,
             letterSpacing: 0,
+          ),
+          autofocus: false,
+          focusNode: ListController.to.focusNode,
+          cursorColor: ListController.to.isFocused.value
+              ? Theme.of(context).primaryColor
+              : Colors.transparent,
+          maxLines: 1,
+          onChanged: onChange,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.r),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.r),
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            isDense: true,
+            prefixIcon: Icon(
+              Icons.search,
+              size: 26.h,
+            ),
+            prefixIconColor: Theme.of(context).primaryColor,
+            hintText: 'Pencarian'.tr,
+            hintStyle: Get.textTheme.bodyMedium?.copyWith(
+              color: MainColor.grey,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0,
+            ),
           ),
         ),
       ),

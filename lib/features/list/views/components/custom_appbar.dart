@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key, required this.appBarTitle});
@@ -12,9 +14,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 68.h,
+      height: 68.w,
       padding: EdgeInsets.symmetric(
-        horizontal: 25.w,
+        horizontal: 5.w,
         vertical: 10.h,
       ),
       decoration: BoxDecoration(
@@ -24,7 +26,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(111, 24, 24, 24),
+            color: Color.fromARGB(33, 24, 24, 24),
             blurRadius: 15,
             spreadRadius: -1,
             offset: Offset(0, 1),
@@ -39,7 +41,10 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {
                 Get.back();
               },
-              icon: const Icon(CupertinoIcons.back),
+              icon: const Icon(
+                CupertinoIcons.back,
+                color: MainColor.black,
+              ),
             ),
           ),
           Align(
@@ -47,9 +52,16 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.note_alt_outlined),
+                Image.asset(
+                  ImageConstant.promoIcon,
+                  width: 18.w,
+                ),
                 SizedBox(width: 8.w),
-                Text(appBarTitle),
+                Text(
+                  appBarTitle,
+                  style: Get.textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w800, fontSize: 20.sp),
+                ),
               ],
             ),
           ),

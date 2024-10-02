@@ -35,7 +35,7 @@ class LoginView extends StatelessWidget {
                   child: GestureDetector(
                     onDoubleTap: () => loginController.flavorSeting(),
                     child: Image.asset(
-                      ImageConstant.logo,
+                      ImageConstant.logoIcon,
                       height: 91.w,
                       width: 270.w,
                       fit: BoxFit.contain,

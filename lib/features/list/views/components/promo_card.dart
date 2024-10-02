@@ -29,7 +29,7 @@ class PromoCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(15.r),
       child: Container(
         width: width ?? 282.w,
-        height: 188.h,
+        height: 158.w,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(15.r),
@@ -52,7 +52,7 @@ class PromoCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.w),
+          padding: const EdgeInsets.fromLTRB(30, 16, 30, 16).w,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,18 +62,20 @@ class PromoCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 TextSpan(
                   text: promoName,
-                  style: Get.textTheme.titleMedium?.copyWith(
+                  style: Get.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w800,
                     color: Colors.white,
+                    fontSize: 20.sp,
                   ),
                   children: [
                     TextSpan(
                       text: ' $discountNominal',
-                      style: Get.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w100,
+                      style: Get.textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                        fontSize: discountNominal.length > 4 ? 25.sp : 38.sp,
                         foreground: Paint()
                           ..style = PaintingStyle.stroke
-                          ..strokeWidth = 1
+                          ..strokeWidth = 0.1
                           ..color = Colors.white,
                       ),
                     ),
@@ -85,6 +87,7 @@ class PromoCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: Get.textTheme.labelSmall?.copyWith(
                   color: Colors.white,
+                  fontSize: 12.sp,
                 ),
               ),
             ],

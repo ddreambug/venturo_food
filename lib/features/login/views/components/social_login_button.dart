@@ -22,12 +22,12 @@ class SocialLoginButton extends StatelessWidget {
 
     if (Platform.isIOS || Platform.isMacOS) {
       platformName = 'Apple';
-      platformIcon = ImageConstant.appleLogo;
+      platformIcon = ImageConstant.appleLogoSvg;
       platformTextColor = MainColor.white;
       platformBackgroundColor = MainColor.black;
     } else {
       platformName = 'Google';
-      platformIcon = ImageConstant.googleLogo;
+      platformIcon = ImageConstant.googleLogoSvg;
       platformTextColor = MainColor.black;
       platformBackgroundColor = MainColor.white;
     }

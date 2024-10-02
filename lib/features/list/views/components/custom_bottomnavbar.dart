@@ -1,26 +1,29 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/carbon.dart';
+import 'package:iconify_flutter/icons/heroicons.dart';
+import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/features/list/controllers/list_controller.dart';
 
 class CustomBottomnavbar extends StatelessWidget {
-  const CustomBottomnavbar({super.key});
+  const CustomBottomnavbar({super.key, this.currentIndex = 0});
+
+  final int currentIndex;
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
     return ClipRRect(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(30.r),
       ),
       child: Container(
         width: double.infinity,
-        height: 80.h,
-        padding: EdgeInsets.symmetric(
-          horizontal: 25.w,
-          vertical: 10.h,
-        ),
+        height: 66.w,
+        padding: const EdgeInsets.symmetric(),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: MainColor.black,
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(30.r),
           ),
@@ -31,21 +34,40 @@ class CustomBottomnavbar extends StatelessWidget {
           unselectedItemColor: Colors.grey,
           selectedFontSize: 10.sp,
           unselectedFontSize: 10.sp,
-          currentIndex: currentIndex,
+          currentIndex: ListController.to.currentNavBarIndex.value,
           onTap: (value) {
-            currentIndex = value;
+            ListController.to.currentNavBarIndex.value = value;
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.house_fill),
+              icon: Iconify(
+                Heroicons.home_20_solid,
+                color: ListController.to.currentNavBarIndex.value == 0
+                    ? MainColor.white
+                    : MainColor.grey,
+                size: 34.w,
+              ),
               label: 'Beranda',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag),
+              icon: Image.asset(
+                ImageConstant.pesananIcon,
+                color: ListController.to.currentNavBarIndex.value == 1
+                    ? MainColor.white
+                    : MainColor.grey,
+                width: 34.w,
+                height: 34.w,
+              ),
               label: 'Pesanan',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.person_crop_circle),
+              icon: Iconify(
+                Carbon.user_avatar_filled_alt,
+                color: ListController.to.currentNavBarIndex.value == 2
+                    ? MainColor.white
+                    : MainColor.grey,
+                size: 34.w,
+              ),
               label: 'Profil',
             ),
           ],

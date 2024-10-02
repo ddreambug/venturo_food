@@ -12,7 +12,7 @@ class SectionHeader extends StatelessWidget {
 
   final String title;
   final Color? color;
-  final IconData? icon;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +21,14 @@ class SectionHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(icon,
-              size: 28.r, color: color ?? Theme.of(context).primaryColor),
+          icon!,
           10.horizontalSpace,
           Text(
             title,
-            style: Get.textTheme.titleMedium?.copyWith(
+            style: Get.textTheme.bodyMedium?.copyWith(
               color: color,
               fontSize: 20.sp,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w800,
             ),
           ),
         ],

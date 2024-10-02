@@ -8,7 +8,17 @@ import 'package:venturo_food/features/list/views/components/search_app_bar.dart'
 class ListController extends GetxController {
   static ListController get to => Get.find<ListController>();
 
-  /// menu related item
+  /// Bottom Navbar property
+  final RxInt currentNavBarIndex = 0.obs;
+
+  /// Appbar property
+  final FocusNode focusNode = FocusNode();
+  var isFocused = false.obs;
+  RxString appbarType = 'main'.obs;
+  Widget appBar =
+      SearchAppBar(onChange: (value) => ListController.to.keyword(value));
+
+  /// List property
   late final ListRepository repository;
   final RxInt page = 0.obs;
   final RxList<Map<String, dynamic>> promo = <Map<String, dynamic>>[].obs;
@@ -16,21 +26,15 @@ class ListController extends GetxController {
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
   final RxBool canLoadMore = true.obs;
-  final RxString selectedCategory = 'all'.obs;
+  final RxString selectedCategory = 'semua menu'.obs;
   final RxString keyword = ''.obs;
-  final List<String> categories = [
-    'All',
-    'Food',
-    'Drink',
-  ];
-
-  ///conditional appbar
-  RxString appbarType = 'main'.obs;
-  Widget appBar =
-      SearchAppBar(onChange: (value) => ListController.to.keyword(value));
-
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
+  final List<String> categories = [
+    'Semua Menu',
+    'Makanan',
+    'Minuman',
+  ];
 
   @override
   void onInit() async {
@@ -38,6 +42,16 @@ class ListController extends GetxController {
 
     repository = ListRepository();
     await getListOfData();
+
+    focusNode.addListener(() {
+      isFocused.value = focusNode.hasFocus;
+    });
+  }
+
+  @override
+  void onClose() {
+    focusNode.dispose();
+    super.onClose();
   }
 
   void onRefresh() async {
@@ -59,7 +73,7 @@ class ListController extends GetxController {
               .toString()
               .toLowerCase()
               .contains(keyword.value.toLowerCase()) &&
-          (selectedCategory.value == 'all' ||
+          (selectedCategory.value == 'semua menu' ||
               element['category'] == selectedCategory.value))
       .toList();
 

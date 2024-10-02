@@ -19,15 +19,15 @@ class PromoDetailView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppbar(appBarTitle: 'Promo Detail'),
+        appBar: const CustomAppbar(appBarTitle: 'Promo'),
         bottomNavigationBar: const CustomBottomnavbar(),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 20.h),
             SizedBox(
-              height: 150,
-              width: 300,
+              height: 181.w,
+              width: 378.w,
               child: Hero(
                 tag: 'promo $item',
                 child: PromoCard(
@@ -70,9 +70,10 @@ class PromoDetailView extends StatelessWidget {
                       SizedBox(height: 10.h),
                       Text(
                         item['promo_description'],
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: MainColor.primary,
-                            fontWeight: FontWeight.w900),
+                            fontWeight: FontWeight.w800,
+                            fontSize: 20.sp),
                       ),
                       SizedBox(height: 10.h),
                       const Divider(
@@ -84,7 +85,9 @@ class PromoDetailView extends StatelessWidget {
                         children: [
                           const Icon(Icons.format_list_bulleted_rounded),
                           SizedBox(width: 10.w),
-                          const Text('Syarat dan Ketentuan')
+                          Text('Syarat dan Ketentuan',
+                              style: Get.textTheme.bodyMedium!.copyWith(
+                                  fontSize: 16.w, fontWeight: FontWeight.w600))
                         ],
                       ),
                       SizedBox(
@@ -95,7 +98,12 @@ class PromoDetailView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Text(
                               '- ${promoRequirement[index]}',
-                              style: Theme.of(context).textTheme.labelSmall,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .copyWith(
+                                    fontSize: 12.sp,
+                                  ),
                             );
                           },
                         ),
