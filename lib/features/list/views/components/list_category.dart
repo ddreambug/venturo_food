@@ -10,36 +10,34 @@ class ListCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        width: 1.sw,
-        height: 35.h,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: ListController.to.categories.length,
-          padding: EdgeInsets.symmetric(horizontal: 25.w),
-          itemBuilder: (context, index) {
-            final category = ListController.to.categories[index];
-            return Obx(
-              () => MenuChip(
-                onTap: () {
-                  ListController.to.selectedCategory(
-                    category.toLowerCase(),
-                  );
-                },
-                isSelected: ListController.to.selectedCategory.value ==
-                    category.toLowerCase(),
-                text: category,
-                icon: index == 0
-                    ? ImageConstant.listIconSvg
-                    : index == 1
-                        ? ImageConstant.makananIconSvg
-                        : ImageConstant.minumanIconSvg,
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => 13.horizontalSpace,
-        ),
+    return SizedBox(
+      width: 1.sw,
+      height: 35.w,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: ListController.to.categories.length,
+        padding: EdgeInsets.symmetric(horizontal: 25.w),
+        itemBuilder: (context, index) {
+          final category = ListController.to.categories[index];
+          return Obx(
+            () => MenuChip(
+              onTap: () {
+                ListController.to.selectedCategory(
+                  category.toLowerCase(),
+                );
+              },
+              isSelected: ListController.to.selectedCategory.value ==
+                  category.toLowerCase(),
+              text: category,
+              icon: index == 0
+                  ? ImageConstant.listIconSvg
+                  : index == 1
+                      ? ImageConstant.makananIconSvg
+                      : ImageConstant.minumanIconSvg,
+            ),
+          );
+        },
+        separatorBuilder: (context, index) => 13.horizontalSpace,
       ),
     );
   }

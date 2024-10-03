@@ -28,17 +28,9 @@ class MenuChip extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.r),
           color: isSelected ? MainColor.black : MainColor.primary,
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 2),
-              blurRadius: 8,
-              spreadRadius: -1,
-              color: Colors.black54,
-            ),
-          ],
         ),
         child: SizedBox(
-          height: 45.h,
+          height: 35.h,
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Row(
@@ -53,7 +45,7 @@ class MenuChip extends StatelessWidget {
                 SizedBox(width: 5.w),
                 Text(
                   text,
-                  style: Get.textTheme.labelLarge!.copyWith(
+                  style: Get.textTheme.bodyMedium!.copyWith(
                       color: Colors.white,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600),

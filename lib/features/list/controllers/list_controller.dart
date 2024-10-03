@@ -36,6 +36,9 @@ class ListController extends GetxController {
     'Minuman',
   ];
 
+  /// Menu Property
+  RxInt itemCount = RxInt(0);
+
   @override
   void onInit() async {
     super.onInit();
@@ -67,14 +70,44 @@ class ListController extends GetxController {
     }
   }
 
+  void updateItemCount({required int idMenu, required int modifier}) {
+    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+    items[itemIndex]['jumlah'] = items[itemIndex]['jumlah'] + modifier;
+    items.refresh();
+  }
+
   List<Map<String, dynamic>> get filteredList => items
-      .where((element) =>
-          element['name']
-              .toString()
-              .toLowerCase()
-              .contains(keyword.value.toLowerCase()) &&
-          (selectedCategory.value == 'semua menu' ||
-              element['category'] == selectedCategory.value))
+      .where(
+        (element) =>
+            element['name']
+                .toString()
+                .toLowerCase()
+                .contains(keyword.value.toLowerCase()) &&
+            (selectedCategory.value == 'semua menu' ||
+                element['category'] == selectedCategory.value),
+      )
+      .toList();
+
+  List<Map<String, dynamic>> get makananList => items
+      .where(
+        (element) =>
+            element['name']
+                .toString()
+                .toLowerCase()
+                .contains(keyword.value.toLowerCase()) &&
+            element['category'] == 'makanan',
+      )
+      .toList();
+
+  List<Map<String, dynamic>> get minumanList => items
+      .where(
+        (element) =>
+            element['name']
+                .toString()
+                .toLowerCase()
+                .contains(keyword.value.toLowerCase()) &&
+            element['category'] == 'minuman',
+      )
       .toList();
 
   Future<bool> getListOfData() async {
@@ -94,6 +127,7 @@ class ListController extends GetxController {
       }
 
       items.addAll(result['data']);
+
       page.value += 5;
       refreshController.loadComplete();
 

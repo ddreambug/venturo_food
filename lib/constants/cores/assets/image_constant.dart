@@ -6,6 +6,9 @@ class ImageConstant {
   static const String promoIcon = 'assets/images/ic_promo.png';
   static const String patternBackground = 'assets/images/bg_pattern.png';
   static const String pesananIcon = 'assets/images/ic_pesanan.png';
+  static const String listEdit = 'assets/images/ic_list_edit.png';
+  static const String plusIcon = 'assets/images/ic_plus.png';
+  static const String minusIcon = 'assets/images/ic_minus.png';
 
   ///svg
   static const String listIconSvg = 'assets/svg/ic_list.svg';
