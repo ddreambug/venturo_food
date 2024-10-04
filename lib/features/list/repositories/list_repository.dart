@@ -40,7 +40,7 @@ class ListRepository {
       'level': 0,
       'toping': 'tanpa toping',
       'catatan': '.......................',
-      'stok': true,
+      'stok': false,
       "deskripsi": "as",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660e47317ea.png",
       "status": 1

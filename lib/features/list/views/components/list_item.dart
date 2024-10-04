@@ -29,9 +29,7 @@ class ListItem extends StatelessWidget {
             onLoading: ListController.to.getListOfData,
             child: ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 25.w),
-              itemCount: listType == 'semua menu'
-                  ? ListController.to.filteredList.length + 1
-                  : ListController.to.filteredList.length + 1,
+              itemCount: ListController.to.filteredList.length + 1,
               itemBuilder: (context, index) {
                 /// Item Category
                 if (index == 0) {
@@ -83,45 +81,47 @@ class ListItem extends StatelessWidget {
                 final item = ListController.to.filteredList[index - 1];
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.w),
-                  child: Obx(() {
-                    return Slidable(
-                      endActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            onPressed: (context) {
-                              ListController.to.deleteItem(item);
-                            },
-                            borderRadius: BorderRadius.horizontal(
-                              right: Radius.circular(10.r),
+                  child: Obx(
+                    () {
+                      return Slidable(
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                ListController.to.deleteItem(item);
+                              },
+                              borderRadius: BorderRadius.horizontal(
+                                right: Radius.circular(10.r),
+                              ),
+                              backgroundColor: const Color(0xFFFE4A49),
+                              foregroundColor: MainColor.white,
+                              icon: Icons.delete,
+                              label: 'Delete',
                             ),
-                            backgroundColor: const Color(0xFFFE4A49),
-                            foregroundColor: MainColor.white,
-                            icon: Icons.delete,
-                            label: 'Delete',
-                          ),
-                        ],
-                      ),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10.r),
-                        elevation: 2,
-                        child: MenuCard(
-                          menu: item,
-                          isSelected:
-                              ListController.to.selectedItems.contains(item),
-                          onTap: () {
-                            if (ListController.to.selectedItems
-                                .contains(item)) {
-                              ListController.to.selectedItems.remove(item);
-                            } else {
-                              ListController.to.selectedItems.add(item);
-                            }
-                            // edit ontap untuk nampilin detail disini
-                          },
+                          ],
                         ),
-                      ),
-                    );
-                  }),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.r),
+                          elevation: 2,
+                          child: MenuCard(
+                            menu: item,
+                            isSelected:
+                                ListController.to.selectedItems.contains(item),
+                            onTap: () {
+                              if (ListController.to.selectedItems
+                                  .contains(item)) {
+                                ListController.to.selectedItems.remove(item);
+                              } else {
+                                ListController.to.selectedItems.add(item);
+                              }
+                              // edit ontap untuk nampilin detail disini
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             ),

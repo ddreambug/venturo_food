@@ -26,7 +26,7 @@ class PromoDetailView extends StatelessWidget {
           children: [
             SizedBox(height: 20.h),
             SizedBox(
-              height: 181.w,
+              height: 181.h,
               width: 378.w,
               child: Hero(
                 tag: 'promo $item',
