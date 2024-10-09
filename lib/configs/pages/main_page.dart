@@ -2,10 +2,11 @@ import 'package:get/get.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/features/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:venturo_food/features/forgot_password/views/ui/forgot_password_view.dart';
-import 'package:venturo_food/features/list/bindings/list_binding.dart';
-import 'package:venturo_food/features/list/views/ui/list_item_view.dart';
-import 'package:venturo_food/features/list/views/ui/menu_detail_view.dart';
-import 'package:venturo_food/features/list/views/ui/promo_detail_view.dart';
+import 'package:venturo_food/features/main_menu/bindings/list_binding.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/bindings/checkout_binding.dart';
+import 'package:venturo_food/features/main_menu/views/ui/main_menu_view.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/menu_detail_view.dart';
+import 'package:venturo_food/features/main_menu/views/ui/promo_detail_view.dart';
 import 'package:venturo_food/features/login/bindings/login_binding.dart';
 import 'package:venturo_food/features/splash_screen/bindings/splash_binding.dart';
 import 'package:venturo_food/features/login/views/ui/login_view.dart';
@@ -45,9 +46,12 @@ abstract class MainPage {
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
-      name: MainRoute.list,
+      name: MainRoute.mainMenu,
       page: () => const ListItemView(),
-      binding: ListBinding(),
+      bindings: [
+        ListBinding(),
+        CheckoutBinding(),
+      ],
       transition: Transition.circularReveal,
       transitionDuration: const Duration(seconds: 2),
     ),

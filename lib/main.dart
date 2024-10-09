@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         ///debugging purpose
-        initialRoute: MainRoute.list,
+        initialRoute: MainRoute.mainMenu,
         // initialRoute: MainRoute.splashScreen,
         theme: mainTheme,
         defaultTransition: Transition.native,

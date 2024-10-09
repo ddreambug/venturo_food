@@ -6,5 +6,5 @@ abstract class MainRoute {
   static const String forgotPassword = '/forgot-password';
   static const String detailPromo = '/detail-promo';
   static const String detailMenu = '/detail-menu';
-  static const String list = '/list';
+  static const String mainMenu = '/main-menu';
 }
