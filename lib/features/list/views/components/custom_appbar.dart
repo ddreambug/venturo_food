@@ -6,9 +6,14 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key, required this.appBarTitle});
+  const CustomAppbar({
+    super.key,
+    required this.appBarTitle,
+    this.useIcon = true,
+  });
 
   final String appBarTitle;
+  final bool useIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(33, 24, 24, 24),
+            color: Color.fromARGB(68, 24, 24, 24),
             blurRadius: 15,
             spreadRadius: -1,
             offset: Offset(0, 1),
@@ -52,10 +57,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  ImageConstant.promoIcon,
-                  width: 18.w,
-                ),
+                if (useIcon) ...{
+                  Image.asset(
+                    ImageConstant.promoIcon,
+                    width: 18.w,
+                  ),
+                },
                 SizedBox(width: 8.w),
                 Text(
                   appBarTitle,

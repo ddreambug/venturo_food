@@ -30,7 +30,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromARGB(33, 24, 24, 24),
+            color: Color.fromARGB(68, 24, 24, 24),
             blurRadius: 15,
             spreadRadius: -1,
             offset: Offset(0, 1),

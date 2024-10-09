@@ -43,12 +43,9 @@ class CustomQuantityButton extends StatelessWidget {
               ),
       );
     } else {
-      return Padding(
-        padding: EdgeInsets.only(top: 60.w),
-        child: Text(
-          'Stok Habis',
-          style: Get.textTheme.labelSmall!.copyWith(fontSize: 16.sp),
-        ),
+      return Text(
+        'Stok Habis',
+        style: Get.textTheme.labelSmall!.copyWith(fontSize: 16.sp),
       );
     }
   }

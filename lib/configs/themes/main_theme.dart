@@ -30,4 +30,8 @@ final ThemeData mainTheme = ThemeData(
     labelStyle: TextStyle(fontSize: 14.sp),
     hintStyle: TextStyle(color: MainColor.grey, fontSize: 12.sp),
   ),
+  dividerTheme: const DividerThemeData(
+    color: Color.fromARGB(92, 51, 51, 51),
+    thickness: 0.5,
+  ),
 );

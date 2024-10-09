@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:venturo_food/features/list/constants/enum.dart';
 import 'package:venturo_food/features/list/repositories/list_repository.dart';
+import 'package:venturo_food/features/list/views/components/custom_bottom_sheet.dart';
 import 'package:venturo_food/features/list/views/components/search_app_bar.dart';
 
 class ListController extends GetxController {
@@ -15,8 +17,9 @@ class ListController extends GetxController {
   final FocusNode focusNode = FocusNode();
   var isFocused = false.obs;
   RxString appbarType = 'main'.obs;
-  Widget appBar =
-      SearchAppBar(onChange: (value) => ListController.to.keyword(value));
+  Widget appBar = SearchAppBar(
+    onChange: (value) => ListController.to.keyword(value),
+  );
 
   /// List property
   late final ListRepository repository;
@@ -49,6 +52,12 @@ class ListController extends GetxController {
     focusNode.addListener(() {
       isFocused.value = focusNode.hasFocus;
     });
+
+    catatanController.addListener(
+      () {
+        catatanLength.value = catatanController.text.length;
+      },
+    );
   }
 
   @override
@@ -68,12 +77,6 @@ class ListController extends GetxController {
     } else {
       refreshController.refreshFailed();
     }
-  }
-
-  void updateItemCount({required int idMenu, required int modifier}) {
-    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
-    items[itemIndex]['jumlah'] = items[itemIndex]['jumlah'] + modifier;
-    items.refresh();
   }
 
   List<Map<String, dynamic>> get filteredList => items
@@ -156,5 +159,71 @@ class ListController extends GetxController {
         stackTrace: stacktrace,
       );
     }
+  }
+
+  ///======================================== bottom property ===================================
+  final TextEditingController catatanController = TextEditingController();
+  RxInt catatanLength = 0.obs;
+
+  void showMenuProperty(Map<String, dynamic> menuItem, DetailType detailType) {
+    Get.bottomSheet(
+      barrierColor: const Color.fromARGB(40, 55, 55, 55),
+      CustomBottomSheet(menuItem: menuItem, detailType: detailType),
+    );
+  }
+
+  void updateLevel({required int idMenu, required int newLevel}) {
+    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+    items[itemIndex]['level'] = newLevel;
+
+    if (items[itemIndex]['jumlah'] == 0) {
+      updateItemCount(idMenu: idMenu, modifier: 1);
+    }
+
+    items.refresh();
+  }
+
+  void updateToping({required int idMenu, required String newToping}) {
+    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+    items[itemIndex]['toping'] = newToping;
+
+    if (items[itemIndex]['jumlah'] == 0) {
+      updateItemCount(idMenu: idMenu, modifier: 1);
+    }
+
+    items.refresh();
+  }
+
+  void updateCatatan({required int idMenu}) {
+    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+    items[itemIndex]['catatan'] = catatanController.text;
+
+    if (items[itemIndex]['jumlah'] == 0) {
+      updateItemCount(idMenu: idMenu, modifier: 1);
+    }
+
+    items.refresh();
+    catatanController.clear();
+    Get.back();
+  }
+
+  void updateItemCount({required int idMenu, required int modifier}) {
+    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+    items[itemIndex]['jumlah'] = items[itemIndex]['jumlah'] + modifier;
+
+    if (items[itemIndex]['jumlah'] == 0) {
+      resetItemProperty(idMenu: idMenu);
+    }
+
+    items.refresh();
+  }
+
+  void resetItemProperty({required int idMenu}) {
+    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+
+    items[itemIndex]['catatan'] = 'Tambahkan Catatan';
+    items[itemIndex]['level'] = 0;
+    items[itemIndex]['toping'] = 'Tanpa Toping';
+    items.refresh();
   }
 }

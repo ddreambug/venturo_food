@@ -11,9 +11,7 @@ import 'package:venturo_food/features/list/views/components/menu_card.dart';
 import 'package:venturo_food/features/list/views/components/section_header.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({
-    super.key,
-  });
+  const ListItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,47 +79,42 @@ class ListItem extends StatelessWidget {
                 final item = ListController.to.filteredList[index - 1];
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.w),
-                  child: Obx(
-                    () {
-                      return Slidable(
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              onPressed: (context) {
-                                ListController.to.deleteItem(item);
-                              },
-                              borderRadius: BorderRadius.horizontal(
-                                right: Radius.circular(10.r),
-                              ),
-                              backgroundColor: const Color(0xFFFE4A49),
-                              foregroundColor: MainColor.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                          ],
-                        ),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(10.r),
-                          elevation: 2,
-                          child: MenuCard(
-                            menu: item,
-                            isSelected:
-                                ListController.to.selectedItems.contains(item),
-                            onTap: () {
-                              if (ListController.to.selectedItems
-                                  .contains(item)) {
-                                ListController.to.selectedItems.remove(item);
-                              } else {
-                                ListController.to.selectedItems.add(item);
-                              }
-                              // edit ontap untuk nampilin detail disini
+                  child: Obx(() {
+                    return Slidable(
+                      endActionPane: ActionPane(
+                        motion: const ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (context) {
+                              ListController.to.deleteItem(item);
                             },
+                            borderRadius: BorderRadius.horizontal(
+                              right: Radius.circular(10.r),
+                            ),
+                            backgroundColor: const Color(0xFFFE4A49),
+                            foregroundColor: MainColor.white,
+                            icon: Icons.delete,
+                            label: 'Delete',
                           ),
+                        ],
+                      ),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(10.r),
+                        elevation: 2,
+                        child: MenuCard(
+                          menu: item,
+                          isSelected:
+                              ListController.to.selectedItems.contains(item),
+                          onTap: () {
+                            Get.toNamed(
+                              '/detail-menu',
+                              arguments: item,
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  }),
                 );
               },
             ),

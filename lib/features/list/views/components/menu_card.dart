@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/features/list/constants/enum.dart';
 import 'package:venturo_food/features/list/controllers/list_controller.dart';
 import 'package:venturo_food/features/list/views/components/custom_quantity_button.dart';
 
@@ -58,13 +57,16 @@ class MenuCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.r),
                     color: const Color.fromARGB(255, 223, 223, 223),
                   ),
-                  child: CachedNetworkImage(
-                    imageUrl: menu['foto'] ??
-                        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
-                    useOldImageOnUrlChange: true,
-                    color: const Color.fromARGB(255, 223, 223, 223),
-                    colorBlendMode: BlendMode.darken,
-                    fit: BoxFit.contain,
+                  child: Hero(
+                    tag: menu['id_menu'],
+                    child: CachedNetworkImage(
+                      imageUrl: menu['foto'] ??
+                          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+                      useOldImageOnUrlChange: true,
+                      color: const Color.fromARGB(255, 223, 223, 223),
+                      colorBlendMode: BlendMode.darken,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
 
@@ -85,7 +87,7 @@ class MenuCard extends StatelessWidget {
                           children: [
                             Text(
                               menu['name'],
-                              style: Get.textTheme.headlineSmall!.copyWith(
+                              style: Get.textTheme.titleSmall!.copyWith(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 23.sp,
                               ),
@@ -111,20 +113,30 @@ class MenuCard extends StatelessWidget {
                                     matchedItem['jumlah'] > 0) {
                                   return SizedBox(
                                     height: 20.h,
-                                    child: Row(
-                                      children: [
-                                        Image.asset(ImageConstant.listEdit),
-                                        SizedBox(width: 5.w),
-                                        Text(
-                                          'Tambahkan Catatan',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: Get.textTheme.labelMedium!
-                                              .copyWith(
-                                            fontSize: 12.sp,
-                                            color: MainColor.grey,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        ListController.to.showMenuProperty(
+                                          menu,
+                                          DetailType.catatan,
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Image.asset(ImageConstant.listEdit),
+                                          SizedBox(width: 5.w),
+                                          Expanded(
+                                            child: Text(
+                                              menu['catatan'],
+                                              overflow: TextOverflow.ellipsis,
+                                              style: Get.textTheme.labelMedium!
+                                                  .copyWith(
+                                                fontSize: 12.sp,
+                                                color: MainColor.grey,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   );
                                 } else {

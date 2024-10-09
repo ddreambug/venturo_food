@@ -25,45 +25,55 @@ class ListItemView extends StatelessWidget {
       child: GestureDetector(
         onTap: ListController.to.focusNode.unfocus,
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: MainColor.primary,
+            shape: const CircleBorder(),
+            mini: true,
+            child: const Icon(Icons.shopping_cart),
+          ),
           backgroundColor: MainColor.white,
           appBar: SearchAppBar(
-              onChange: (value) => ListController.to.keyword(value)),
+            onChange: (value) => ListController.to.keyword(value),
+          ),
           bottomNavigationBar: Obx(
             () => CustomBottomnavbar(
               currentIndex: listController.currentNavBarIndex.value,
             ),
           ),
           body: NestedScrollView(
-              physics: const ClampingScrollPhysics(),
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  SliverToBoxAdapter(child: 22.verticalSpace),
-                  // list of promo
-                  SliverToBoxAdapter(
-                    child: SectionHeader(
-                      icon: Image.asset(
-                        ImageConstant.promoIcon,
-                        height: 14.h,
-                      ),
-                      title: 'Promo Yang Tersedia (${promoRepo.length})',
-                      isHeader: true,
+            physics: const ClampingScrollPhysics(),
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverToBoxAdapter(child: 22.verticalSpace),
+                SliverToBoxAdapter(
+                  child: SectionHeader(
+                    icon: Image.asset(
+                      ImageConstant.promoIcon,
+                      height: 14.h,
                     ),
+                    title: 'Promo Yang Tersedia (${promoRepo.length})',
+                    isHeader: true,
                   ),
-                  SliverToBoxAdapter(child: 22.verticalSpace),
-                  const ListPromo(),
-                  SliverToBoxAdapter(child: 22.verticalSpace),
-                ];
-              },
-              body: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // List item Header
-                  const ListCategory(),
-                  SizedBox(height: 10.w),
-                  //List Item
-                  const ListItem(),
-                ],
-              )),
+                ),
+                SliverToBoxAdapter(child: 22.verticalSpace),
+
+                // list of promo
+                const ListPromo(),
+                SliverToBoxAdapter(child: 22.verticalSpace),
+              ];
+            },
+            body: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // List item Header
+                const ListCategory(),
+                SizedBox(height: 10.w),
+                //List Item
+                const ListItem(),
+              ],
+            ),
+          ),
         ),
       ),
     );

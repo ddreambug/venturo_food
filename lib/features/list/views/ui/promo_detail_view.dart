@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/features/list/controllers/list_controller.dart';
 import 'package:venturo_food/features/list/views/components/custom_appbar.dart';
 import 'package:venturo_food/features/list/views/components/custom_bottomnavbar.dart';
 import 'package:venturo_food/features/list/views/components/promo_card.dart';
@@ -20,7 +21,11 @@ class PromoDetailView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: const CustomAppbar(appBarTitle: 'Promo'),
-        bottomNavigationBar: const CustomBottomnavbar(),
+        bottomNavigationBar: Obx(
+          () => CustomBottomnavbar(
+            currentIndex: ListController.to.currentNavBarIndex.value,
+          ),
+        ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
