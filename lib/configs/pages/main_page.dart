@@ -4,6 +4,7 @@ import 'package:venturo_food/features/forgot_password/bindings/forgot_password_b
 import 'package:venturo_food/features/forgot_password/views/ui/forgot_password_view.dart';
 import 'package:venturo_food/features/main_menu/bindings/list_binding.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/bindings/checkout_binding.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/checkout_view.dart';
 import 'package:venturo_food/features/main_menu/views/ui/main_menu_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/menu_detail_view.dart';
 import 'package:venturo_food/features/main_menu/views/ui/promo_detail_view.dart';
@@ -63,6 +64,11 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.detailMenu,
       page: () => const MenuDetailView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: MainRoute.detailPesanan,
+      page: () => const CheckoutView(),
       transition: Transition.fadeIn,
     ),
   ];

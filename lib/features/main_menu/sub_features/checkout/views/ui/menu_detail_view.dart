@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/features/main_menu/constants/enum.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
+import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
@@ -15,39 +17,32 @@ class MenuDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = Get.arguments as Map<String, dynamic>;
+    final menuItem = arguments['item'];
+    final isCart = arguments['isCart'] ?? false;
     final items = ListController.to.items;
-    final menuItem = Get.arguments as Map<String, dynamic>;
+    final cart = CheckoutController.to.cart;
+    final dataSource = isCart ? cart : items;
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppbar(
-          appBarTitle: 'Detail Menu',
+        appBar: CustomAppbar(
+          appBarTitle: isCart ? 'Edit Menu' : 'Detail Menu',
           useIcon: false,
         ),
-        bottomNavigationBar: Obx(
-          () => CustomBottomnavbar(
-            currentIndex: ListController.to.currentNavBarIndex.value,
-          ),
-        ),
+        bottomNavigationBar: !isCart
+            ? Obx(
+                () => CustomBottomnavbar(
+                  currentIndex: ListController.to.currentNavBarIndex.value,
+                ),
+              )
+            : const CheckoutBottomNavbar(checkoutNavbarType: 'pesanan'),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 20.h),
-            SizedBox(
-              height: 181.h,
-              width: 378.w,
-              child: Hero(
-                tag: menuItem['id_menu'],
-                child: CachedNetworkImage(
-                  imageUrl: menuItem['foto'],
-                  useOldImageOnUrlChange: true,
-                  color: Colors.grey[100],
-                  colorBlendMode: BlendMode.darken,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
+            _buildMenuImage(menuItem),
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(top: 20.h),
@@ -82,42 +77,7 @@ class MenuDetailView extends StatelessWidget {
                                 fontWeight: FontWeight.w900),
                           ),
                           const Spacer(),
-                          Container(
-                            margin: EdgeInsets.only(right: 10.w),
-                            width: menuItem['stok'] == true ? 73.w : 105.w,
-                            child: Obx(
-                              () {
-                                final matchedItem = items.firstWhere((item) =>
-                                    item['id_menu'] == menuItem['id_menu']);
-                                return Row(
-                                  mainAxisAlignment: matchedItem['jumlah'] == 0
-                                      ? MainAxisAlignment.end
-                                      : MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    if (matchedItem['jumlah'] != 0) ...{
-                                      CustomQuantityButton(
-                                        menu: menuItem,
-                                        isAdd: false,
-                                      ),
-                                      Text(
-                                        '${matchedItem['jumlah']}',
-                                        style:
-                                            Get.textTheme.labelMedium!.copyWith(
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                      ),
-                                      CustomQuantityButton(
-                                        menu: menuItem,
-                                      ),
-                                    } else
-                                      CustomQuantityButton(
-                                        menu: menuItem,
-                                      ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
+                          _buildQuantityButton(menuItem, dataSource),
                         ],
                       ),
                       Padding(
@@ -130,64 +90,10 @@ class MenuDetailView extends StatelessWidget {
                         ),
                       ),
                       const Divider(),
-
-                      /// Menu Property
-                      MenuDetailList(
-                        menuItem: menuItem,
-                        detailType: DetailType.harga,
-                      ),
-                      const Divider(),
-                      MenuDetailList(
-                        menuItem: menuItem,
-                        detailType: DetailType.level,
-                      ),
-                      const Divider(),
-                      MenuDetailList(
-                        menuItem: menuItem,
-                        detailType: DetailType.toping,
-                      ),
-                      const Divider(),
-                      MenuDetailList(
-                        menuItem: menuItem,
-                        detailType: DetailType.catatan,
-                      ),
-                      const Divider(),
-                      SizedBox(height: 20.h),
-
-                      ///reactive button
-                      Obx(
-                        () {
-                          final matchedItem = items.firstWhere(
-                              (item) => item['id_menu'] == menuItem['id_menu']);
-                          if (matchedItem['jumlah'] > 0) {
-                            return SizedBox(
-                              width: double.infinity,
-                              height: 42.w,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  side: const BorderSide(
-                                    color: Color(0xFF00717F),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Tambahkan Ke Pesanan',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                          color: MainColor.white,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 14.sp),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
-                      )
+                      ..._buildMenuProperties(menuItem, isCart),
+                      if (!isCart) ...{
+                        _buildReactiveSubmitButton(menuItem, dataSource),
+                      },
                     ],
                   ),
                 ),
@@ -196,6 +102,141 @@ class MenuDetailView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  List<Widget> _buildMenuProperties(
+      Map<String, dynamic> menuItem, bool isCart) {
+    return [
+      MenuDetailList(
+        menuItem: menuItem,
+        detailType: DetailType.harga,
+        isCart: isCart,
+      ),
+      const Divider(),
+      MenuDetailList(
+        menuItem: menuItem,
+        detailType: DetailType.level,
+        isCart: isCart,
+      ),
+      const Divider(),
+      MenuDetailList(
+        menuItem: menuItem,
+        detailType: DetailType.toping,
+        isCart: isCart,
+      ),
+      const Divider(),
+      MenuDetailList(
+        menuItem: menuItem,
+        detailType: DetailType.catatan,
+        isCart: isCart,
+      ),
+      const Divider(),
+    ];
+  }
+
+  Widget _buildMenuImage(Map<String, dynamic> menuItem) {
+    return SizedBox(
+      height: 181.h,
+      width: 378.w,
+      child: Hero(
+        tag: menuItem['id_menu'],
+        child: CachedNetworkImage(
+          imageUrl: menuItem['foto'],
+          useOldImageOnUrlChange: true,
+          color: Colors.grey[100],
+          colorBlendMode: BlendMode.darken,
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuantityButton(
+    Map<String, dynamic> menuItem,
+    RxList<Map<String, dynamic>> dataSource,
+  ) {
+    return Container(
+      margin: EdgeInsets.only(right: 10.w),
+      width: menuItem['stok'] == true ? 73.w : 105.w,
+      child: Obx(
+        () {
+          final matchedItem = dataSource
+              .firstWhere((item) => item['id_menu'] == menuItem['id_menu']);
+          return Row(
+            mainAxisAlignment: matchedItem['jumlah'] == 0
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.spaceBetween,
+            children: [
+              if (matchedItem['jumlah'] != 0) ...{
+                CustomQuantityButton(
+                  menu: menuItem,
+                  isAdd: false,
+                ),
+                Text(
+                  '${matchedItem['jumlah']}',
+                  style: Get.textTheme.labelMedium!.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                CustomQuantityButton(
+                  menu: menuItem,
+                ),
+              } else
+                CustomQuantityButton(
+                  menu: menuItem,
+                ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildReactiveSubmitButton(
+    Map<String, dynamic> menuItem,
+    RxList<Map<String, dynamic>> dataSource,
+  ) {
+    return Obx(
+      () {
+        final matchedItem = dataSource
+            .firstWhere((item) => item['id_menu'] == menuItem['id_menu']);
+        if (matchedItem['jumlah'] > 0) {
+          return SizedBox(
+            width: double.infinity,
+            height: 42.w,
+            child: ElevatedButton(
+              onPressed: () async {
+                final result =
+                    await CheckoutController.to.addCartItem(menuItem);
+
+                Get.showSnackbar(
+                  GetSnackBar(
+                    message: result,
+                    snackPosition: SnackPosition.BOTTOM,
+                    duration: const Duration(milliseconds: 1500),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                side: const BorderSide(
+                  color: Color(0xFF00717F),
+                  width: 1,
+                ),
+              ),
+              child: Text(
+                'Tambahkan Ke Pesanan',
+                style: Get.textTheme.bodyMedium!.copyWith(
+                    color: MainColor.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14.sp),
+              ),
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

@@ -107,9 +107,10 @@ class ListItem extends StatelessWidget {
                           isSelected:
                               ListController.to.selectedItems.contains(item),
                           onTap: () {
+                            //to menu_detail_view.dart
                             Get.toNamed(
                               '/detail-menu',
-                              arguments: item,
+                              arguments: {'item': item},
                             );
                           },
                         ),

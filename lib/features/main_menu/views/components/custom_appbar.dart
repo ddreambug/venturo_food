@@ -12,10 +12,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.appBarTitle,
     this.useIcon = true,
+    this.icon = ImageConstant.promoIcon,
   });
 
   final String appBarTitle;
   final bool useIcon;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +63,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 if (useIcon) ...{
                   Image.asset(
-                    ImageConstant.promoIcon,
+                    icon,
                     width: 18.w,
+                    color: MainColor.primary,
                   ),
                 },
                 SizedBox(width: 8.w),

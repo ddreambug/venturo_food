@@ -26,7 +26,9 @@ class ListItemView extends StatelessWidget {
         onTap: ListController.to.focusNode.unfocus,
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed('/detail-pesanan');
+            },
             backgroundColor: MainColor.primary,
             shape: const CircleBorder(),
             mini: true,

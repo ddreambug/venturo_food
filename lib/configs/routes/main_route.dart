@@ -7,4 +7,5 @@ abstract class MainRoute {
   static const String detailPromo = '/detail-promo';
   static const String detailMenu = '/detail-menu';
   static const String mainMenu = '/main-menu';
+  static const String detailPesanan = '/detail-pesanan';
 }

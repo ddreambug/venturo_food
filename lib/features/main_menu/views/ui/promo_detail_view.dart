@@ -6,6 +6,7 @@ import 'package:venturo_food/features/main_menu/controllers/list_controller.dart
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/promo_card.dart';
+import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 
 class PromoDetailView extends StatelessWidget {
   const PromoDetailView({super.key});
@@ -20,7 +21,10 @@ class PromoDetailView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppbar(appBarTitle: 'Promo'),
+        appBar: const CustomAppbar(
+          appBarTitle: 'Promo',
+          icon: ImageConstant.promoIcon,
+        ),
         bottomNavigationBar: Obx(
           () => CustomBottomnavbar(
             currentIndex: ListController.to.currentNavBarIndex.value,

@@ -9,6 +9,8 @@ class ImageConstant {
   static const String listEdit = 'assets/images/ic_list_edit.png';
   static const String plusIcon = 'assets/images/ic_plus.png';
   static const String minusIcon = 'assets/images/ic_minus.png';
+  static const String discountIcon = 'assets/images/ic_discount.png';
+  static const String voucherIcon = 'assets/images/ic_voucher.png';
 
   ///svg
   static const String listIconSvg = 'assets/svg/ic_list.svg';

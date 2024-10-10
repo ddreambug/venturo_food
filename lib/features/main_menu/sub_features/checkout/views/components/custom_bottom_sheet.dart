@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/features/main_menu/constants/enum.dart';
+import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/custom_choice_chip.dart';
 

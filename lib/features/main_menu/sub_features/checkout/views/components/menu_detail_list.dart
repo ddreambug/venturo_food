@@ -9,7 +9,7 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:venturo_food/features/main_menu/constants/enum.dart';
+import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 
@@ -18,14 +18,20 @@ class MenuDetailList extends StatelessWidget {
     super.key,
     required this.menuItem,
     required this.detailType,
+    this.isCart = false,
   });
 
   //variabel passed
   final Map<String, dynamic> menuItem;
   final DetailType detailType;
+  final bool isCart;
 
   @override
   Widget build(BuildContext context) {
+    final items = ListController.to.items;
+    final cart = CheckoutController.to.cart;
+    final dataSource = isCart ? cart : items;
+
     String listIcon;
     String listTitle;
     String listPrice = 'Rp ${NumberFormat('#,###', 'id_ID').format(
@@ -57,8 +63,7 @@ class MenuDetailList extends StatelessWidget {
         }
       },
       child: Obx(() {
-        final items = ListController.to.items;
-        final matchedItem = items.firstWhere(
+        final matchedItem = dataSource.firstWhere(
           (item) => item['id_menu'] == menuItem['id_menu'],
         );
 

@@ -1,21 +1,35 @@
 class CartRepository {
-  final List<Map<String, dynamic>> data = <Map<String, dynamic>>[
-    {
-      'id_cart': 1,
-      'qty': 1,
-      'item': {
-        "id_menu": 2,
-        "name": "Chicken Slam ",
-        "category": "food",
-        "harga": 13000,
-        "deskripsi":
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.s",
-        "foto": "https://i.ibb.co/R9kJtny/1637916829.png",
-      },
-    },
-  ];
+  List<Map<String, dynamic>>? cart;
 
-  List<Map<String, dynamic>> getListOfData() {
-    return data;
+  List<Map<String, dynamic>> sortCart(
+    List<Map<String, dynamic>> list,
+  ) {
+    list.sort(
+      (a, b) => a['category'].toString().compareTo(
+            b['category'].toString(),
+          ),
+    );
+    return list;
+  }
+
+  // Get list of data
+  Map<String, dynamic> getListOfCart() {
+    sortCart(cart!);
+
+    return {
+      'cart': cart!.getRange(0, cart!.length).toList(),
+    };
+  }
+
+  // Add Item
+  void addCartItem(Map<String, dynamic> item) {
+    cart ??= [];
+    cart!.add(item);
+    getListOfCart();
+  }
+
+  // Delete item
+  void deleteCartItem(int id) {
+    cart!.removeWhere((element) => element['id_menu'] == id);
   }
 }
