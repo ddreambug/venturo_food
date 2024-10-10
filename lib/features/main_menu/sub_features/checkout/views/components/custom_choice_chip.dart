@@ -4,6 +4,7 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/utils/enums/enum.dart';
 
 /// Used in custom_bottom_sheet.dart
 class CustomChoiceChip extends StatelessWidget {
@@ -11,10 +12,13 @@ class CustomChoiceChip extends StatelessWidget {
     super.key,
     required this.type,
     required this.menu,
+    this.editType = EditType.list,
   });
 
   final String type;
   final Map<String, dynamic> menu;
+  final EditType editType;
+
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -31,7 +35,9 @@ class CustomChoiceChip extends StatelessWidget {
 
           return Obx(() {
             final items = ListController.to.items;
-            final matchedItem = items.firstWhere(
+            final cart = CheckoutController.to.cart;
+            final dataSource = editType == EditType.cart ? cart : items;
+            final matchedItem = dataSource.firstWhere(
               (item) => item['id_menu'] == menu['id_menu'],
             );
             int topingIndex = chipLabels
@@ -41,10 +47,18 @@ class CustomChoiceChip extends StatelessWidget {
               onTap: () {
                 if (type == 'toping') {
                   CheckoutController.to.updateToping(
-                      idMenu: menu['id_menu'], newToping: chipLabels[index]);
+                      idMenu: menu['id_menu'],
+                      newToping: chipLabels[index],
+                      editType: editType);
+
+                  Get.back();
                 } else {
-                  CheckoutController.to
-                      .updateLevel(idMenu: menu['id_menu'], newLevel: index);
+                  CheckoutController.to.updateLevel(
+                      idMenu: menu['id_menu'],
+                      newLevel: index,
+                      editType: editType);
+
+                  Get.back();
                 }
               },
               child: Container(

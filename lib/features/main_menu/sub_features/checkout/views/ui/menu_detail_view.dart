@@ -77,7 +77,7 @@ class MenuDetailView extends StatelessWidget {
                                 fontWeight: FontWeight.w900),
                           ),
                           const Spacer(),
-                          _buildQuantityButton(menuItem, dataSource),
+                          _buildQuantityButton(menuItem, dataSource, isCart),
                         ],
                       ),
                       Padding(
@@ -108,29 +108,43 @@ class MenuDetailView extends StatelessWidget {
   List<Widget> _buildMenuProperties(
       Map<String, dynamic> menuItem, bool isCart) {
     return [
-      MenuDetailList(
-        menuItem: menuItem,
-        detailType: DetailType.harga,
-        isCart: isCart,
-      ),
-      const Divider(),
-      MenuDetailList(
-        menuItem: menuItem,
-        detailType: DetailType.level,
-        isCart: isCart,
-      ),
-      const Divider(),
-      MenuDetailList(
-        menuItem: menuItem,
-        detailType: DetailType.toping,
-        isCart: isCart,
-      ),
-      const Divider(),
-      MenuDetailList(
-        menuItem: menuItem,
-        detailType: DetailType.catatan,
-        isCart: isCart,
-      ),
+      if (menuItem['category'] == 'minuman') ...{
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.harga,
+          isCart: isCart,
+        ),
+        const Divider(),
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.level,
+          isCart: isCart,
+        ),
+      } else ...[
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.harga,
+          isCart: isCart,
+        ),
+        const Divider(),
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.level,
+          isCart: isCart,
+        ),
+        const Divider(),
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.toping,
+          isCart: isCart,
+        ),
+        const Divider(),
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.catatan,
+          isCart: isCart,
+        )
+      ],
       const Divider(),
     ];
   }
@@ -155,6 +169,7 @@ class MenuDetailView extends StatelessWidget {
   Widget _buildQuantityButton(
     Map<String, dynamic> menuItem,
     RxList<Map<String, dynamic>> dataSource,
+    bool isCart,
   ) {
     return Container(
       margin: EdgeInsets.only(right: 10.w),
@@ -172,6 +187,7 @@ class MenuDetailView extends StatelessWidget {
                 CustomQuantityButton(
                   menu: menuItem,
                   isAdd: false,
+                  editType: isCart ? EditType.cart : EditType.list,
                 ),
                 Text(
                   '${matchedItem['jumlah']}',
@@ -181,10 +197,12 @@ class MenuDetailView extends StatelessWidget {
                 ),
                 CustomQuantityButton(
                   menu: menuItem,
+                  editType: isCart ? EditType.cart : EditType.list,
                 ),
               } else
                 CustomQuantityButton(
                   menu: menuItem,
+                  editType: isCart ? EditType.cart : EditType.list,
                 ),
             ],
           );
@@ -209,11 +227,11 @@ class MenuDetailView extends StatelessWidget {
               onPressed: () async {
                 final result =
                     await CheckoutController.to.addCartItem(menuItem);
-
+                Get.back();
                 Get.showSnackbar(
                   GetSnackBar(
                     message: result,
-                    snackPosition: SnackPosition.BOTTOM,
+                    snackPosition: SnackPosition.TOP,
                     duration: const Duration(milliseconds: 1500),
                   ),
                 );

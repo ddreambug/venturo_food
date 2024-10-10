@@ -42,6 +42,10 @@ class MenuDetailList extends StatelessWidget {
     if (detailType.name == 'harga') {
       listIcon = Bi.cash_coin;
       listTitle = 'Harga';
+    } else if (detailType.name == 'level' &&
+        menuItem['category'] == 'minuman') {
+      listIcon = Ri.fire_line;
+      listTitle = 'Level Gula';
     } else if (detailType.name == 'level') {
       listIcon = Ri.fire_line;
       listTitle = 'Level';
@@ -59,7 +63,11 @@ class MenuDetailList extends StatelessWidget {
         if (detailType.name == 'harga') {
           null;
         } else {
-          CheckoutController.to.showMenuProperty(menuItem, detailType);
+          CheckoutController.to.showMenuProperty(
+            menuItem,
+            detailType,
+            isCart ? EditType.cart : EditType.list,
+          );
         }
       },
       child: Obx(() {
@@ -88,7 +96,7 @@ class MenuDetailList extends StatelessWidget {
             ),
             const Spacer(),
             SizedBox(
-              width: 240.w,
+              width: 230.w,
               child: Text(
                 detailType.name == 'catatan'
                     ? matchedItem['catatan']

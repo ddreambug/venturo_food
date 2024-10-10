@@ -131,7 +131,11 @@ class MenuCard extends StatelessWidget {
       height: 20.h,
       child: GestureDetector(
         onTap: () {
-          CheckoutController.to.showMenuProperty(menu, DetailType.catatan);
+          CheckoutController.to.showMenuProperty(
+            menu,
+            DetailType.catatan,
+            isCart ? EditType.cart : EditType.list,
+          );
         },
         child: Row(
           children: [
@@ -164,16 +168,26 @@ class MenuCard extends StatelessWidget {
             : MainAxisAlignment.spaceBetween,
         children: [
           if (matchedItem['jumlah'] != 0) ...[
-            CustomQuantityButton(menu: menu, isAdd: false),
+            CustomQuantityButton(
+              menu: menu,
+              isAdd: false,
+              editType: isCart ? EditType.cart : EditType.list,
+            ),
             Text(
               '${matchedItem['jumlah']}',
               style: Get.textTheme.labelMedium!.copyWith(
                 fontWeight: FontWeight.w900,
               ),
             ),
-            CustomQuantityButton(menu: menu),
+            CustomQuantityButton(
+              menu: menu,
+              editType: isCart ? EditType.cart : EditType.list,
+            ),
           ] else
-            CustomQuantityButton(menu: menu),
+            CustomQuantityButton(
+              menu: menu,
+              editType: isCart ? EditType.cart : EditType.list,
+            ),
         ],
       ),
     );

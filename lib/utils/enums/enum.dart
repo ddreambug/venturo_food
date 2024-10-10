@@ -5,3 +5,8 @@ enum DetailType {
   toping,
   catatan,
 }
+
+enum EditType {
+  list,
+  cart,
+}

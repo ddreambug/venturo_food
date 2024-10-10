@@ -157,7 +157,7 @@ class CheckoutView extends StatelessWidget {
           children: [
             SlidableAction(
               onPressed: (context) {
-                CheckoutController.to.deleteCartItem(item);
+                CheckoutController.to.deleteCartItem(item['id_menu']);
               },
               borderRadius: BorderRadius.horizontal(
                 right: Radius.circular(10.r),

@@ -14,10 +14,12 @@ class CustomBottomSheet extends StatelessWidget {
     super.key,
     required this.menuItem,
     required this.detailType,
+    required this.editType,
   });
 
   final Map<String, dynamic> menuItem;
   final DetailType detailType;
+  final EditType editType;
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +111,8 @@ class CustomBottomSheet extends StatelessWidget {
                     SizedBox(width: 5.w),
                     GestureDetector(
                       onTap: () {
-                        CheckoutController.to
-                            .updateCatatan(idMenu: menuItem['id_menu']);
+                        CheckoutController.to.updateCatatan(
+                            idMenu: menuItem['id_menu'], editType: editType);
                       },
                       child: Iconify(
                         Ic.round_check_circle,
@@ -125,12 +127,14 @@ class CustomBottomSheet extends StatelessWidget {
                 CustomChoiceChip(
                   type: 'toping',
                   menu: menuItem,
+                  editType: editType,
                 ),
               } else ...{
                 SizedBox(height: 10.h),
                 CustomChoiceChip(
                   type: 'level',
                   menu: menuItem,
+                  editType: editType,
                 ),
               }
             ],

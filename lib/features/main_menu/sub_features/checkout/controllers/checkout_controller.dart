@@ -15,6 +15,12 @@ class CheckoutController extends GetxController {
   RxInt catatanLength = 0.obs;
   final RxList<Map<String, dynamic>> items = ListController.to.items;
   final RxList<Map<String, dynamic>> cart = <Map<String, dynamic>>[].obs;
+  final RxMap<String, dynamic> editCart = {
+    'jumlah': 0,
+    'level': 0,
+    'toping': 'Tanpa Toping',
+    'catatan': 'Tambahkan Catatan'
+  }.obs;
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
 
@@ -25,57 +31,109 @@ class CheckoutController extends GetxController {
     await getListOfCart();
   }
 
-  void showMenuProperty(Map<String, dynamic> menuItem, DetailType detailType) {
+  void showMenuProperty(
+      Map<String, dynamic> menuItem, DetailType detailType, EditType editType) {
     Get.bottomSheet(
       barrierColor: const Color.fromARGB(40, 55, 55, 55),
-      CustomBottomSheet(menuItem: menuItem, detailType: detailType),
+      CustomBottomSheet(
+        menuItem: menuItem,
+        detailType: detailType,
+        editType: editType,
+      ),
     );
   }
 
-  void updateLevel({required int idMenu, required int newLevel}) {
-    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
-    items[itemIndex]['level'] = newLevel;
+  void updateLevel({
+    required int idMenu,
+    required int newLevel,
+    EditType editType = EditType.list,
+  }) {
+    if (editType == EditType.cart) {
+      int itemIndex = cart.indexWhere((item) => item['id_menu'] == idMenu);
+      cart[itemIndex]['level'] = newLevel;
 
-    if (items[itemIndex]['jumlah'] == 0) {
-      updateItemCount(idMenu: idMenu, modifier: 1);
+      cart.refresh();
+    } else {
+      int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+      items[itemIndex]['level'] = newLevel;
+
+      if (items[itemIndex]['jumlah'] == 0) {
+        updateItemCount(idMenu: idMenu, modifier: 1);
+      }
+
+      items.refresh();
     }
-
-    items.refresh();
   }
 
-  void updateToping({required int idMenu, required String newToping}) {
-    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
-    items[itemIndex]['toping'] = newToping;
+  void updateToping({
+    required int idMenu,
+    required String newToping,
+    EditType editType = EditType.list,
+  }) {
+    if (editType == EditType.cart) {
+      int itemIndex = cart.indexWhere((item) => item['id_menu'] == idMenu);
+      cart[itemIndex]['toping'] = newToping;
 
-    if (items[itemIndex]['jumlah'] == 0) {
-      updateItemCount(idMenu: idMenu, modifier: 1);
+      if (cart[itemIndex]['jumlah'] == 0) {
+        updateItemCount(idMenu: idMenu, modifier: 1, editType: editType);
+      }
+      cart.refresh();
+    } else {
+      int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+      items[itemIndex]['toping'] = newToping;
+
+      if (items[itemIndex]['jumlah'] == 0) {
+        updateItemCount(idMenu: idMenu, modifier: 1);
+      }
+      items.refresh();
     }
-
-    items.refresh();
   }
 
-  void updateCatatan({required int idMenu}) {
-    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
-    items[itemIndex]['catatan'] = catatanTextController.text;
+  void updateCatatan({
+    required int idMenu,
+    EditType editType = EditType.list,
+  }) {
+    if (editType == EditType.cart) {
+      int itemIndex = cart.indexWhere((item) => item['id_menu'] == idMenu);
+      cart[itemIndex]['catatan'] = catatanTextController.text;
 
-    if (items[itemIndex]['jumlah'] == 0) {
-      updateItemCount(idMenu: idMenu, modifier: 1);
+      cart.refresh();
+    } else {
+      int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+      items[itemIndex]['catatan'] = catatanTextController.text;
+
+      if (items[itemIndex]['jumlah'] == 0) {
+        updateItemCount(idMenu: idMenu, modifier: 1);
+      }
+      items.refresh();
     }
 
-    items.refresh();
     catatanTextController.clear();
     Get.back();
   }
 
-  void updateItemCount({required int idMenu, required int modifier}) {
-    int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
-    items[itemIndex]['jumlah'] = items[itemIndex]['jumlah'] + modifier;
+  void updateItemCount({
+    required int idMenu,
+    required int modifier,
+    EditType editType = EditType.list,
+  }) {
+    if (editType == EditType.cart) {
+      int itemIndex = cart.indexWhere((item) => item['id_menu'] == idMenu);
+      cart[itemIndex]['jumlah'] = cart[itemIndex]['jumlah'] + modifier;
 
-    if (items[itemIndex]['jumlah'] == 0) {
-      resetItemProperty(idMenu: idMenu);
+      if (cart[itemIndex]['jumlah'] == 0) {
+        deleteCartItem(idMenu);
+      }
+      cart.refresh();
+    } else {
+      int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
+      items[itemIndex]['jumlah'] = items[itemIndex]['jumlah'] + modifier;
+
+      if (items[itemIndex]['jumlah'] == 0) {
+        resetItemProperty(idMenu: idMenu);
+      }
+      items.refresh();
     }
-
-    items.refresh();
   }
 
   void resetItemProperty({required int idMenu}) {
@@ -104,10 +162,10 @@ class CheckoutController extends GetxController {
     }
   }
 
-  Future<bool> deleteCartItem(Map<String, dynamic> item) async {
+  Future<bool> deleteCartItem(int idItem) async {
     try {
-      _cartRepository.deleteCartItem(item['id_menu']);
-      cart.remove(item);
+      _cartRepository.deleteCartItem(idItem);
+      cart.removeWhere((item) => item['id_menu'] == idItem);
       cart.refresh();
       return true;
     } catch (exception, stacktrace) {
