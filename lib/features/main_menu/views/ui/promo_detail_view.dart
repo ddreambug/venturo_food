@@ -7,6 +7,7 @@ import 'package:venturo_food/features/main_menu/views/components/custom_appbar.d
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/promo_card.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class PromoDetailView extends StatelessWidget {
   const PromoDetailView({super.key});
@@ -79,10 +80,8 @@ class PromoDetailView extends StatelessWidget {
                       SizedBox(height: 10.h),
                       Text(
                         item['promo_description'],
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: MainColor.primary,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 20.sp),
+                        style: GoogleTextStyle.w700.copyWith(
+                            fontSize: 20.sp, color: MainColor.primary),
                       ),
                       SizedBox(height: 10.h),
                       const Divider(
@@ -94,9 +93,11 @@ class PromoDetailView extends StatelessWidget {
                         children: [
                           const Icon(Icons.format_list_bulleted_rounded),
                           SizedBox(width: 10.w),
-                          Text('Syarat dan Ketentuan',
-                              style: Get.textTheme.bodyMedium!.copyWith(
-                                  fontSize: 16.w, fontWeight: FontWeight.w600))
+                          Text(
+                            'Syarat dan Ketentuan',
+                            style:
+                                GoogleTextStyle.w600.copyWith(fontSize: 16.sp),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -107,12 +108,8 @@ class PromoDetailView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Text(
                               '- ${promoRequirement[index]}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall!
-                                  .copyWith(
-                                    fontSize: 12.sp,
-                                  ),
+                              style: GoogleTextStyle.w400
+                                  .copyWith(fontSize: 12.sp),
                             );
                           },
                         ),

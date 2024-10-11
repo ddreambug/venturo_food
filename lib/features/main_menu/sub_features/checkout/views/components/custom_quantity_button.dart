@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 
 /// Used in menu_detail_view.dart
@@ -52,7 +52,7 @@ class CustomQuantityButton extends StatelessWidget {
     } else {
       return Text(
         'Stok Habis',
-        style: Get.textTheme.labelSmall!.copyWith(fontSize: 16.sp),
+        style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
       );
     }
   }

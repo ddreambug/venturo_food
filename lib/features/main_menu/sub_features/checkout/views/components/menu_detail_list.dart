@@ -9,6 +9,7 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
@@ -88,10 +89,7 @@ class MenuDetailList extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 1.h),
               child: Text(
                 listTitle,
-                style: Get.textTheme.labelSmall!.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14.sp,
-                ),
+                style: GoogleTextStyle.w600.copyWith(fontSize: 14.sp),
               ),
             ),
             const Spacer(),
@@ -105,15 +103,12 @@ class MenuDetailList extends StatelessWidget {
                         : detailType.name == 'level'
                             ? matchedItem['level'].toString()
                             : listPrice,
-                style: Get.textTheme.titleSmall!.copyWith(
-                  color: detailType.name == 'harga'
-                      ? Theme.of(context).primaryColor
-                      : MainColor.black,
-                  fontSize: 16.sp,
-                  fontWeight: detailType.name == 'harga'
-                      ? FontWeight.w900
-                      : FontWeight.w100,
-                ),
+                style: detailType.name == 'harga'
+                    ? GoogleTextStyle.w700.copyWith(
+                        color: MainColor.primary,
+                        fontSize: 15.sp,
+                      )
+                    : GoogleTextStyle.w400.copyWith(fontSize: 14.sp),
                 textAlign: TextAlign.end,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

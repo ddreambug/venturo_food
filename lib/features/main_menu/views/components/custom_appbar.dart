@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 /// Used in promo_detail_view.dart
 /// Used in subfeatures menu_detail_view.dart
@@ -71,8 +72,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 SizedBox(width: 8.w),
                 Text(
                   appBarTitle,
-                  style: Get.textTheme.bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w800, fontSize: 20.sp),
+                  style: GoogleTextStyle.w700.copyWith(fontSize: 20.sp),
                 ),
               ],
             ),

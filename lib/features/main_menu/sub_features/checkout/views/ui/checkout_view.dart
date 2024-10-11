@@ -36,7 +36,7 @@ class CheckoutView extends StatelessWidget {
           body: Obx(
             () {
               if (cartItem.isEmpty) {
-                return _buildPesananKosong();
+                return _buildEmptyCart();
               } else {
                 return Stack(
                   children: [
@@ -112,7 +112,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Widget _buildPesananKosong() {
+  Widget _buildEmptyCart() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

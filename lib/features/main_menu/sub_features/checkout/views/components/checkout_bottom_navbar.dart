@@ -65,7 +65,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
             const Spacer(),
             SizedBox(
               height: 42.w,
-              width: 168.w,
+              width: 200.w,
               child: OutlinedButton(
                 onPressed: () {},
                 style: OutlinedButton.styleFrom(

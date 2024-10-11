@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 /// Used in list_promo.dart
 class PromoCard extends StatelessWidget {
@@ -63,10 +65,9 @@ class PromoCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 TextSpan(
                   text: promoName,
-                  style: Get.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
+                  style: GoogleTextStyle.w800.copyWith(
                     fontSize: 20.sp,
+                    color: MainColor.white,
                   ),
                   children: [
                     TextSpan(
@@ -86,10 +87,9 @@ class PromoCard extends StatelessWidget {
               Text(
                 promoDesc,
                 textAlign: TextAlign.center,
-                style: Get.textTheme.labelSmall?.copyWith(
-                  color: Colors.white,
-                  fontSize: 12.sp,
-                ),
+                style: GoogleTextStyle.w400.copyWith(
+                    fontSize: 12.sp,
+                    color: const Color.fromARGB(199, 255, 255, 255)),
               ),
             ],
           ),

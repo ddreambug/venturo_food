@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
-import 'package:venturo_food/features/main_menu/repositories/list_repository.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/list_category.dart';
 import 'package:venturo_food/features/main_menu/views/components/list_item.dart';
@@ -18,7 +17,6 @@ class ListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> promoRepo = ListRepository().promo;
     final listController = ListController.to;
 
     return SafeArea(
@@ -54,7 +52,7 @@ class ListItemView extends StatelessWidget {
                       ImageConstant.promoIcon,
                       height: 14.h,
                     ),
-                    title: 'Promo Yang Tersedia (${promoRepo.length})',
+                    title: 'Promo yang Tersedia ',
                     isHeader: true,
                   ),
                 ),

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
@@ -71,10 +72,10 @@ class MenuDetailView extends StatelessWidget {
                         children: [
                           Text(
                             menuItem['name'],
-                            style: Get.textTheme.displayMedium!.copyWith(
-                                color: MainColor.primary,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w900),
+                            style: GoogleTextStyle.w700.copyWith(
+                              fontSize: 20.sp,
+                              color: MainColor.primary,
+                            ),
                           ),
                           const Spacer(),
                           _buildQuantityButton(menuItem, dataSource, isCart),
@@ -84,13 +85,12 @@ class MenuDetailView extends StatelessWidget {
                         padding: EdgeInsets.only(top: 8.h, bottom: 18.h),
                         child: Text(
                           menuItem['deskripsi'],
-                          style: Get.textTheme.labelSmall!.copyWith(
-                            fontSize: 12.sp,
-                          ),
+                          style: GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
                         ),
                       ),
                       const Divider(),
                       ..._buildMenuProperties(menuItem, isCart),
+                      SizedBox(height: 15.h),
                       if (!isCart) ...{
                         _buildReactiveSubmitButton(menuItem, dataSource),
                       },
@@ -197,9 +197,7 @@ class MenuDetailView extends StatelessWidget {
                 ),
                 Text(
                   '${matchedItem['jumlah']}',
-                  style: Get.textTheme.labelMedium!.copyWith(
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: GoogleTextStyle.w500.copyWith(fontSize: 18.sp),
                 ),
                 CustomQuantityButton(
                   menu: menuItem,
@@ -250,10 +248,7 @@ class MenuDetailView extends StatelessWidget {
               ),
               child: Text(
                 'Tambahkan Ke Pesanan',
-                style: Get.textTheme.bodyMedium!.copyWith(
-                    color: MainColor.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14.sp),
+                style: GoogleTextStyle.w700.copyWith(fontSize: 14.sp),
               ),
             ),
           );

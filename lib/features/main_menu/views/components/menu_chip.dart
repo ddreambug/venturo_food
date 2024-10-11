@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 /// Used in list_category.dart
 class MenuChip extends StatelessWidget {
@@ -46,7 +46,7 @@ class MenuChip extends StatelessWidget {
                 SizedBox(width: 5.w),
                 Text(
                   text,
-                  style: Get.textTheme.bodyMedium!.copyWith(
+                  style: GoogleTextStyle.w600.copyWith(
                       color: Colors.white,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600),

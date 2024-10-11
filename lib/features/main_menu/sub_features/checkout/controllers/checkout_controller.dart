@@ -128,7 +128,6 @@ class CheckoutController extends GetxController {
       if (cart[itemIndex]['jumlah'] == 0) {
         deleteCartItem(idMenu);
       }
-      print(cart.length);
       cart.refresh();
       changeFinalHarga();
     } else {

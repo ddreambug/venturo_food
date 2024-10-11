@@ -1,6 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 /// Used in list_item.dart
 /// Used in main_menu_view.dart
@@ -28,14 +28,9 @@ class SectionHeader extends StatelessWidget {
         children: [
           icon!,
           10.horizontalSpace,
-          Text(
-            title,
-            style: Get.textTheme.bodyMedium?.copyWith(
-              color: color,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
+          Text(title,
+              style:
+                  GoogleTextStyle.w700.copyWith(fontSize: 20.sp, color: color)),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 
 /// Used in custom_bottom_sheet.dart
@@ -82,12 +83,15 @@ class CustomChoiceChip extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (type == 'toping') ...{
-                      Text(chipLabels[index],
-                          style: Get.textTheme.labelSmall!.copyWith(
-                              color: topingIndex == index
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontSize: 14.sp)),
+                      Text(
+                        chipLabels[index],
+                        style: GoogleTextStyle.w400.copyWith(
+                          fontSize: 14.sp,
+                          color: topingIndex == index
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
                       if (topingIndex == index) ...{
                         SizedBox(width: 8.w),
                         const Icon(
@@ -97,12 +101,14 @@ class CustomChoiceChip extends StatelessWidget {
                         ),
                       },
                     } else ...{
-                      Text('$index',
-                          style: Get.textTheme.labelSmall!.copyWith(
-                              color: matchedItem['level'] == index
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontSize: 14.sp)),
+                      Text(
+                        '$index',
+                        style: GoogleTextStyle.w400.copyWith(
+                            color: matchedItem['level'] == index
+                                ? Colors.white
+                                : Colors.black,
+                            fontSize: 14.sp),
+                      ),
                       if (matchedItem['level'] == index) ...{
                         SizedBox(width: 8.w),
                         const Icon(

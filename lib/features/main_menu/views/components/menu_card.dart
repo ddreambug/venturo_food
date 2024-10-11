@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
@@ -101,20 +102,16 @@ class MenuCard extends StatelessWidget {
         children: [
           Text(
             menu['name'],
-            style: Get.textTheme.titleSmall!.copyWith(
-              fontWeight: FontWeight.w600,
-              fontSize: 23.sp,
-            ),
+            style: GoogleTextStyle.w500.copyWith(fontSize: 23.sp),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             softWrap: true,
           ),
           Text(
             'Rp ${NumberFormat('#,###', 'id_ID').format(menu['harga'])}',
-            style: Get.textTheme.bodyMedium!.copyWith(
-              color: Get.theme.primaryColor,
+            style: GoogleTextStyle.w800.copyWith(
               fontSize: 18.sp,
-              fontWeight: FontWeight.w800,
+              color: MainColor.primary,
             ),
           ),
           SizedBox(height: 4.w),
@@ -145,7 +142,7 @@ class MenuCard extends StatelessWidget {
               child: Text(
                 menu['catatan'],
                 overflow: TextOverflow.ellipsis,
-                style: Get.textTheme.labelMedium!.copyWith(
+                style: GoogleTextStyle.w500.copyWith(
                   fontSize: 12.sp,
                   color: MainColor.grey,
                 ),
@@ -175,9 +172,7 @@ class MenuCard extends StatelessWidget {
             ),
             Text(
               '${matchedItem['jumlah']}',
-              style: Get.textTheme.labelMedium!.copyWith(
-                fontWeight: FontWeight.w900,
-              ),
+              style: GoogleTextStyle.w500.copyWith(fontSize: 18.sp),
             ),
             CustomQuantityButton(
               menu: menu,

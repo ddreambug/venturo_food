@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class VoucherView extends StatelessWidget {
   const VoucherView({super.key});
@@ -55,11 +55,8 @@ class VoucherView extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                         voucherList[index]['promo_description'],
-                                        style:
-                                            Get.textTheme.titleMedium!.copyWith(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w900,
-                                        ),
+                                        style: GoogleTextStyle.w500
+                                            .copyWith(fontSize: 16.sp),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                       ),

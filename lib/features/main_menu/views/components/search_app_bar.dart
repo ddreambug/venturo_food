@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 /// Used in main_menu_view.dart
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -41,10 +42,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Obx(
         () => TextField(
           controller: searchController,
-          style: Get.textTheme.labelSmall?.copyWith(
-            fontSize: 18.sp,
-            letterSpacing: 0,
-          ),
+          style: GoogleTextStyle.w500.copyWith(fontSize: 16.sp),
           autofocus: false,
           focusNode: ListController.to.focusNode,
           cursorColor: ListController.to.isFocused.value
@@ -69,12 +67,11 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             prefixIconColor: Theme.of(context).primaryColor,
             hintText: 'Pencarian'.tr,
-            hintStyle: Get.textTheme.bodyMedium?.copyWith(
+            hintStyle: GoogleTextStyle.w500.copyWith(
+              fontSize: 16.sp,
               color: MainColor.grey,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0,
             ),
+            contentPadding: EdgeInsets.only(top: 2.w),
           ),
         ),
       ),
