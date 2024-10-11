@@ -97,7 +97,7 @@ class LoadingController extends GetxController {
 
   /// Pergi ke screen selanjutnya
   void toNextScreen() {
-    Get.offAllNamed('/list');
+    Get.offAllNamed('/main-menu');
   }
 
   /// Ambil alamat pake pub Location

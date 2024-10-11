@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/cil.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
@@ -21,8 +23,11 @@ class CheckoutView extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-          bottomNavigationBar:
-              cartItem.isNotEmpty ? const CheckoutBottomNavbar() : null,
+          bottomNavigationBar: Obx(
+            () => cartItem.isNotEmpty
+                ? const CheckoutBottomNavbar()
+                : const SizedBox.shrink(),
+          ),
           backgroundColor: MainColor.white,
           appBar: const CustomAppbar(
             appBarTitle: 'Pesanan',
@@ -38,7 +43,7 @@ class CheckoutView extends StatelessWidget {
                     Column(
                       children: [
                         SizedBox(
-                          height: 430.h,
+                          height: 440.h,
                           child: Obx(
                             () {
                               final makananItems =
@@ -108,8 +113,17 @@ class CheckoutView extends StatelessWidget {
   }
 
   Widget _buildPesananKosong() {
-    return const Center(
-      child: Text('Pesanan Kosong!'),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Iconify(
+            Cil.face_dead,
+            size: 50.w,
+          ),
+          const Text('Pesanan Kosong!'),
+        ],
+      ),
     );
   }
 

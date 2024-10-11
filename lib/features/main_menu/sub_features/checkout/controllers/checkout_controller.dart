@@ -25,6 +25,8 @@ class CheckoutController extends GetxController {
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
   final List<Map<String, dynamic>> voucher = [];
+  final RxNum finalHarga = RxNum(0);
+  final RxDouble discount = (20 / 100).obs;
 
   @override
   void onInit() async {
@@ -126,7 +128,9 @@ class CheckoutController extends GetxController {
       if (cart[itemIndex]['jumlah'] == 0) {
         deleteCartItem(idMenu);
       }
+      print(cart.length);
       cart.refresh();
+      changeFinalHarga();
     } else {
       int itemIndex = items.indexWhere((item) => item['id_menu'] == idMenu);
       items[itemIndex]['jumlah'] = items[itemIndex]['jumlah'] + modifier;
@@ -157,7 +161,7 @@ class CheckoutController extends GetxController {
 
       _cartRepository.addCartItem(cartItem);
       cart.add(cartItem);
-
+      changeFinalHarga();
       return 'Success';
     } catch (e) {
       return 'Error: $e';
@@ -221,6 +225,12 @@ class CheckoutController extends GetxController {
     for (var i = 0; i < cart.length; i++) {
       hargaTotal = hargaTotal + cart[i]['harga'] * cart[i]['jumlah'];
     }
+    //
+
     return hargaTotal;
+  }
+
+  void changeFinalHarga() {
+    finalHarga.value = totalHarga - (totalHarga * discount.value);
   }
 }

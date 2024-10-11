@@ -108,7 +108,7 @@ class MenuDetailView extends StatelessWidget {
   List<Widget> _buildMenuProperties(
       Map<String, dynamic> menuItem, bool isCart) {
     return [
-      if (menuItem['category'] == 'minuman') ...{
+      if (menuItem['category'] == 'minuman') ...[
         MenuDetailList(
           menuItem: menuItem,
           detailType: DetailType.harga,
@@ -120,7 +120,13 @@ class MenuDetailView extends StatelessWidget {
           detailType: DetailType.level,
           isCart: isCart,
         ),
-      } else ...[
+        const Divider(),
+        MenuDetailList(
+          menuItem: menuItem,
+          detailType: DetailType.catatan,
+          isCart: isCart,
+        )
+      ] else ...[
         MenuDetailList(
           menuItem: menuItem,
           detailType: DetailType.harga,

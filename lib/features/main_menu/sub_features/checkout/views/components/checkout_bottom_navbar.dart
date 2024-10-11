@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/fa.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 
 class CheckoutBottomNavbar extends StatelessWidget {
   const CheckoutBottomNavbar({
@@ -15,6 +17,9 @@ class CheckoutBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency =
+        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
+
     return Container(
       padding: EdgeInsets.only(left: 20.w, right: 10.w),
       width: double.infinity,
@@ -44,14 +49,17 @@ class CheckoutBottomNavbar extends StatelessWidget {
                   'Total Pembayaran',
                   style: Get.textTheme.labelSmall!.copyWith(fontSize: 12.sp),
                 ),
-                Text(
-                  'Rp 110.000',
-                  style: Get.textTheme.bodyMedium!.copyWith(
-                    fontSize: 20.sp,
-                    color: MainColor.primary,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+                Obx(() {
+                  final finalHarga = CheckoutController.to.finalHarga.value;
+                  return Text(
+                    formatCurrency.format(finalHarga),
+                    style: Get.textTheme.bodyMedium!.copyWith(
+                      fontSize: 20.sp,
+                      color: MainColor.primary,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  );
+                }),
               ],
             ),
             const Spacer(),
