@@ -8,6 +8,7 @@ import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:intl/intl.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class CheckoutPriceDetail extends StatelessWidget {
   const CheckoutPriceDetail({
@@ -65,14 +66,13 @@ class CheckoutPriceDetail extends StatelessWidget {
         Text.rich(
           TextSpan(
             text: 'Total Pesanan ',
-            style: Get.textTheme.bodyMedium!.copyWith(
-              fontWeight: FontWeight.w900,
+            style: GoogleTextStyle.w700.copyWith(
               fontSize: 16.sp,
             ),
             children: [
               TextSpan(
                 text: '(${cartItem.length} Menu) :',
-                style: Get.textTheme.labelSmall!.copyWith(
+                style: GoogleTextStyle.w400.copyWith(
                   fontWeight: FontWeight.w300,
                 ),
               ),
@@ -82,7 +82,7 @@ class CheckoutPriceDetail extends StatelessWidget {
         const Spacer(),
         Text(
           formatCurrency.format(totalHarga),
-          style: Get.textTheme.bodyMedium!.copyWith(
+          style: GoogleTextStyle.w600.copyWith(
             color: MainColor.primary,
             fontSize: 14.sp,
             fontWeight: FontWeight.w900,
@@ -109,11 +109,10 @@ class CheckoutPriceDetail extends StatelessWidget {
           Image.asset(ImageConstant.discountIcon, width: 22.w),
           SizedBox(width: 8.w),
           SizedBox(
-            width: 230.w,
+            width: 220.w,
             child: Text(
               'Diskon 20%',
-              style: Get.textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.w900,
+              style: GoogleTextStyle.w700.copyWith(
                 fontSize: 16.sp,
               ),
             ),
@@ -121,7 +120,7 @@ class CheckoutPriceDetail extends StatelessWidget {
           const Spacer(),
           Text(
             formatCurrency.format(discount),
-            style: Get.textTheme.titleSmall!.copyWith(
+            style: GoogleTextStyle.w400.copyWith(
               color: MainColor.danger,
               fontSize: 14.sp,
               fontWeight: FontWeight.w100,
@@ -148,8 +147,7 @@ class CheckoutPriceDetail extends StatelessWidget {
           SizedBox(width: 8.w),
           Text(
             'Voucher',
-            style: Get.textTheme.bodyMedium!.copyWith(
-              fontWeight: FontWeight.w900,
+            style: GoogleTextStyle.w700.copyWith(
               fontSize: 16.sp,
             ),
           ),
@@ -158,7 +156,7 @@ class CheckoutPriceDetail extends StatelessWidget {
             width: 230.w,
             child: Text(
               'Pilih Voucher',
-              style: Get.textTheme.titleSmall!.copyWith(
+              style: GoogleTextStyle.w400.copyWith(
                 color: MainColor.black,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w100,
@@ -183,15 +181,14 @@ class CheckoutPriceDetail extends StatelessWidget {
         SizedBox(width: 8.w),
         Text(
           'Pembayaran',
-          style: Get.textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.w900,
+          style: GoogleTextStyle.w700.copyWith(
             fontSize: 16.sp,
           ),
         ),
         const Spacer(),
         Text(
           'Pay Later',
-          style: Get.textTheme.titleSmall!.copyWith(
+          style: GoogleTextStyle.w400.copyWith(
             color: MainColor.black,
             fontSize: 14.sp,
             fontWeight: FontWeight.w100,
@@ -220,9 +217,8 @@ class CheckoutPriceDetail extends StatelessWidget {
             children: [
               Text(
                 "Info Diskon",
-                style: Get.textTheme.titleMedium!.copyWith(
+                style: GoogleTextStyle.w700.copyWith(
                   fontSize: 22.sp,
-                  fontWeight: FontWeight.w900,
                   color: MainColor.primary,
                 ),
                 textAlign: TextAlign.center,
@@ -232,7 +228,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                 children: [
                   Text(
                     'Mengisi Survey',
-                    style: Get.textTheme.labelMedium!.copyWith(fontSize: 16.sp),
+                    style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
                   ),
                   const Spacer(),
                   const Text('10%'),
@@ -242,7 +238,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                 children: [
                   Text(
                     'Terlambat <3x',
-                    style: Get.textTheme.labelMedium!.copyWith(fontSize: 16.sp),
+                    style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
                   ),
                   const Spacer(),
                   const Text('10%'),
@@ -269,8 +265,8 @@ class CheckoutPriceDetail extends StatelessWidget {
                   },
                   child: Text(
                     'Oke',
-                    style: Get.textTheme.bodyMedium!
-                        .copyWith(color: MainColor.white),
+                    style:
+                        GoogleTextStyle.w700.copyWith(color: MainColor.white),
                   ),
                 ),
               )

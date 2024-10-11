@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/custom_choice_chip.dart';
@@ -72,8 +73,7 @@ class CustomBottomSheet extends StatelessWidget {
               Text(
                 bottomSheetTitle,
                 textAlign: TextAlign.end,
-                style: Get.textTheme.bodyMedium!
-                    .copyWith(fontSize: 18.sp, fontWeight: FontWeight.w800),
+                style: GoogleTextStyle.w600.copyWith(fontSize: 18.sp),
               ),
 
               /// Conditional bottom sheet widget
@@ -93,7 +93,7 @@ class CustomBottomSheet extends StatelessWidget {
                             decoration: InputDecoration(
                               isDense: true,
                               counterText: '$count/100',
-                              counterStyle: Get.textTheme.labelSmall!.copyWith(
+                              counterStyle: GoogleTextStyle.w400.copyWith(
                                 fontSize: 10.sp,
                                 color: const Color.fromARGB(255, 134, 133, 133),
                               ),
@@ -102,8 +102,8 @@ class CustomBottomSheet extends StatelessWidget {
                                     BorderSide(color: MainColor.primary),
                               ),
                             ),
-                            style: Get.textTheme.labelSmall!
-                                .copyWith(fontSize: 12.sp),
+                            style:
+                                GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
                           ),
                         );
                       },

@@ -6,6 +6,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/fa.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class CheckoutBottomNavbar extends StatelessWidget {
   const CheckoutBottomNavbar({
@@ -47,13 +48,13 @@ class CheckoutBottomNavbar extends StatelessWidget {
               children: [
                 Text(
                   'Total Pembayaran',
-                  style: Get.textTheme.labelSmall!.copyWith(fontSize: 12.sp),
+                  style: GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
                 ),
                 Obx(() {
                   final finalHarga = CheckoutController.to.finalHarga.value;
                   return Text(
                     formatCurrency.format(finalHarga),
-                    style: Get.textTheme.bodyMedium!.copyWith(
+                    style: GoogleTextStyle.w600.copyWith(
                       fontSize: 20.sp,
                       color: MainColor.primary,
                       fontWeight: FontWeight.w900,
@@ -77,7 +78,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
                 ),
                 child: Text(
                   'Pesan Sekarang',
-                  style: Get.textTheme.bodyMedium!.copyWith(
+                  style: GoogleTextStyle.w600.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w900,
                     color: MainColor.white,
@@ -103,9 +104,8 @@ class CheckoutBottomNavbar extends StatelessWidget {
                 ),
                 child: Text(
                   'Simpan',
-                  style: Get.textTheme.bodyMedium!.copyWith(
+                  style: GoogleTextStyle.w600.copyWith(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w900,
                     color: MainColor.white,
                   ),
                   textAlign: TextAlign.center,
@@ -129,9 +129,8 @@ class CheckoutBottomNavbar extends StatelessWidget {
                 ),
                 child: Text(
                   'Oke',
-                  style: Get.textTheme.bodyMedium!.copyWith(
+                  style: GoogleTextStyle.w600.copyWith(
                     fontSize: 14.sp,
-                    fontWeight: FontWeight.w900,
                     color: MainColor.white,
                   ),
                   textAlign: TextAlign.center,
