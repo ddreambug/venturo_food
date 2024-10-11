@@ -160,5 +160,4 @@ class ListController extends GetxController {
       );
     }
   }
-
 }

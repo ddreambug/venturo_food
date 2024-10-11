@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:venturo_food/features/main_menu/repositories/list_repository.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/repositories/cart_repository.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
@@ -23,11 +24,12 @@ class CheckoutController extends GetxController {
   }.obs;
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
+  final List<Map<String, dynamic>> voucher = [];
 
   @override
   void onInit() async {
     super.onInit();
-
+    getVoucherList();
     await getListOfCart();
   }
 
@@ -192,6 +194,16 @@ class CheckoutController extends GetxController {
     }
   }
 
+  void getVoucherList() {
+    final List<Map<String, dynamic>> promo = ListRepository().promo;
+    for (var item in promo) {
+      if (item['promo_name'] == 'Voucher') {
+        voucher.add(item);
+      }
+    }
+  }
+
+  /// Getter
   List<Map<String, dynamic>> get makananCart => cart
       .where(
         (element) => element['category'] == 'makanan',
@@ -203,4 +215,12 @@ class CheckoutController extends GetxController {
         (element) => element['category'] == 'minuman',
       )
       .toList();
+
+  num get totalHarga {
+    num hargaTotal = 0;
+    for (var i = 0; i < cart.length; i++) {
+      hargaTotal = hargaTotal + cart[i]['harga'] * cart[i]['jumlah'];
+    }
+    return hargaTotal;
+  }
 }

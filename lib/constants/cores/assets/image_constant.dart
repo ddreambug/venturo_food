@@ -11,6 +11,10 @@ class ImageConstant {
   static const String minusIcon = 'assets/images/ic_minus.png';
   static const String discountIcon = 'assets/images/ic_discount.png';
   static const String voucherIcon = 'assets/images/ic_voucher.png';
+  static const String voucherReferral = 'assets/images/voucher_referral.png';
+  static const String voucherBirthday = 'assets/images/voucher_birthday.png';
+  static const String voucherKoordinator =
+      'assets/images/voucher_koordinator.png';
 
   ///svg
   static const String listIconSvg = 'assets/svg/ic_list.svg';

@@ -1,3 +1,5 @@
+import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+
 class ListRepository {
   // Dummy list of data
   final List<Map<String, dynamic>> data = [
@@ -559,6 +561,7 @@ class ListRepository {
     {
       'promo_name': 'Voucher',
       'promo_property': 'Rp.200.000',
+      'value': 200000,
       'promo_description':
           'Berhasil mereferensikan rekan/teman untuk menjadi karyawan',
       'promo_requirement': [
@@ -569,6 +572,31 @@ class ListRepository {
       ],
       'promo_thumbnail':
           'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
+      'promo_image': ImageConstant.voucherReferral,
+    },
+    {
+      'promo_name': 'Voucher',
+      'promo_property': 'Rp.100.000',
+      'value': 100000,
+      'promo_description': 'Koordinator Program Kekompakan',
+      'promo_requirement': [
+        'Hanya untuk Koordinator Program Karyawan',
+      ],
+      'promo_thumbnail':
+          'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
+      'promo_image': ImageConstant.voucherKoordinator,
+    },
+    {
+      'promo_name': 'Voucher',
+      'promo_property': 'Rp.100.000',
+      'value': 100000,
+      'promo_description': 'Ulang Tahun',
+      'promo_requirement': [
+        'Hanya berlaku hingga H+1 hari ulang tahun',
+      ],
+      'promo_thumbnail':
+          'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
+      'promo_image': ImageConstant.voucherBirthday,
     },
     {
       'promo_name': 'Diskon',

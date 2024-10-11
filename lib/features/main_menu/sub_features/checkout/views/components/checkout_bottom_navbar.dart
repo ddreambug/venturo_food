@@ -104,6 +104,32 @@ class CheckoutBottomNavbar extends StatelessWidget {
                 ),
               ),
             ),
+          } else if (checkoutNavbarType == 'voucher') ...{
+            SizedBox(
+              height: 42.w,
+              width: 377.w,
+              child: OutlinedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.black, width: 0.5),
+                  backgroundColor: MainColor.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: Text(
+                  'Oke',
+                  style: Get.textTheme.bodyMedium!.copyWith(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w900,
+                    color: MainColor.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           }
         ],
       ),

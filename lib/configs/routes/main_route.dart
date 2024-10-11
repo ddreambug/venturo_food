@@ -8,4 +8,6 @@ abstract class MainRoute {
   static const String detailMenu = '/detail-menu';
   static const String mainMenu = '/main-menu';
   static const String detailPesanan = '/detail-pesanan';
+  static const String detailVoucher = '/detail-voucher';
+  static const String voucher = '/voucher';
 }
