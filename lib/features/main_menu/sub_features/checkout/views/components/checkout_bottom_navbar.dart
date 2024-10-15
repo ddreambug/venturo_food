@@ -71,7 +71,10 @@ class CheckoutBottomNavbar extends StatelessWidget {
               height: 42.w,
               width: 200.w,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  CheckoutController.to.verify();
+                  print('pesan sekarang pressed');
+                },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.black, width: 0.5),
                   backgroundColor: MainColor.primary,

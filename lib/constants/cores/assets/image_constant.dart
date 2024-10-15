@@ -22,4 +22,5 @@ class ImageConstant {
   static const String googleLogoSvg = 'assets/svg/ic_google.svg';
   static const String makananIconSvg = 'assets/svg/ic_makanan.svg';
   static const String minumanIconSvg = 'assets/svg/ic_minuman.svg';
+  static const String orderCompleteSvg = 'assets/svg/ic_eggonpan.svg';
 }

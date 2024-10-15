@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class PinDialog extends StatefulWidget {
   final String pin;
@@ -19,29 +22,25 @@ class _PinDialogState extends State<PinDialog> {
   final RxBool obscure = RxBool(true);
   final RxnString errorText = RxnString();
   final TextEditingController controller = TextEditingController();
-
-  int tries = 0;
+  int tries = 3;
 
   Future<void> processPin(String? pin) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
-    if (pin == widget.pin) {
+    if (pin == '123456') {
       // if pin is correct close the dialog
       Get.back<bool>(result: true);
     } else {
       // if pin incorrect, type again
-      tries++;
+      tries--;
 
-      if (tries >= 3) {
+      if (tries == 0) {
         // if tries more than 3, close the dialog
         Get.back<bool>(result: false);
       } else {
         // show how many tries user have left
         controller.clear();
-
-        errorText.value = 'PIN wrong! n chances left.'.trParams({
-          'n': (3 - tries).toString(),
-        });
+        errorText.value = 'PIN wrong! $tries chances left.';
       }
     }
   }
@@ -50,9 +49,9 @@ class _PinDialogState extends State<PinDialog> {
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
       width: 34.w,
-      height: 50.h,
+      height: 35.h,
       textStyle: Get.textTheme.titleLarge,
-      margin: EdgeInsets.symmetric(horizontal: 3.w),
+      margin: EdgeInsets.symmetric(horizontal: 0.w),
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).primaryColor),
         borderRadius: BorderRadius.circular(10.r),
@@ -66,93 +65,60 @@ class _PinDialogState extends State<PinDialog> {
         children: [
           // title
           Text(
-            'Verify order',
-            style: Get.textTheme.labelLarge,
+            'Verifikasi Pesanan',
+            style: GoogleTextStyle.w600.copyWith(fontSize: 22.sp),
           ),
 
           // subtitle
           Text(
-            'Enter PIN code',
-            style: Get.textTheme.bodySmall!.copyWith(color: Colors.black),
+            'Masukkan kode PIN',
+            style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
           ),
-
           24.verticalSpacingRadius,
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // First 2 Pinput fields
-                    Expanded(
-                      child: Pinput(
-                        controller: controller,
-                        length: 2,
-                        showCursor: false,
-                        autofocus: true,
-                        defaultPinTheme: defaultPinTheme,
-                        obscureText: obscure.value,
-                        onSubmitted: processPin,
-                        onCompleted: processPin,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: ColoredBox(
-                        color: Colors.black,
-                        child: SizedBox(
-                            width: 9.w, height: 2.h), // Custom separator
-                      ),
-                    ),
-                    // Next 2 Pinput fields
-                    Expanded(
-                      child: Pinput(
-                        controller: controller,
-                        length: 2,
-                        showCursor: false,
-                        autofocus: true,
-                        defaultPinTheme: defaultPinTheme,
-                        obscureText: obscure.value,
-                        onSubmitted: processPin,
-                        onCompleted: processPin,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: ColoredBox(
-                        color: Colors.black,
-                        child: SizedBox(
-                            width: 9.w, height: 2.h), // Custom separator
-                      ),
-                    ),
-                    // Last 2 Pinput fields
-                    Expanded(
-                      child: Pinput(
-                        controller: controller,
-                        length: 2,
-                        showCursor: false,
-                        autofocus: true,
-                        defaultPinTheme: defaultPinTheme,
-                        obscureText: obscure.value,
-                        onSubmitted: processPin,
-                        onCompleted: processPin,
-                      ),
-                    ),
-                  ],
+                () => Expanded(
+                  // pin input
+                  child: Pinput(
+                    controller: controller,
+                    showCursor: false,
+                    length: 6,
+                    autofocus: true,
+                    closeKeyboardWhenCompleted: false,
+                    defaultPinTheme: defaultPinTheme,
+                    obscureText: obscure.value,
+                    onSubmitted: processPin,
+                    onCompleted: processPin,
+                    separatorBuilder: (index) {
+                      if (index == 1 || index == 3) {
+                        // Add dash after index 1 and index 3
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.0),
+                          child: Text(
+                            '-',
+                            style: TextStyle(
+                              fontSize: 15.0, // Dash size
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      }
+                      return const SizedBox(
+                          width: 3.0); // Add spacing between other boxes
+                    },
+                  ),
                 ),
               ),
-
-              10.horizontalSpace,
-
+              3.horizontalSpace,
               // show pin button
               Obx(
                 () => InkWell(
                   radius: 24.r,
                   child: Icon(
                     obscure.value ? Icons.visibility : Icons.visibility_off,
-                    color: Theme.of(context).primaryColor,
+                    color: MainColor.grey,
                     size: 20.r,
                   ),
                   onTap: () {
@@ -167,8 +133,7 @@ class _PinDialogState extends State<PinDialog> {
           Obx(
             () => errorText.value != null
                 ? Padding(
-                    padding:
-                        EdgeInsets.only(left: 15.r, right: 15.r, top: 10.r),
+                    padding: EdgeInsets.only(left: 2.r, right: 15.r, top: 10.r),
                     child: Text(
                       errorText.value!,
                       style: Get.textTheme.bodySmall!
