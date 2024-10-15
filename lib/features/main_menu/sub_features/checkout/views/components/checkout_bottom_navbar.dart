@@ -164,7 +164,9 @@ class CheckoutBottomNavbar extends StatelessWidget {
                       voucher!['promo_description'],
                       voucher!['value'],
                     );
-                    Get.until((route) => Get.currentRoute == '/detail-pesanan');
+                    Get.back();
+
+                    // Get.until((route) => Get.currentRoute == '/detail-pesanan');
                   } else {
                     Get.back();
                   }

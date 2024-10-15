@@ -245,6 +245,7 @@ class CheckoutController extends GetxController {
   void changeVoucherValue(String desc, int newValue) {
     if (voucherValue.containsKey(desc)) {
       voucherValue.remove(desc);
+      changeFinalHarga();
     } else {
       voucherValue.value = {desc: newValue};
       changeFinalHarga();
