@@ -19,40 +19,61 @@ class CheckoutPriceDetail extends StatelessWidget {
   final RxList<Map<String, dynamic>> cartItem;
   @override
   Widget build(BuildContext context) {
-    num totalHarga = CheckoutController.to.totalHarga;
-
     return Expanded(
-      child: Container(
-        margin: EdgeInsets.only(top: 5.h),
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(102, 211, 211, 211),
-          borderRadius: BorderRadiusDirectional.vertical(
-            top: Radius.circular(30),
-          ),
-        ),
-        width: double.infinity,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Total Row
-              _buildTotalRow(totalHarga),
-              const Divider(),
+      child: Obx(
+        () {
+          var isUsingVoucher = CheckoutController.to.voucherValue.isNotEmpty;
+          num totalHarga = CheckoutController.to.totalHarga;
 
-              // Discount Row
-              _buildDiscountRow(totalHarga),
-              const Divider(),
+          return Container(
+            margin: isUsingVoucher
+                ? EdgeInsets.only(top: 50.h)
+                : EdgeInsets.only(top: 5.h),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(102, 211, 211, 211),
+              borderRadius: BorderRadiusDirectional.vertical(
+                top: Radius.circular(30),
+              ),
+            ),
+            width: double.infinity,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Total Row
+                  _buildTotalRow(totalHarga),
+                  const Divider(),
 
-              // Voucher Row
-              _buildVoucherRow(),
-              const Divider(),
+                  // Discount Row
+                  if (!isUsingVoucher) ...{
+                    Obx(
+                      () {
+                        if (CheckoutController.to.voucherValue.isEmpty) {
+                          return Column(
+                            children: [
+                              _buildDiscountRow(totalHarga),
+                              const Divider(),
+                            ],
+                          );
+                        } else {
+                          return const SizedBox.shrink();
+                        }
+                      },
+                    ),
+                  },
 
-              // Payment Row
-              _buildPaymentRow(),
-            ],
-          ),
-        ),
+                  // Voucher Row
+                  _buildVoucherRow(),
+                  const Divider(),
+
+                  // Payment Row
+                  _buildPaymentRow(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -154,16 +175,26 @@ class CheckoutPriceDetail extends StatelessWidget {
           const Spacer(),
           SizedBox(
             width: 230.w,
-            child: Text(
-              'Pilih Voucher',
-              style: GoogleTextStyle.w400.copyWith(
-                color: MainColor.black,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w100,
-              ),
-              textAlign: TextAlign.end,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            child: Obx(
+              () {
+                var voucherAmount =
+                    CheckoutController.to.voucherValue.values.isNotEmpty
+                        ? CheckoutController.to.voucherValue.values.first
+                        : 'Pilih Voucher';
+                return Text(
+                  voucherAmount.toString(),
+                  style: GoogleTextStyle.w400.copyWith(
+                    color: CheckoutController.to.voucherValue.values.isNotEmpty
+                        ? MainColor.danger
+                        : MainColor.black,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w100,
+                  ),
+                  textAlign: TextAlign.end,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                );
+              },
             ),
           ),
           Iconify(Ep.arrow_right_bold, size: 14.w, color: MainColor.grey),

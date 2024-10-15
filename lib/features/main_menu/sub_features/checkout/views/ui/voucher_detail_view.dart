@@ -1,146 +1,130 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/uiw.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
-import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_price_detail.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
-import 'package:venturo_food/constants/cores/assets/image_constant.dart';
-import 'package:venturo_food/features/main_menu/views/components/menu_card.dart';
-import 'package:venturo_food/features/main_menu/views/components/section_header.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class VoucherDetailView extends StatelessWidget {
   const VoucherDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cartItem = CheckoutController.to.cart;
+    ///variable dari list item
+    final voucherItem = Get.arguments;
 
     return SafeArea(
       child: Scaffold(
-          bottomNavigationBar:
-              cartItem.isNotEmpty ? const CheckoutBottomNavbar() : null,
-          backgroundColor: MainColor.white,
-          appBar: const CustomAppbar(
-            appBarTitle: 'Pilih Voucher',
-            icon: ImageConstant.voucherIcon,
-          ),
-          body: Obx(
-            () {
-              return Stack(
-                children: [
-                  Column(
+        backgroundColor: Colors.grey[100],
+        appBar: const CustomAppbar(
+          appBarTitle: 'Detail Voucher',
+          useIcon: false,
+        ),
+        bottomNavigationBar: CheckoutBottomNavbar(
+          checkoutNavbarType: 'detail_voucher',
+          voucher: voucherItem,
+        ),
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(height: 20.h),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.r),
+              child: SizedBox(
+                width: 364.w,
+                child: Image.asset(
+                  voucherItem['promo_image'],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: 20.h),
+                decoration: const BoxDecoration(
+                  color: MainColor.white,
+                  borderRadius: BorderRadiusDirectional.vertical(
+                    top: Radius.circular(30),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(21, 24, 24, 24),
+                      blurRadius: 15,
+                      spreadRadius: -1,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                width: double.infinity,
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        voucherItem['promo_description'],
+                        style: GoogleTextStyle.w600.copyWith(
+                          fontSize: 20.sp,
+                          color: MainColor.primary,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
                       SizedBox(
-                        height: 430.h,
-                        child: Obx(
-                          () {
-                            final makananItems =
-                                CheckoutController.to.makananCart;
-                            final minumanItems =
-                                CheckoutController.to.minumanCart;
-
-                            return ListView.builder(
-                              padding: EdgeInsets.symmetric(horizontal: 25.w),
-                              itemCount: minumanItems.isNotEmpty
-                                  ? cartItem.length + 2
-                                  : makananItems.length + 1,
-                              itemBuilder: (context, index) {
-                                if (index == 0 && makananItems.isNotEmpty) {
-                                  // Makanan Section Header
-                                  return Container(
-                                    margin:
-                                        EdgeInsets.only(top: 15.w, bottom: 4.w),
-                                    child: SectionHeader(
-                                      color: MainColor.primary,
-                                      title: 'Makanan',
-                                      icon: SvgPicture.asset(
-                                        ImageConstant.makananIconSvg,
-                                        height: 14.h,
-                                      ),
-                                    ),
-                                  );
-                                } else if (index > 0 &&
-                                    index <= makananItems.length) {
-                                  // Makanan Items
-                                  final item = makananItems[index - 1];
-                                  return _buildCartItem(context, item);
-                                } else if (index == makananItems.length + 1 &&
-                                    minumanItems.isNotEmpty) {
-                                  // Minuman Section Header
-                                  return Container(
-                                    margin: EdgeInsets.only(top: 15.w),
-                                    child: SectionHeader(
-                                      color: MainColor.primary,
-                                      title: 'Minuman',
-                                      icon: SvgPicture.asset(
-                                        ImageConstant.minumanIconSvg,
-                                      ),
-                                    ),
-                                  );
-                                } else {
-                                  // Minuman Items
-                                  final minumanIndex =
-                                      index - (makananItems.length + 2);
-                                  final item = minumanItems[minumanIndex];
-                                  return _buildCartItem(context, item);
-                                }
-                              },
+                        height: 70.h,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          itemCount: voucherItem['promo_requirement'].length,
+                          itemBuilder: (context, index) {
+                            return Text(
+                              '- ${voucherItem['promo_requirement'][index]}',
+                              style: GoogleTextStyle.w400.copyWith(
+                                fontSize: 12.sp,
+                              ),
                             );
                           },
                         ),
                       ),
-                      CheckoutPriceDetail(cartItem: cartItem),
+                      SizedBox(height: 10.h),
+                      const Divider(
+                        color: MainColor.grey,
+                        thickness: 0.5,
+                      ),
+                      Row(
+                        children: [
+                          Iconify(
+                            Uiw.date,
+                            size: 16.w,
+                            color: MainColor.primary,
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                            'Valid Date',
+                            style: GoogleTextStyle.w700.copyWith(
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            voucherItem['valid_date'],
+                            style: GoogleTextStyle.w500.copyWith(
+                              fontSize: 14.sp,
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(
+                        color: MainColor.grey,
+                        thickness: 0.5,
+                      ),
                     ],
                   ),
-                ],
-              );
-            },
-          )),
-    );
-  }
-
-  Widget _buildCartItem(BuildContext context, Map<String, dynamic> item) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.w),
-      child: Slidable(
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            SlidableAction(
-              onPressed: (context) {
-                CheckoutController.to.deleteCartItem(item['id_menu']);
-              },
-              borderRadius: BorderRadius.horizontal(
-                right: Radius.circular(10.r),
+                ),
               ),
-              backgroundColor: const Color(0xFFFE4A49),
-              foregroundColor: MainColor.white,
-              icon: Icons.delete,
-              label: 'Delete',
             ),
           ],
-        ),
-        child: Material(
-          borderRadius: BorderRadius.circular(10.r),
-          elevation: 2,
-          child: MenuCard(
-            menu: item,
-            isSelected: CheckoutController.to.selectedItems.contains(item),
-            isCart: true,
-            onTap: () {
-              Get.toNamed(
-                '/detail-menu',
-                arguments: {
-                  'item': item,
-                  'isCart': true,
-                },
-              );
-            },
-          ),
         ),
       ),
     );

@@ -573,6 +573,7 @@ class ListRepository {
       'promo_thumbnail':
           'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
       'promo_image': ImageConstant.voucherReferral,
+      'valid_date': '19/11/2021 - 31/01/2022',
     },
     {
       'promo_name': 'Voucher',
@@ -585,6 +586,7 @@ class ListRepository {
       'promo_thumbnail':
           'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
       'promo_image': ImageConstant.voucherKoordinator,
+      'valid_date': '19/11/2021 - 31/01/2022',
     },
     {
       'promo_name': 'Voucher',
@@ -597,6 +599,7 @@ class ListRepository {
       'promo_thumbnail':
           'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
       'promo_image': ImageConstant.voucherBirthday,
+      'valid_date': '19/11/2021 - 31/01/2022',
     },
     {
       'promo_name': 'Diskon',

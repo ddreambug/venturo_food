@@ -5,7 +5,7 @@ import 'package:venturo_food/features/main_menu/sub_features/checkout/controller
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
-import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/voucher_card.dart';
 
 class VoucherView extends StatelessWidget {
   const VoucherView({super.key});
@@ -23,82 +23,21 @@ class VoucherView extends StatelessWidget {
           appBarTitle: 'Pilih Voucher',
           icon: ImageConstant.voucherIcon,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height - 120.h,
-                child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  itemCount: voucherList.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.w),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(10.r),
-                        elevation: 2,
-                        child: Container(
-                          height: 216.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20).r,
-                            color: const Color.fromARGB(77, 193, 193, 193),
-                          ),
-                          width: 377.w,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                top: -8.w,
-                                left: 15.w,
-                                right: -5.w,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        voucherList[index]['promo_description'],
-                                        style: GoogleTextStyle.w500
-                                            .copyWith(fontSize: 16.sp),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    Transform.scale(
-                                      scale: 14 / Checkbox.width,
-                                      child: Checkbox(
-                                        side: const BorderSide(width: 2),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5.r),
-                                        ),
-                                        value: false,
-                                        onChanged: (value) {},
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10).r,
-                                  child: SizedBox(
-                                    width: 364.w,
-                                    child: Image.asset(
-                                      voucherList[index]['promo_image'],
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+        body: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 25.w),
+          itemCount: voucherList.length,
+          itemBuilder: (context, index) {
+            final voucher = voucherList[index];
+
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.w),
+              child: Material(
+                borderRadius: BorderRadius.circular(20.r),
+                elevation: 2,
+                child: VoucherCard(voucher: voucher),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

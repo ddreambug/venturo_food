@@ -71,60 +71,62 @@ class MenuDetailList extends StatelessWidget {
           );
         }
       },
-      child: Obx(() {
-        final matchedItem = dataSource.firstWhere(
-          (item) => item['id_menu'] == menuItem['id_menu'],
-        );
+      child: Obx(
+        () {
+          final matchedItem = dataSource.firstWhere(
+            (item) => item['id_menu'] == menuItem['id_menu'],
+          );
 
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Iconify(
-              listIcon,
-              color: const Color.fromRGBO(44, 139, 164, 1),
-              size: 18.w,
-            ),
-            SizedBox(width: 8.w),
-            Padding(
-              padding: EdgeInsets.only(bottom: 1.h),
-              child: Text(
-                listTitle,
-                style: GoogleTextStyle.w600.copyWith(fontSize: 14.sp),
-              ),
-            ),
-            const Spacer(),
-            SizedBox(
-              width: 230.w,
-              child: Text(
-                detailType.name == 'catatan'
-                    ? matchedItem['catatan']
-                    : detailType.name == 'toping'
-                        ? matchedItem['toping']
-                        : detailType.name == 'level'
-                            ? matchedItem['level'].toString()
-                            : listPrice,
-                style: detailType.name == 'harga'
-                    ? GoogleTextStyle.w700.copyWith(
-                        color: MainColor.primary,
-                        fontSize: 15.sp,
-                      )
-                    : GoogleTextStyle.w400.copyWith(fontSize: 14.sp),
-                textAlign: TextAlign.end,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            if (detailType.name != 'harga') ...{
-              SizedBox(width: 5.w),
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
               Iconify(
-                Ep.arrow_right_bold,
-                size: 14.w,
-                color: MainColor.grey,
-              )
-            },
-          ],
-        );
-      }),
+                listIcon,
+                color: const Color.fromRGBO(44, 139, 164, 1),
+                size: 18.w,
+              ),
+              SizedBox(width: 8.w),
+              Padding(
+                padding: EdgeInsets.only(bottom: 1.h),
+                child: Text(
+                  listTitle,
+                  style: GoogleTextStyle.w600.copyWith(fontSize: 14.sp),
+                ),
+              ),
+              const Spacer(),
+              SizedBox(
+                width: 230.w,
+                child: Text(
+                  detailType.name == 'catatan'
+                      ? matchedItem['catatan']
+                      : detailType.name == 'toping'
+                          ? matchedItem['toping']
+                          : detailType.name == 'level'
+                              ? matchedItem['level'].toString()
+                              : listPrice,
+                  style: detailType.name == 'harga'
+                      ? GoogleTextStyle.w700.copyWith(
+                          color: MainColor.primary,
+                          fontSize: 15.sp,
+                        )
+                      : GoogleTextStyle.w400.copyWith(fontSize: 14.sp),
+                  textAlign: TextAlign.end,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              if (detailType.name != 'harga') ...{
+                SizedBox(width: 5.w),
+                Iconify(
+                  Ep.arrow_right_bold,
+                  size: 14.w,
+                  color: MainColor.grey,
+                )
+              },
+            ],
+          );
+        },
+      ),
     );
   }
 }

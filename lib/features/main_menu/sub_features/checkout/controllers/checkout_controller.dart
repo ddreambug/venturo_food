@@ -27,6 +27,7 @@ class CheckoutController extends GetxController {
   final List<Map<String, dynamic>> voucher = [];
   final RxNum finalHarga = RxNum(0);
   final RxDouble discount = (20 / 100).obs;
+  final RxMap<String, int> voucherValue = <String, int>{}.obs;
 
   @override
   void onInit() async {
@@ -230,6 +231,23 @@ class CheckoutController extends GetxController {
   }
 
   void changeFinalHarga() {
-    finalHarga.value = totalHarga - (totalHarga * discount.value);
+    if (voucherValue.isNotEmpty) {
+      if (totalHarga - voucherValue.values.first < 0) {
+        finalHarga.value = 0;
+      } else {
+        finalHarga.value = totalHarga - voucherValue.values.first;
+      }
+    } else {
+      finalHarga.value = totalHarga - (totalHarga * discount.value);
+    }
+  }
+
+  void changeVoucherValue(String desc, int newValue) {
+    if (voucherValue.containsKey(desc)) {
+      voucherValue.remove(desc);
+    } else {
+      voucherValue.value = {desc: newValue};
+      changeFinalHarga();
+    }
   }
 }

@@ -35,7 +35,7 @@ class MenuDetailView extends StatelessWidget {
         bottomNavigationBar: !isCart
             ? Obx(
                 () => CustomBottomnavbar(
-                  currentIndex: ListController.to.currentNavBarIndex.value,
+                  currentIndex: ListController.to.currentNavBarIndex.value
                 ),
               )
             : const CheckoutBottomNavbar(checkoutNavbarType: 'pesanan'),
@@ -82,7 +82,10 @@ class MenuDetailView extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 8.h, bottom: 18.h),
+                        padding: EdgeInsets.only(
+                          top: 8.h,
+                          bottom: 18.h,
+                        ),
                         child: Text(
                           menuItem['deskripsi'],
                           style: GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
