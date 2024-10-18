@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class OrderSuccessDialog extends StatelessWidget {
@@ -54,7 +56,14 @@ class OrderSuccessDialog extends StatelessWidget {
             width: 168.w,
             height: 42.w,
             child: ElevatedButton(
-              onPressed: () => Get.back(),
+              onPressed: () {
+                CheckoutController.to.saveOrder();
+                Get.until(
+                  (route) => Get.currentRoute == '/main-menu',
+                );
+                ListController.to.currentNavBarIndex.value = 1;
+                Get.toNamed('/order');
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
                 side: BorderSide(

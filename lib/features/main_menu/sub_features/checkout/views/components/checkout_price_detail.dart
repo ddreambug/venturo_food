@@ -79,8 +79,11 @@ class CheckoutPriceDetail extends StatelessWidget {
   }
 
   Widget _buildTotalRow(num totalHarga) {
-    final formatCurrency =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -117,8 +120,11 @@ class CheckoutPriceDetail extends StatelessWidget {
   }
 
   Widget _buildDiscountRow(num totalHarga) {
-    final formatCurrency =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
     final double discount = (20 / 100) * totalHarga;
     return GestureDetector(
       onTap: () {
@@ -207,8 +213,11 @@ class CheckoutPriceDetail extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Iconify(La.coins,
-            color: const Color.fromRGBO(44, 139, 164, 1), size: 24.w),
+        Iconify(
+          La.coins,
+          color: const Color.fromRGBO(44, 139, 164, 1),
+          size: 24.w,
+        ),
         SizedBox(width: 8.w),
         Text(
           'Pembayaran',

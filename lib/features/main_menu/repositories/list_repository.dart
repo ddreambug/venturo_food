@@ -17,7 +17,6 @@ class ListRepository {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.s",
       "foto":
           "https://www.nrn.com/sites/nrn.com/files/styles/article_featured_retina/public/Dennys-6.99-Endless-Breakfast%20Credit%20Dennys%20Corp.jpg",
-      "status": 1
     },
     {
       "id_menu": 3,
@@ -31,7 +30,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Daun Teh dengan irisan lemon",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660e379fdf4.png",
-      "status": 1
     },
     {
       "id_menu": 12,
@@ -45,7 +43,6 @@ class ListRepository {
       'stok': false,
       "deskripsi": "as",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660e47317ea.png",
-      "status": 1
     },
     {
       "id_menu": 13,
@@ -59,7 +56,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "fr",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660ef6630d6.png",
-      "status": 1
     },
     {
       "id_menu": 14,
@@ -73,7 +69,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "frn",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660f05b2072.png",
-      "status": 1
     },
     {
       "id_menu": 15,
@@ -87,7 +82,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "bg",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660f2091f8c.png",
-      "status": 1
     },
     {
       "id_menu": 16,
@@ -102,7 +96,6 @@ class ListRepository {
       "deskripsi": "AG",
       "foto":
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMiX5F4A6GovnkUztggJyX8h21dKS8gjASPO0McSjTcWJR6vOtnLomhqsRJXn4zq5_s5s&usqp=CAU',
-      "status": 1
     },
     {
       "id_menu": 17,
@@ -116,7 +109,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "PG",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660f43c0542.png",
-      "status": 1
     },
     {
       "id_menu": 18,
@@ -130,7 +122,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "FJC",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660f519a3fb.png",
-      "status": 1
     },
     {
       "id_menu": 19,
@@ -144,7 +135,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Sosis Bakar",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660f6f077fc.png",
-      "status": 1
     },
     {
       "id_menu": 20,
@@ -158,7 +148,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kentang Goreng Dengan Saus Yang Gokil",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660f838c846.png",
-      "status": 1
     },
     {
       "id_menu": 22,
@@ -172,7 +161,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Racikan Kentang Dengan Bumbu Spesial Khas Java Code",
       "foto": "https://javacode.landa.id/img/menu/gambar_62660fa11c345.png",
-      "status": 1
     },
     {
       "id_menu": 23,
@@ -186,7 +174,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Sosis Bakar Yang Di Padukan Dengan Olahan Telur Scribble",
       "foto": "https://javacode.landa.id/img/menu/gambar_6266100049ab0.png",
-      "status": 1
     },
     {
       "id_menu": 24,
@@ -200,7 +187,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Burger Dengan Olahan Daging Sapi, Sayuran, Serta Keju",
       "foto": "https://javacode.landa.id/img/menu/gambar_62661010e0ef6.png",
-      "status": 1
     },
     {
       "id_menu": 25,
@@ -214,7 +200,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "NG",
       "foto": "https://javacode.landa.id/img/menu/gambar_62661020bdb0b.png",
-      "status": 1
     },
     {
       "id_menu": 26,
@@ -228,7 +213,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Olahan Roti Khas timur tengah dengan topping coklat/Keju",
       "foto": "https://javacode.landa.id/img/menu/gambar_626611270bce4.png",
-      "status": 1
     },
     {
       "id_menu": 27,
@@ -242,7 +226,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Biji kopi arabika yang diolah menggunakan metode V60",
       "foto": "https://javacode.landa.id/img/menu/gambar_62661057cc43c.png",
-      "status": 1
     },
     {
       "id_menu": 28,
@@ -256,7 +239,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kopi Robusta Alami",
       "foto": "https://javacode.landa.id/img/menu/gambar_6266108602d08.png",
-      "status": 1
     },
     {
       "id_menu": 29,
@@ -270,7 +252,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kopi Robusta, Susu Uht, Creamer, Kental Manis",
       "foto": "https://javacode.landa.id/img/menu/gambar_626610a407c58.png",
-      "status": 1
     },
     {
       "id_menu": 30,
@@ -284,7 +265,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kopi Robusta + Susu + Brown Sugar",
       "foto": "https://javacode.landa.id/img/menu/gambar_626610bc4165e.png",
-      "status": 1
     },
     {
       "id_menu": 31,
@@ -298,7 +278,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Coffee beer olahan",
       "foto": "https://javacode.landa.id/img/menu/gambar_626610ce5de4c.png",
-      "status": 1
     },
     {
       "id_menu": 32,
@@ -314,7 +293,6 @@ class ListRepository {
           "Kopi Robusta, Kental Manis, Diolah Dengan metode khas Vietnam Drip",
       "foto":
           "https://www.shutterstock.com/image-photo/vietnamese-drip-coffee-condensed-milk-600w-2446020503.jpg",
-      "status": 1
     },
     {
       "id_menu": 33,
@@ -329,7 +307,6 @@ class ListRepository {
       "deskripsi": "50% Robusta 50%Arabika",
       "foto":
           "https://media.istockphoto.com/id/681750926/id/foto/es-kopi-atau-caffe-latte.jpg?s=612x612&w=0&k=20&c=8csy9uvSMF86ErFR-8RYlwb9Zev3rpyJoyeKsEhL9zA=",
-      "status": 1
     },
     {
       "id_menu": 34,
@@ -343,7 +320,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kopi Robusta Olahan, Susu UHT, Creamer, Kental Manis",
       "foto": "https://javacode.landa.id/img/menu/gambar_62661139ef69d.png",
-      "status": 1
     },
     {
       "id_menu": 35,
@@ -357,7 +333,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kopi Robusta dengan metode Manual Brewing",
       "foto": "https://javacode.landa.id/img/menu/gambar_6266114e5b5fb.png",
-      "status": 1
     },
     {
       "id_menu": 36,
@@ -371,7 +346,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Kopi susu creamy + Chocolate spesial",
       "foto": "https://javacode.landa.id/img/menu/gambar_626611611aa4d.png",
-      "status": 1
     },
     {
       "id_menu": 37,
@@ -385,7 +359,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Daun Teh Pilihan",
       "foto": "https://javacode.landa.id/img/menu/gambar_626612ccd777e.png",
-      "status": 1
     },
     {
       "id_menu": 38,
@@ -400,7 +373,6 @@ class ListRepository {
       "deskripsi": "Greentea, Susu,Creamer",
       "foto":
           "https://t4.ftcdn.net/jpg/06/49/44/19/360_F_649441929_JZGvp4GcO38ZX4QqtjrukttYrVJje5EO.jpg",
-      "status": 1
     },
     {
       "id_menu": 39,
@@ -414,7 +386,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Greentea, Susu,Creamer Ice",
       "foto": "https://javacode.landa.id/img/menu/gambar_626611abc99af.png",
-      "status": 1
     },
     {
       "id_menu": 40,
@@ -429,7 +400,6 @@ class ListRepository {
       "deskripsi": "Chocolate original + Susu ",
       "foto":
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHGGe7lxf6sgNXMWEBiCVda_UhxdEzcNYL1g&s",
-      "status": 1
     },
     {
       "id_menu": 41,
@@ -443,7 +413,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Chocolate original + Susu ",
       "foto": "https://javacode.landa.id/img/menu/gambar_626611ec41fb8.png",
-      "status": 1
     },
     {
       "id_menu": 42,
@@ -457,7 +426,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Selai strawberry + Susu strawberry",
       "foto": "https://javacode.landa.id/img/menu/gambar_6266120ada9ba.png",
-      "status": 1
     },
     {
       "id_menu": 43,
@@ -471,7 +439,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Ovaltine+Susu",
       "foto": "https://javacode.landa.id/img/menu/gambar_6266121c02b28.png",
-      "status": 1
     },
     {
       "id_menu": 44,
@@ -485,7 +452,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Daun teh irisan lemon",
       "foto": "https://javacode.landa.id/img/menu/gambar_62661234a177c.png",
-      "status": 1
     },
     {
       "id_menu": 45,
@@ -499,7 +465,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Jeruk Nipis, Coconut, Soda, Selasih",
       "foto": "https://javacode.landa.id/img/menu/gambar_626611fc53691.png",
-      "status": 1
     },
     {
       "id_menu": 46,
@@ -513,7 +478,6 @@ class ListRepository {
       'stok': true,
       "deskripsi": "Jeruk Nipis, Coconut, Soda, Selasih",
       "foto": "https://javacode.landa.id/img/menu/gambar_6266123f80172.png",
-      "status": 1
     },
     {
       "id_menu": 47,

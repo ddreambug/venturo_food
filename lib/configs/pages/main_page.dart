@@ -7,10 +7,13 @@ import 'package:venturo_food/features/main_menu/sub_features/checkout/bindings/c
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/checkout_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/voucher_detail_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/voucher_view.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/bindings/order_binding.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/views/ui/order_view.dart';
 import 'package:venturo_food/features/main_menu/views/ui/main_menu_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/menu_detail_view.dart';
 import 'package:venturo_food/features/main_menu/views/ui/promo_detail_view.dart';
 import 'package:venturo_food/features/login/bindings/login_binding.dart';
+import 'package:venturo_food/features/profil/views/ui/profile_view.dart';
 import 'package:venturo_food/features/splash_screen/bindings/splash_binding.dart';
 import 'package:venturo_food/features/login/views/ui/login_view.dart';
 import 'package:venturo_food/features/splash_screen/views/ui/splash_screen.dart';
@@ -54,6 +57,7 @@ abstract class MainPage {
       bindings: [
         ListBinding(),
         CheckoutBinding(),
+        OrderBinding(),
       ],
       transition: Transition.circularReveal,
       transitionDuration: const Duration(seconds: 2),
@@ -86,6 +90,16 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.voucher,
       page: () => const VoucherView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: MainRoute.order,
+      page: () => const OrderView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: MainRoute.profil,
+      page: () => const ProfileView(),
       transition: Transition.fadeIn,
     ),
   ];

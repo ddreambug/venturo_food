@@ -38,9 +38,6 @@ class ListController extends GetxController {
     'Minuman',
   ];
 
-  /// Menu Property
-  RxInt itemCount = RxInt(0);
-
   @override
   void onInit() async {
     super.onInit();
@@ -159,5 +156,14 @@ class ListController extends GetxController {
         stackTrace: stacktrace,
       );
     }
+  }
+
+  void emptyListItem() async {
+    page.value = 0;
+    items.clear();
+    canLoadMore(true);
+
+    await getListOfData();
+    update();
   }
 }

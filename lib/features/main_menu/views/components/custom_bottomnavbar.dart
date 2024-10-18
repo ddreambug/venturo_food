@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
 import 'package:iconify_flutter/icons/heroicons.dart';
@@ -40,6 +41,14 @@ class CustomBottomnavbar extends StatelessWidget {
           currentIndex: ListController.to.currentNavBarIndex.value,
           onTap: (value) {
             ListController.to.currentNavBarIndex.value = value;
+
+            if (ListController.to.currentNavBarIndex.value == 1) {
+              Get.toNamed('/order');
+            } else if (ListController.to.currentNavBarIndex.value == 0) {
+              Get.until((route) => route.settings.name == '/main-menu');
+            } else if (ListController.to.currentNavBarIndex.value == 2) {
+              Get.toNamed('/profil');
+            }
           },
           items: [
             BottomNavigationBarItem(

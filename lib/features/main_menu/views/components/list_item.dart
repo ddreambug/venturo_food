@@ -61,8 +61,8 @@ class ListItem extends StatelessWidget {
                       ),
                     );
                   });
-                } else if (index == ListController.to.makananList.length &&
-                    listType == 'semua menu' &&
+                } else if (listType == 'semua menu' &&
+                    index == ListController.to.makananList.length &&
                     ListController.to.minumanList.isNotEmpty) {
                   return Container(
                     margin: EdgeInsets.only(top: 15.w),

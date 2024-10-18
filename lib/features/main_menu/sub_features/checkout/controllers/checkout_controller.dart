@@ -11,6 +11,7 @@ import 'package:venturo_food/features/main_menu/sub_features/checkout/repositori
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/fingerprint_dialog.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/order_success_dialog.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/pin_dialog.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/custom_bottom_sheet.dart';
@@ -190,6 +191,21 @@ class CheckoutController extends GetxController {
     }
   }
 
+  Future<bool> emptyCartItem() async {
+    try {
+      _cartRepository.emptyCartItem();
+      cart.removeRange(0, cart.length);
+      cart.refresh();
+      return true;
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+      return false;
+    }
+  }
+
   Future<bool> getListOfCart() async {
     try {
       final result = _cartRepository.getListOfCart();
@@ -283,8 +299,6 @@ class CheckoutController extends GetxController {
         await showPinDialog();
       }
     } catch (e) {
-      // Handle the error gracefully and use PIN authentication
-      print('Biometric authentication not supported: $e');
       await showPinDialog();
     }
   }
@@ -339,8 +353,30 @@ class CheckoutController extends GetxController {
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const OrderSuccessDialog(),
+      barrierDismissible: false,
     );
+  }
 
-    Get.back();
+  void saveOrder() async {
+    try {
+      //di duplicate biar ga ke reference
+      List<Map<String, dynamic>> newOrders =
+          cart.map((item) => Map<String, dynamic>.from(item)).toList();
+
+      final saveOrder = await OrderController.to.addOrder(
+        newOrders,
+        voucherValue,
+        finalHarga.value,
+      );
+
+      if (saveOrder) {
+        emptyCartItem();
+      }
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+    }
   }
 }

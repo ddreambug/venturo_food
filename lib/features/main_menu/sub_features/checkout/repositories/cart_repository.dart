@@ -1,3 +1,5 @@
+import 'package:sentry_flutter/sentry_flutter.dart';
+
 class CartRepository {
   List<Map<String, dynamic>>? cart;
 
@@ -31,5 +33,18 @@ class CartRepository {
   // Delete item
   void deleteCartItem(int id) {
     cart!.removeWhere((element) => element['id_menu'] == id);
+  }
+
+   Future<bool> emptyCartItem() async {
+    try {
+      cart!.removeRange(0, cart!.length);
+      return true;
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+      return false;
+    }
   }
 }
