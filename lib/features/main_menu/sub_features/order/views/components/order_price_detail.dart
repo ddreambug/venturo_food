@@ -6,8 +6,8 @@ import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/views/components/order_status.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
-import 'package:iconify_flutter/icons/ic.dart';
 
 class OrderPriceDetail extends StatelessWidget {
   const OrderPriceDetail({
@@ -214,88 +214,8 @@ class OrderPriceDetail extends StatelessWidget {
               ),
               const Divider(),
 
-              //Status Pesanan
-              Padding(
-                padding: EdgeInsets.only(bottom: 7.w, top: 3.w),
-                child: Text(
-                  'Pesanan Kamu Sedang Disiapkan',
-                  style: GoogleTextStyle.w600.copyWith(
-                    fontSize: 16.sp,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 10.w),
-
-              Padding(
-                padding: EdgeInsets.only(left: 15.w, right: 28.w),
-                child: Row(
-                  children: [
-                    Iconify(
-                      Ic.baseline_check_circle,
-                      size: 22.h,
-                      color: MainColor.primary,
-                    ),
-                    Expanded(
-                      child: Divider(
-                        indent: 10.w,
-                        endIndent: 10.w,
-                        thickness: 3.h,
-                      ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: const Color.fromARGB(255, 150, 150, 150),
-                      radius: 5.w,
-                    ),
-                    Expanded(
-                      child: Divider(
-                        indent: 10.w,
-                        endIndent: 10.w,
-                        thickness: 3.h,
-                      ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: const Color.fromARGB(255, 150, 150, 150),
-                      radius: 5.w,
-                    ),
-                  ],
-                ),
-              ),
-
-              Row(
-                children: [
-                  SizedBox(
-                    width: 60.w,
-                    height: 35.w,
-                    child: Text(
-                      'Pesanan Diterima',
-                      style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    width: 60.w,
-                    height: 35.w,
-                    child: Text(
-                      'Silahkan Diambil',
-                      style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    width: 60.w,
-                    height: 35.w,
-                    child: Text(
-                      'Pesanan Selesai',
-                      style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              )
+              //status bar
+              const OrderStatus(),
             ],
           ),
         ),
