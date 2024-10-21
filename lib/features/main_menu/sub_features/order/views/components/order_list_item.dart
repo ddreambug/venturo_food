@@ -20,7 +20,6 @@ class OrderListItem extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: orderItems.length,
         itemBuilder: (context, index) {
-          print(orderItems);
           return OrderCard(
             orderItem: orderItems[index],
           );

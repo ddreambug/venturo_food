@@ -8,6 +8,7 @@ import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/c
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/voucher_detail_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/voucher_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/bindings/order_binding.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/views/ui/order_detail_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/views/ui/order_view.dart';
 import 'package:venturo_food/features/main_menu/views/ui/main_menu_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/menu_detail_view.dart';
@@ -95,6 +96,11 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.order,
       page: () => const OrderView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: MainRoute.detailOrder,
+      page: () => const OrderDetailView(),
       transition: Transition.fadeIn,
     ),
     GetPage(

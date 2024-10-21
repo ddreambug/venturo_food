@@ -362,15 +362,18 @@ class CheckoutController extends GetxController {
       //di duplicate biar ga ke reference
       List<Map<String, dynamic>> newOrders =
           cart.map((item) => Map<String, dynamic>.from(item)).toList();
+      final RxMap<String, int> newVoucher =
+          RxMap<String, int>.from(voucherValue);
 
       final saveOrder = await OrderController.to.addOrder(
         newOrders,
-        voucherValue,
+        newVoucher,
         finalHarga.value,
       );
 
       if (saveOrder) {
         emptyCartItem();
+        voucherValue.clear();
       }
     } catch (exception, stacktrace) {
       await Sentry.captureException(

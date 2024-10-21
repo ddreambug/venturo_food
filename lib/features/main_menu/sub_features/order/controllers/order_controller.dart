@@ -9,6 +9,7 @@ class OrderController extends GetxController
   late TabController tabController;
   RxInt orderAppbarValue = 0.obs;
   RxList<Map<String, dynamic>> orders = <Map<String, dynamic>>[].obs;
+  RxMap<String, dynamic> selectedOrder = <String, dynamic>{}.obs;
 
   @override
   void onInit() {
@@ -34,7 +35,7 @@ class OrderController extends GetxController
           'voucher': voucher,
           'harga': harga,
           'date': DateTime.now(),
-          'status': 0 //0=canceled, 1=ongoing, 2=success
+          'status': 0 //0=ongoing, 1=ready, 2=success, 3=canceled
         },
       );
 
@@ -50,9 +51,37 @@ class OrderController extends GetxController
         .join(', ');
   }
 
-  List<Map<String, dynamic>> get onGoingOrders => orders
-      .where(
-        (element) => element['category'] == 'makanan',
-      )
-      .toList();
+  List<Map<String, dynamic>> get foodOrders {
+    List<Map<String, dynamic>> foods = [];
+    List<dynamic> items = selectedOrder['item'] as List<dynamic>;
+
+    for (var item in items) {
+      if (item['category'] == 'makanan') {
+        foods.add(item);
+      }
+    }
+    return foods;
+  }
+
+  List<Map<String, dynamic>> get drinkOrders {
+    List<Map<String, dynamic>> drinks = [];
+    List<dynamic> items = selectedOrder['item'] as List<dynamic>;
+
+    for (var item in items) {
+      if (item['category'] == 'minuman') {
+        drinks.add(item);
+      }
+    }
+    return drinks;
+  }
+
+  num get totalOrderPrice {
+    num price = 0;
+    List<dynamic> items = selectedOrder['item'] as List<dynamic>;
+
+    for (var item in items) {
+      price = price + (item['harga'] * item['jumlah']);
+    }
+    return price;
+  }
 }

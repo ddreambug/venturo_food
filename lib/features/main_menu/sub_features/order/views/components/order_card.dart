@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
@@ -41,7 +42,10 @@ class OrderCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          OrderController.to.selectedOrder.value = orderItem;
+          Get.toNamed('/detail-order');
+        },
         child: Ink(
           padding: EdgeInsets.only(
             top: 7.w,
