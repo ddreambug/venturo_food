@@ -2,6 +2,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
+import 'package:venturo_food/features/login/repositories/login_repository.dart';
 import 'package:venturo_food/features/login/views/components/login_flavor.dart';
 import 'package:venturo_food/global_controllers/global_controller.dart';
 import 'package:flutter/material.dart';
@@ -30,30 +31,50 @@ class LoginController extends GetxController {
     Get.focusScope!.unfocus();
 
     if (isValid && GlobalController.to.isConnect.value == true) {
-      EasyLoading.show(
-        status: 'Sedang Diproses...',
-        maskType: EasyLoadingMaskType.black,
-        dismissOnTap: false,
-      );
+      // EasyLoading.show(
+      //   status: 'Sedang Diproses...',
+      //   maskType: EasyLoadingMaskType.black,
+      //   dismissOnTap: false,
+      // );
 
       formKey.currentState!.save();
-      if (emailController.text == "admin@gmail.com" &&
-          passwordController.text == "admin") {
-        EasyLoading.dismiss();
-        Get.offNamed('/search-location');
-      } else {
-        EasyLoading.dismiss();
-        PanaraInfoDialog.show(
-          context,
-          title: "Warning",
-          message: "Email & Password Salah",
-          buttonText: "Coba lagi",
-          onTapDismiss: () {
-            Get.back();
-          },
-          panaraDialogType: PanaraDialogType.warning,
-          barrierDismissible: false,
-        );
+
+      try {
+        var response = await LoginRepository()
+            .login(emailController.text, passwordController.text);
+
+        if (response['status_code'] == 200) {
+          EasyLoading.dismiss();
+          Get.offNamed('/search-location');
+        } else if (response['status_code'] == 422) {
+          EasyLoading.dismiss();
+          PanaraInfoDialog.show(
+            context,
+            title: "Warning",
+            message: response['errors'][0],
+            buttonText: "Coba lagi",
+            onTapDismiss: () {
+              Get.back();
+            },
+            panaraDialogType: PanaraDialogType.warning,
+            barrierDismissible: false,
+          );
+        } else {
+          EasyLoading.dismiss();
+          PanaraInfoDialog.show(
+            context,
+            title: "Warning",
+            message: response['message'],
+            buttonText: "Coba lagi",
+            onTapDismiss: () {
+              Get.back();
+            },
+            panaraDialogType: PanaraDialogType.warning,
+            barrierDismissible: false,
+          );
+        }
+      } catch (e) {
+        print(e);
       }
     } else if (GlobalController.to.isConnect.value == false) {
       Get.toNamed(MainRoute.noConnection);
