@@ -9,7 +9,7 @@ import 'package:venturo_food/features/main_menu/sub_features/order/views/compone
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
-import 'package:venturo_food/features/main_menu/views/components/order_detail_card.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/views/components/order_detail_card.dart';
 import 'package:venturo_food/features/main_menu/views/components/section_header.dart';
 
 class OrderDetailView extends StatelessWidget {
@@ -19,9 +19,9 @@ class OrderDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<dynamic> selectedOrder =
         OrderController.to.selectedOrder['item'] as List<dynamic>;
+    var voucher = OrderController.to.selectedOrder['voucher'] as Map;
     final foodOrder = OrderController.to.foodOrders;
     final drinkOrder = OrderController.to.drinkOrders;
-    print(OrderController.to.selectedOrder['voucher']);
 
     return SafeArea(
       child: Scaffold(
@@ -38,7 +38,7 @@ class OrderDetailView extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(
-              height: 440.h,
+              height: voucher.isNotEmpty ? 340.h : 350.h,
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
                 itemCount: drinkOrder.isNotEmpty

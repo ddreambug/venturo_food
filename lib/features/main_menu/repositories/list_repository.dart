@@ -1,3 +1,4 @@
+// import 'package:dio/dio.dart' as dios;
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 
 class ListRepository {
@@ -604,6 +605,25 @@ class ListRepository {
           'https://javacode.landa.id/img/promo/gambar_62661b52223ff.png',
     },
   ];
+
+  // API Fetch - Conflict data structure
+  // final dio = dios.Dio();
+  // List<Map<String, dynamic>> data = [];
+  // Future<void> fetchApiData() async {
+  //   var headers = {'token': '5b90e85d28255df4e6c4e57053d0a87063157de3'};
+  //   dio.options.headers.addAll(headers);
+  //   try {
+  //     dios.Response response =
+  //         await dio.get('https://trainee.landa.id/javacode/menu/all');
+  //     if (response.data['status_code'] == 200) {
+  //       var listdata = response.data['data'] as List;
+  //       data.addAll(listdata.map((item) => item as Map<String, dynamic>));
+  //     }
+  //     print(data[1]);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   List<Map<String, dynamic>> sortData(
     List<Map<String, dynamic>> list,

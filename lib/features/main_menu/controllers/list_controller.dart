@@ -43,6 +43,7 @@ class ListController extends GetxController {
     super.onInit();
 
     repository = ListRepository();
+    // await repository.fetchApiData();
     await getListOfData();
 
     focusNode.addListener(() {
