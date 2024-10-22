@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
@@ -11,8 +13,6 @@ class OrderStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orderItem = OrderController.to.selectedOrder;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,72 +21,71 @@ class OrderStatus extends StatelessWidget {
             bottom: 7.w,
             top: 3.w,
           ),
-          child: GestureDetector(
-            child: Text(
-              'Pesanan Kamu Sedang Disiapkan',
-              style: GoogleTextStyle.w600.copyWith(
-                fontSize: 16.sp,
-                color: Colors.black,
-              ),
-            ),
+          child: Obx(
+            () {
+              final orderStatus = OrderController.to.selectedOrder['status'];
+              return Text(
+                orderStatus == 3
+                    ? 'Pesanan Dibatalkan'
+                    : orderStatus == 2
+                        ? 'Pesanan Selesai'
+                        : 'Pesanan Kamu Sedang Disiapkan',
+                style: GoogleTextStyle.w600.copyWith(
+                  fontSize: 16.sp,
+                  color: Colors.black,
+                ),
+              );
+            },
           ),
         ),
         SizedBox(height: 10.w),
-        Padding(
-          padding: EdgeInsets.only(left: 15.w, right: 28.w),
-          child: Row(
-            children: [
-              if (orderItem['status'] == 0) ...{
-                Iconify(
-                  Ic.baseline_check_circle,
-                  size: 22.h,
-                  color: MainColor.primary,
-                ),
-              } else ...{
-                CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 150, 150, 150),
-                  radius: 5.w,
-                ),
+        GestureDetector(
+          onTap: () {
+            PanaraConfirmDialog.show(
+              context,
+              title: "Update Status",
+              message: "Apakah anda yakin akan mengubah status Pesanan ini?",
+              confirmButtonText: "Oke",
+              cancelButtonText: 'Tidak',
+              onTapConfirm: () {
+                Navigator.pop(context);
+                OrderController.to.updateOrderStatus();
               },
-              Expanded(
-                child: Divider(
-                  indent: 10.w,
-                  endIndent: 10.w,
-                  thickness: 3.h,
-                ),
-              ),
-              if (orderItem['status'] == 1) ...{
-                Iconify(
-                  Ic.baseline_check_circle,
-                  size: 22.h,
-                  color: MainColor.primary,
-                ),
-              } else ...{
-                CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 150, 150, 150),
-                  radius: 5.w,
-                ),
+              onTapCancel: () {
+                Navigator.pop(context);
               },
-              Expanded(
-                child: Divider(
-                  indent: 10.w,
-                  endIndent: 10.w,
-                  thickness: 3.h,
-                ),
-              ),
-              if (orderItem['status'] == 2) ...{
-                Iconify(
-                  Ic.baseline_check_circle,
-                  size: 22.h,
-                  color: MainColor.primary,
-                ),
-              } else ...{
-                CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 150, 150, 150),
-                  radius: 5.w,
-                ),
-              },
-            ],
+              panaraDialogType: PanaraDialogType.normal,
+              barrierDismissible: false,
+            );
+          },
+          child: Obx(
+            () {
+              final orderItem = OrderController.to.selectedOrder;
+              final List<int> status = [0, 1, 2];
+
+              return Row(
+                children: [
+                  for (int i = 0; i < status.length; i++) ...[
+                    if (i > 0)
+                      Expanded(
+                        child: Divider(thickness: 3.h),
+                      ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Iconify(
+                        orderItem['status'] == status[i]
+                            ? Ic.baseline_check_circle
+                            : Ic.baseline_circle,
+                        size: orderItem['status'] == status[i] ? 22.h : 12.h,
+                        color: orderItem['status'] == status[i]
+                            ? MainColor.primary
+                            : const Color.fromARGB(255, 150, 150, 150),
+                      ),
+                    ),
+                  ],
+                ],
+              );
+            },
           ),
         ),
         Row(

@@ -38,7 +38,7 @@ class OrderDetailView extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(
-              height: voucher.isNotEmpty ? 340.h : 350.h,
+              height: voucher.isNotEmpty ? 300.h : 310.h,
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
                 itemCount: drinkOrder.isNotEmpty

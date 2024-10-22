@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 ///package alt geolocator
 import 'package:location/location.dart' as loc;
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class LoadingController extends GetxController {
   static LoadingController get to => Get.find();
@@ -153,8 +154,11 @@ class LoadingController extends GetxController {
           responseData['results'][0]['address_components'][5]['long_name'];
 
       address.value = '$jalan, $kelurahan, $kecamatan, $kota';
-    } catch (e) {
-      print('retrieve alamat gagal, $e');
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
     }
   }
 }

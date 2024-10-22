@@ -1,56 +1,56 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
+// import 'dart:convert';
+// import 'package:dio/dio.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class CartRepository {
-  Future<void> postOrder() async {
-    var dio = Dio();
-    var headers = {
-      'token': '5b90e85d28255df4e6c4e57053d0a87063157de3',
-      'Content-Type': 'application/json',
-    };
-    var requestBody = {
-      "order": {
-        "id_user": 1,
-        "id_voucher": 1,
-        "potongan": 45000,
-        "total_bayar": 12800
-      },
-      "menu": [
-        {
-          "id_menu": 2,
-          "harga": 18000,
-          "level": 1,
-          "topping": [1, 2],
-          "jumlah": 2
-        },
-        {
-          "id_menu": 3,
-          "harga": 10000,
-          "level": 2,
-          "topping": [2, 3],
-          "jumlah": 1
-        }
-      ]
-    };
+  // API post kendala beda struktur data
+  //Future<void> postOrder() async {
+  //   var dio = Dio();
+  //   var headers = {
+  //     'token': '5b90e85d28255df4e6c4e57053d0a87063157de3',
+  //     'Content-Type': 'application/json',
+  //   };
+  //   var requestBody = {
+  //     "order": {
+  //       "id_user": 1,
+  //       "id_voucher": 1,
+  //       "potongan": 45000,
+  //       "total_bayar": 12800
+  //     },
+  //     "menu": [
+  //       {
+  //         "id_menu": 2,
+  //         "harga": 18000,
+  //         "level": 1,
+  //         "topping": [1, 2],
+  //         "jumlah": 2
+  //       },
+  //       {
+  //         "id_menu": 3,
+  //         "harga": 10000,
+  //         "level": 2,
+  //         "topping": [2, 3],
+  //         "jumlah": 1
+  //       }
+  //     ]
+  //   };
 
-    try {
-      var response = await dio.post(
-        'https://trainee.landa.id/javacode/order/add',
-        data: jsonEncode(requestBody),
-        options: Options(headers: headers),
-      );
+  //   try {
+  //     var response = await dio.post(
+  //       'https://trainee.landa.id/javacode/order/add',
+  //       data: jsonEncode(requestBody),
+  //       options: Options(headers: headers),
+  //     );
 
-      if (response.statusCode == 200) {
-        print('Response: ${response.data}');
-      } else {
-        print('Failed: ${response.statusMessage}');
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  //     if (response.statusCode == 200) {
+  //       print('Response: ${response.data}');
+  //     } else {
+  //       print('Failed: ${response.statusMessage}');
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   List<Map<String, dynamic>>? cart;
 

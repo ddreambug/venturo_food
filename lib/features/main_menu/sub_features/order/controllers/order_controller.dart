@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class OrderController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -23,6 +24,18 @@ class OrderController extends GetxController
     super.onClose();
   }
 
+  List<Map<String, dynamic>> get ongoingOrders {
+    return orders
+        .where((order) => order['status'] == 0 || order['status'] == 1)
+        .toList();
+  }
+
+  List<Map<String, dynamic>> get finishedOrders {
+    return orders
+        .where((order) => order['status'] == 2 || order['status'] == 3)
+        .toList();
+  }
+
   Future<bool> addOrder(
     List<Map<String, dynamic>> newOrder,
     Map<String, int> voucher,
@@ -40,7 +53,12 @@ class OrderController extends GetxController
       );
 
       return true;
-    } catch (e) {
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+
       return false;
     }
   }
@@ -83,5 +101,29 @@ class OrderController extends GetxController
       price = price + (item['harga'] * item['jumlah']);
     }
     return price;
+  }
+
+  void updateOrderStatus({isCancelOrder = false}) {
+    bool cancel = isCancelOrder;
+
+    for (int i = 0; i < orders.length; i++) {
+      var currentOrder = orders[i];
+
+      bool isMatch = (currentOrder['item'] == selectedOrder['item']) &&
+          (currentOrder['harga'] == selectedOrder['harga']) &&
+          (currentOrder['date'] == selectedOrder['date']);
+
+      if (isMatch) {
+        if (cancel) {
+          orders[i]['status'] = 3;
+          orders.refresh();
+          selectedOrder.refresh();
+        } else {
+          orders[i]['status']++;
+          orders.refresh();
+          selectedOrder.refresh();
+        }
+      }
+    }
   }
 }

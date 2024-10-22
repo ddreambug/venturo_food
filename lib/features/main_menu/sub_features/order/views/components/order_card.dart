@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/material_symbols.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/views/components/order_completed_button.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:intl/intl.dart';
 
@@ -13,9 +15,11 @@ class OrderCard extends StatelessWidget {
   const OrderCard({
     super.key,
     required this.orderItem,
+    this.isCompleted = false,
   });
 
   final Map<String, dynamic> orderItem;
+  final bool isCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +83,7 @@ class OrderCard extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
+
               // Details
               Expanded(
                 child: Column(
@@ -87,22 +92,40 @@ class OrderCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(
                         top: 5.w,
-                        bottom: 15.w,
+                        bottom: isCompleted ? 0.w : 15.w,
                       ),
+
+                      //status - date
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Iconify(
-                            Mdi.clock_time_three_outline,
+                            orderItem['status'] == 2
+                                ? MaterialSymbols.check_small_rounded
+                                : orderItem['status'] == 3
+                                    ? MaterialSymbols.close_rounded
+                                    : Mdi.clock_time_three_outline,
                             size: 14.w,
-                            color: MainColor.warning,
+                            color: orderItem['status'] == 2
+                                ? MainColor.success
+                                : orderItem['status'] == 3
+                                    ? MainColor.danger
+                                    : MainColor.warning,
                           ),
                           SizedBox(width: 2.w),
                           Text(
-                            'Sedang disiapkan',
+                            orderItem['status'] == 2
+                                ? 'Selesai'
+                                : orderItem['status'] == 3
+                                    ? 'Dibatalkan'
+                                    : 'Sedang disiapkan',
                             style: GoogleTextStyle.w600.copyWith(
                               fontSize: 12.sp,
-                              color: MainColor.warning,
+                              color: orderItem['status'] == 2
+                                  ? MainColor.success
+                                  : orderItem['status'] == 3
+                                      ? MainColor.danger
+                                      : MainColor.warning,
                             ),
                           ),
                           const Spacer(),
@@ -116,8 +139,10 @@ class OrderCard extends StatelessWidget {
                         ],
                       ),
                     ),
+
+                    //menu title
                     SizedBox(
-                      height: 45.h,
+                      height: isCompleted ? 40.w : 45.h,
                       width: 150.w,
                       child: Text(
                         menuTitles,
@@ -125,11 +150,13 @@ class OrderCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: GoogleTextStyle.w500.copyWith(
                           fontSize: 20.sp,
-                          height: 0,
+                          height: 0.9,
                           letterSpacing: 0,
                         ),
                       ),
                     ),
+
+                    //price - menucount
                     SizedBox(
                       width: 150.w,
                       child: Row(
@@ -155,6 +182,21 @@ class OrderCard extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(height: 5.w),
+
+                    //completed
+                    if (isCompleted) ...{
+                      if (orderItem['status'] == 2) ...{
+                        OrderCompletedButton(
+                          orderItem: orderItem,
+                        ),
+                      } else ...{
+                        OrderCompletedButton(
+                          orderItem: orderItem,
+                          isCanceled: true,
+                        ),
+                      }
+                    }
                   ],
                 ),
               ),

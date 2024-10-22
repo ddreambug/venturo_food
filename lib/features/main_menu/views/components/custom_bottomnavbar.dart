@@ -95,12 +95,12 @@ class CustomBottomnavbar extends StatelessWidget {
           right: 170.w,
           child: Obx(
             () {
-              if (OrderController.to.orders.isNotEmpty) {
+              if (OrderController.to.ongoingOrders.isNotEmpty) {
                 return CircleAvatar(
                   radius: 10.w,
                   child: Obx(
                     () {
-                      var orderCount = OrderController.to.orders.length;
+                      var orderCount = OrderController.to.ongoingOrders.length;
 
                       return Text(
                         '$orderCount',
