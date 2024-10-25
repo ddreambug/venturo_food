@@ -15,6 +15,7 @@ class ImageConstant {
   static const String voucherBirthday = 'assets/images/voucher_birthday.png';
   static const String voucherKoordinator =
       'assets/images/voucher_koordinator.png';
+  static const String bgProfile = 'assets/images/bg_profile.png';
 
   ///svg
   static const String listIconSvg = 'assets/svg/ic_list.svg';
@@ -23,4 +24,6 @@ class ImageConstant {
   static const String makananIconSvg = 'assets/svg/ic_makanan.svg';
   static const String minumanIconSvg = 'assets/svg/ic_minuman.svg';
   static const String orderCompleteSvg = 'assets/svg/ic_eggonpan.svg';
+  static const String engFlag = 'assets/svg/eng_flag.svg';
+  static const String idFlag = 'assets/svg/ind_flag.svg';
 }

@@ -14,7 +14,8 @@ import 'package:venturo_food/features/main_menu/views/ui/main_menu_view.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/menu_detail_view.dart';
 import 'package:venturo_food/features/main_menu/views/ui/promo_detail_view.dart';
 import 'package:venturo_food/features/login/bindings/login_binding.dart';
-import 'package:venturo_food/features/profil/views/ui/profile_view.dart';
+import 'package:venturo_food/features/profile/bindings/profile_binding.dart';
+import 'package:venturo_food/features/profile/views/ui/profile_view.dart';
 import 'package:venturo_food/features/splash_screen/bindings/splash_binding.dart';
 import 'package:venturo_food/features/login/views/ui/login_view.dart';
 import 'package:venturo_food/features/splash_screen/views/ui/splash_screen.dart';
@@ -106,6 +107,7 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.profil,
       page: () => const ProfileView(),
+      binding: ProfileBinding(),
       transition: Transition.fadeIn,
     ),
   ];
