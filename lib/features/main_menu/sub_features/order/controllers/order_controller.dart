@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class OrderController extends GetxController
@@ -11,6 +12,14 @@ class OrderController extends GetxController
   RxInt orderAppbarValue = 0.obs;
   RxList<Map<String, dynamic>> orders = <Map<String, dynamic>>[].obs;
   RxMap<String, dynamic> selectedOrder = <String, dynamic>{}.obs;
+  final formatter = NumberFormat.currency(
+    locale: 'id_ID',
+    symbol: 'Rp. ',
+    decimalDigits: 0,
+  );
+  RxString filterSelectedValue = 'Semua Status'.obs;
+  RxString filterStartDate = '12/10/24'.obs;
+  RxString filterEndDate = '30/12/24'.obs;
 
   @override
   void onInit() {
@@ -30,10 +39,19 @@ class OrderController extends GetxController
         .toList();
   }
 
-  List<Map<String, dynamic>> get finishedOrders {
-    return orders
-        .where((order) => order['status'] == 2 || order['status'] == 3)
-        .toList();
+  List<Map<String, dynamic>> finishedOrders({
+    bool completed = false,
+    bool canceled = false,
+  }) {
+    if (completed) {
+      return orders.where((order) => order['status'] == 2).toList();
+    } else if (canceled) {
+      return orders.where((order) => order['status'] == 3).toList();
+    } else {
+      return orders
+          .where((order) => order['status'] == 2 || order['status'] == 3)
+          .toList();
+    }
   }
 
   Future<bool> addOrder(
@@ -67,6 +85,19 @@ class OrderController extends GetxController
     return (data['item'] as List<dynamic>)
         .map((item) => item['name'] as String)
         .join(', ');
+  }
+
+  String getFinalSpending() {
+    num totalSpending = 0;
+    List<dynamic> items = finishedOrders() as List<dynamic>;
+
+    for (var i = 0; i < items.length; i++) {
+      if (items[i]['status'] == 2) {
+        totalSpending = totalSpending + items[i]['harga'];
+      }
+    }
+
+    return formatter.format(totalSpending);
   }
 
   List<Map<String, dynamic>> get foodOrders {

@@ -9,10 +9,16 @@ import 'package:venturo_food/features/main_menu/sub_features/order/controllers/o
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class EmptyOrder extends StatelessWidget {
-  const EmptyOrder({super.key});
+  const EmptyOrder({
+    super.key,
+    this.customMessage = '',
+  });
 
+  final String customMessage;
   @override
   Widget build(BuildContext context) {
+    String emptyOrderText;
+
     return Center(
       child: Stack(
         children: [
@@ -38,12 +44,16 @@ class EmptyOrder extends StatelessWidget {
                 Obx(
                   () {
                     final tabValue = OrderController.to.orderAppbarValue.value;
-                    String emptyOrderText =
-                        'Sudah Pesan?\nLacak pesananmu\ndi sini.';
-
                     if (tabValue == 1) {
+                      if (customMessage != '') {
+                        emptyOrderText = customMessage;
+                      } else {
+                        emptyOrderText =
+                            'Mulai buat pesanan.\n\nMakanan yang kamu pesan\nakan muncul di sini agar\nkamu bisa menemukan\nmenu favoritmu lagi!';
+                      }
+                    } else {
                       emptyOrderText =
-                          'Mulai buat pesanan.\n\nMakanan yang kamu pesan\nakan muncul di sini agar\nkamu bisa menemukan\nmenu favoritmu lagi!';
+                          'Sudah Pesan?\nLacak pesananmu\ndi sini.';
                     }
 
                     return SizedBox(

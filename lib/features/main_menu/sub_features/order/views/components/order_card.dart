@@ -25,7 +25,7 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatCurrency = NumberFormat.currency(
       locale: 'id_ID',
-      symbol: 'Rp ',
+      symbol: 'Rp. ',
       decimalDigits: 0,
     );
     final formatDate = DateFormat(
@@ -38,7 +38,7 @@ class OrderCard extends StatelessWidget {
     return Card(
       margin: EdgeInsets.only(
         left: 20.w,
-        top: 15.w,
+        top: 10.w,
         right: 20.w,
       ),
       elevation: 2.5,
@@ -158,7 +158,7 @@ class OrderCard extends StatelessWidget {
 
                     //price - menucount
                     SizedBox(
-                      width: 150.w,
+                      width: 160.w,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
