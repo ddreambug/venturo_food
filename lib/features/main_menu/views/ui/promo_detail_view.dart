@@ -81,7 +81,9 @@ class PromoDetailView extends StatelessWidget {
                       Text(
                         item['promo_description'],
                         style: GoogleTextStyle.w700.copyWith(
-                            fontSize: 20.sp, color: MainColor.primary),
+                          fontSize: 20.sp,
+                          color: MainColor.primary,
+                        ),
                       ),
                       SizedBox(height: 10.h),
                       const Divider(
@@ -95,8 +97,9 @@ class PromoDetailView extends StatelessWidget {
                           SizedBox(width: 10.w),
                           Text(
                             'Syarat dan Ketentuan',
-                            style:
-                                GoogleTextStyle.w600.copyWith(fontSize: 16.sp),
+                            style: GoogleTextStyle.w600.copyWith(
+                              fontSize: 16.sp,
+                            ),
                           )
                         ],
                       ),
@@ -108,8 +111,9 @@ class PromoDetailView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Text(
                               '- ${promoRequirement[index]}',
-                              style: GoogleTextStyle.w400
-                                  .copyWith(fontSize: 12.sp),
+                              style: GoogleTextStyle.w400.copyWith(
+                                fontSize: 12.sp,
+                              ),
                             );
                           },
                         ),

@@ -28,10 +28,8 @@ class _PinDialogState extends State<PinDialog> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     if (pin == '123456') {
-      // if pin is correct close the dialog
       Get.back<bool>(result: true);
     } else {
-      // if pin incorrect, type again
       tries--;
 
       if (tries == 0) {
@@ -69,7 +67,6 @@ class _PinDialogState extends State<PinDialog> {
             style: GoogleTextStyle.w600.copyWith(fontSize: 22.sp),
           ),
 
-          // subtitle
           Text(
             'Masukkan kode PIN',
             style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
@@ -93,25 +90,26 @@ class _PinDialogState extends State<PinDialog> {
                     onCompleted: processPin,
                     separatorBuilder: (index) {
                       if (index == 1 || index == 3) {
-                        // Add dash after index 1 and index 3
                         return const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.0),
                           child: Text(
                             '-',
                             style: TextStyle(
-                              fontSize: 15.0, // Dash size
+                              fontSize: 15.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         );
                       }
                       return const SizedBox(
-                          width: 3.0); // Add spacing between other boxes
+                        width: 3.0,
+                      );
                     },
                   ),
                 ),
               ),
               3.horizontalSpace,
+
               // show pin button
               Obx(
                 () => InkWell(
@@ -136,8 +134,9 @@ class _PinDialogState extends State<PinDialog> {
                     padding: EdgeInsets.only(left: 2.r, right: 15.r, top: 10.r),
                     child: Text(
                       errorText.value!,
-                      style: Get.textTheme.bodySmall!
-                          .copyWith(color: Theme.of(context).colorScheme.error),
+                      style: Get.textTheme.bodySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   )

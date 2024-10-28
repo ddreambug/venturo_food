@@ -248,7 +248,6 @@ class CheckoutController extends GetxController {
     for (var i = 0; i < cart.length; i++) {
       hargaTotal = hargaTotal + cart[i]['harga'] * cart[i]['jumlah'];
     }
-    //
 
     return hargaTotal;
   }
@@ -316,11 +315,8 @@ class CheckoutController extends GetxController {
   }
 
   Future<void> showPinDialog() async {
-    // ensure all modal is closed before show pin dialog
     Get.until((route) => Get.currentRoute == '/detail-pesanan');
-
     const userPin = '123456';
-
     final bool? authenticated = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
@@ -328,13 +324,12 @@ class CheckoutController extends GetxController {
     );
 
     if (authenticated == true) {
-      // if succeed, order cart
       showOrderSuccessDialog();
     } else if (authenticated != null) {
-      // if failed 3 times, show order failed dialog
       Get.until((route) => Get.currentRoute == '/detail-pesanan');
       Get.showSnackbar(
         const GetSnackBar(
+          snackPosition: SnackPosition.TOP,
           title: 'Error',
           message: 'PIN already wrong 3 times. Please try again later.',
           icon: Iconify(
@@ -359,11 +354,11 @@ class CheckoutController extends GetxController {
 
   void saveOrder() async {
     try {
-      //di duplicate biar ga ke reference
       List<Map<String, dynamic>> newOrders =
           cart.map((item) => Map<String, dynamic>.from(item)).toList();
-      final RxMap<String, int> newVoucher =
-          RxMap<String, int>.from(voucherValue);
+      final RxMap<String, int> newVoucher = RxMap<String, int>.from(
+        voucherValue,
+      );
 
       final saveOrder = await OrderController.to.addOrder(
         newOrders,

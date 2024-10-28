@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 /// Used in promo_detail_view.dart
@@ -14,10 +16,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     required this.appBarTitle,
     this.useIcon = true,
     this.icon = ImageConstant.promoIcon,
+    this.isOrder = false,
   });
 
   final String appBarTitle;
   final bool useIcon;
+  final bool isOrder;
   final String icon;
 
   @override
@@ -77,6 +81,53 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
           ),
+          if (isOrder) ...{
+            Obx(
+              () {
+                var orderStatus = OrderController.to.selectedOrder['status'];
+                if (orderStatus != 2 && orderStatus != 3) {
+                  return Positioned(
+                    top: 5.w,
+                    right: 15.w,
+                    child: SizedBox(
+                      height: 40.w,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          PanaraConfirmDialog.show(
+                            context,
+                            panaraDialogType: PanaraDialogType.error,
+                            message: 'Apakah anda ingin membatalkan pesanan?',
+                            confirmButtonText: 'Ya',
+                            cancelButtonText: 'Tidak',
+                            onTapConfirm: () {
+                              OrderController.to
+                                  .updateOrderStatus(isCancelOrder: true);
+                              Get.until(
+                                (route) => route.settings.name == '/order',
+                              );
+                            },
+                            onTapCancel: () {
+                              Get.back();
+                            },
+                          );
+                        },
+                        style: const ButtonStyle(
+                          backgroundColor:
+                              WidgetStatePropertyAll(MainColor.danger),
+                        ),
+                        child: Text(
+                          'batal',
+                          style: GoogleTextStyle.w500.copyWith(fontSize: 12.sp),
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            )
+          }
         ],
       ),
     );

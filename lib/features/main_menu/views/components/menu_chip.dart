@@ -47,9 +47,10 @@ class MenuChip extends StatelessWidget {
                 Text(
                   text,
                   style: GoogleTextStyle.w600.copyWith(
-                      color: Colors.white,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),

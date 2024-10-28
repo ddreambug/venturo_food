@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +21,7 @@ class OrderCompletedButton extends StatelessWidget {
       children: [
         if (!isCanceled) ...{
           SizedBox(
-            height: 21.h,
+            height: 23.h,
             width: 100.w,
             child: ElevatedButton(
               onPressed: () {
@@ -42,8 +42,8 @@ class OrderCompletedButton extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'Beri Penilaian',
-                      style: GoogleTextStyle.w600.copyWith(
-                        fontSize: 12.sp,
+                      style: GoogleTextStyle.w700.copyWith(
+                        fontSize: 10.sp,
                       ),
                     ),
                   ),
@@ -54,22 +54,25 @@ class OrderCompletedButton extends StatelessWidget {
           SizedBox(width: 10.w),
         },
         SizedBox(
-          height: 21.h,
+          height: 23.h,
           width: 100.w,
           child: ElevatedButton(
             onPressed: () {
-              OrderController.to.addOrder(
-                orderItem['item'],
-                orderItem['voucher'],
-                orderItem['harga'],
-              );
+              for (var item in orderItem['item']) {
+                CheckoutController.to.addCartItem(item);
+              }
 
               PanaraInfoDialog.show(
                 context,
                 message: 'Order Ditambahkan',
                 buttonText: 'Oke',
                 onTapDismiss: () {
-                  Get.back();
+                  Get.until(
+                    (route) => route.settings.name == '/main-menu',
+                  );
+                  Get.toNamed(
+                    '/detail-pesanan',
+                  );
                 },
                 panaraDialogType: PanaraDialogType.success,
               );
@@ -87,8 +90,8 @@ class OrderCompletedButton extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     'Pesan Lagi',
-                    style: GoogleTextStyle.w600.copyWith(
-                      fontSize: 12.sp,
+                    style: GoogleTextStyle.w700.copyWith(
+                      fontSize: 10.sp,
                     ),
                   ),
                 ),

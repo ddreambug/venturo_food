@@ -1,45 +1,36 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/global_controllers/global_controller.dart';
 
 class DioService extends GetxService {
+  static final DioService _dioService = DioService._();
+
   DioService._();
 
-  static final DioService dioService = DioService._();
-
   factory DioService() {
-    return dioService;
+    return _dioService;
   }
 
-  static const Duration timeoutInMiliSeconds = Duration(
-    seconds: 20000,
-  );
+  static const Duration timeoutInMilliseconds = Duration(seconds: 20);
 
-  static Dio dioCall({
-    Duration timeout = timeoutInMiliSeconds,
+  Dio getDio({
+    Duration timeout = timeoutInMilliseconds,
     String? token,
     String? authorization,
   }) {
-    var headers = {
+    final headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      if (token != null) 'token': token,
+      if (authorization != null) 'Authorization': authorization,
     };
 
-    if (token != null) {
-      headers['token'] = token;
-    }
-
-    if (authorization != null) {
-      headers['Authorization'] = authorization;
-    }
-
-    var dio = Dio(
+    final dio = Dio(
       BaseOptions(
         headers: headers,
         baseUrl: GlobalController.to.baseUrl,
-        connectTimeout: timeoutInMiliSeconds,
+        connectTimeout: timeout,
         contentType: "application/json",
         responseType: ResponseType.json,
       ),
@@ -50,24 +41,21 @@ class DioService extends GetxService {
     return dio;
   }
 
-  static Interceptor _authInterceptor() {
+  Interceptor _authInterceptor() {
     return QueuedInterceptorsWrapper(
       onRequest: (reqOptions, handler) {
         log('${reqOptions.uri}', name: 'REQUEST URL');
         log('${reqOptions.headers}', name: 'HEADER');
-
-        return handler.next(reqOptions);
+        handler.next(reqOptions);
       },
-      onError: (error, handler) async {
+      onError: (error, handler) {
         log(error.message.toString(), name: 'ERROR MESSAGE');
         log('${error.response}', name: 'RESPONSE');
-
-        return handler.next(error);
+        handler.next(error);
       },
-      onResponse: (response, handler) async {
+      onResponse: (response, handler) {
         log('${response.data}', name: 'RESPONSE');
-
-        return handler.resolve(response);
+        handler.next(response);
       },
     );
   }

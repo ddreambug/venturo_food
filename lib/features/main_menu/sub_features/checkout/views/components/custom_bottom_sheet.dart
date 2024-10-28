@@ -98,12 +98,14 @@ class CustomBottomSheet extends StatelessWidget {
                                 color: const Color.fromARGB(255, 134, 133, 133),
                               ),
                               focusedBorder: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: MainColor.primary),
+                                borderSide: BorderSide(
+                                  color: MainColor.primary,
+                                ),
                               ),
                             ),
-                            style:
-                                GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
+                            style: GoogleTextStyle.w400.copyWith(
+                              fontSize: 12.sp,
+                            ),
                           ),
                         );
                       },
@@ -112,7 +114,9 @@ class CustomBottomSheet extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         CheckoutController.to.updateCatatan(
-                            idMenu: menuItem['id_menu'], editType: editType);
+                          idMenu: menuItem['id_menu'],
+                          editType: editType,
+                        );
                       },
                       child: Iconify(
                         Ic.round_check_circle,

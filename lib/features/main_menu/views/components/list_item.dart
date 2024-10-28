@@ -20,68 +20,88 @@ class ListItem extends StatelessWidget {
       child: Obx(
         () {
           final String listType = ListController.to.selectedCategory.value;
-          return SmartRefresher(
-            controller: ListController.to.refreshController,
-            enablePullDown: true,
-            onRefresh: ListController.to.onRefresh,
-            enablePullUp: ListController.to.canLoadMore.isTrue ? true : false,
-            onLoading: ListController.to.getListOfData,
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 25.w),
-              itemCount: ListController.to.filteredList.length + 1,
-              itemBuilder: (context, index) {
-                /// Item Category
-                if (index == 0) {
-                  return Obx(() {
+          final itemCount = ListController.to.filteredList.length;
+
+          if (itemCount == 0) {
+            return const Center(
+              child: Text('Item Tidak Ditemukan'),
+            );
+          } else {
+            return SmartRefresher(
+              controller: ListController.to.refreshController,
+              enablePullDown: true,
+              onRefresh: ListController.to.onRefresh,
+              enablePullUp: ListController.to.canLoadMore.isTrue,
+              onLoading: ListController.to.getListOfData,
+              child: ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 25.w),
+                itemCount: ListController.to.filteredList.length + 1,
+                itemBuilder: (context, index) {
+                  /// Category Header
+                  if (index == 0) {
                     final currentCategory =
                         ListController.to.selectedCategory.value;
+
+                    if (itemCount < 5) {
+                      return Container(
+                        margin: EdgeInsets.only(top: 15.w, bottom: 4.w),
+                        child: SectionHeader(
+                          color: MainColor.primary,
+                          title: ListController.to.filteredList[0]
+                                      ["category"] ==
+                                  'makanan'
+                              ? 'Makanan'
+                              : 'Minuman',
+                          icon: SvgPicture.asset(
+                            ListController.to.filteredList[0]["category"] ==
+                                    'makanan'
+                                ? ImageConstant.makananIconSvg
+                                : ImageConstant.minumanIconSvg,
+                            height: 14.h,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container(
+                        margin: EdgeInsets.only(top: 15.w, bottom: 4.w),
+                        child: SectionHeader(
+                          color: MainColor.primary,
+                          title: currentCategory == 'semua menu'
+                              ? 'Makanan'
+                              : currentCategory == 'makanan'
+                                  ? 'Makanan'
+                                  : 'Minuman',
+                          icon: SvgPicture.asset(
+                            currentCategory == 'semua menu' ||
+                                    currentCategory == 'makanan'
+                                ? ImageConstant.makananIconSvg
+                                : ImageConstant.minumanIconSvg,
+                            height: 14.h,
+                          ),
+                        ),
+                      );
+                    }
+                  } else if (listType == 'semua menu' &&
+                      index == ListController.to.makananList.length &&
+                      ListController.to.minumanList.isNotEmpty) {
                     return Container(
-                      margin: EdgeInsets.only(top: 15.w, bottom: 4.w),
+                      margin: EdgeInsets.only(top: 15.w),
                       child: SectionHeader(
                         color: MainColor.primary,
-                        title: currentCategory == 'semua menu'
-                            ? 'Makanan'
-                            : currentCategory == 'makanan'
-                                ? 'Makanan'
-                                : 'Minuman',
-                        icon: currentCategory == 'semua menu'
-                            ? SvgPicture.asset(
-                                ImageConstant.makananIconSvg,
-                                height: 14.h,
-                              )
-                            : currentCategory == 'makanan'
-                                ? SvgPicture.asset(
-                                    ImageConstant.makananIconSvg,
-                                    height: 14.h,
-                                  )
-                                : SvgPicture.asset(
-                                    ImageConstant.minumanIconSvg,
-                                    height: 14.h,
-                                  ),
+                        title: 'Minuman',
+                        icon: SvgPicture.asset(
+                          ImageConstant.minumanIconSvg,
+                          height: 14.h,
+                        ),
                       ),
                     );
-                  });
-                } else if (listType == 'semua menu' &&
-                    index == ListController.to.makananList.length &&
-                    ListController.to.minumanList.isNotEmpty) {
-                  return Container(
-                    margin: EdgeInsets.only(top: 15.w),
-                    child: SectionHeader(
-                      color: MainColor.primary,
-                      title: 'Minuman',
-                      icon: SvgPicture.asset(
-                        ImageConstant.minumanIconSvg,
-                      ),
-                    ),
-                  );
-                }
+                  }
 
-                /// items
-                final item = ListController.to.filteredList[index - 1];
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.w),
-                  child: Obx(() {
-                    return Slidable(
+                  /// Menu Items
+                  final item = ListController.to.filteredList[index - 1];
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.w),
+                    child: Slidable(
                       endActionPane: ActionPane(
                         motion: const ScrollMotion(),
                         children: [
@@ -107,7 +127,6 @@ class ListItem extends StatelessWidget {
                           isSelected:
                               ListController.to.selectedItems.contains(item),
                           onTap: () {
-                            //to menu_detail_view.dart
                             Get.toNamed(
                               '/detail-menu',
                               arguments: {'item': item},
@@ -115,12 +134,12 @@ class ListItem extends StatelessWidget {
                           },
                         ),
                       ),
-                    );
-                  }),
-                );
-              },
-            ),
-          );
+                    ),
+                  );
+                },
+              ),
+            );
+          }
         },
       ),
     );

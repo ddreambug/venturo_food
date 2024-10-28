@@ -21,8 +21,11 @@ class CheckoutBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatCurrency =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
+    final formatCurrency = NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+      decimalDigits: 0,
+    );
 
     return Container(
       padding: EdgeInsets.only(left: 20.w, right: 10.w),
@@ -47,23 +50,26 @@ class CheckoutBottomNavbar extends StatelessWidget {
             SizedBox(width: 5.w),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   'Total Pembayaran',
                   style: GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
                 ),
-                Obx(() {
-                  final finalHarga = CheckoutController.to.finalHarga.value;
-                  return Text(
-                    formatCurrency.format(finalHarga),
-                    style: GoogleTextStyle.w600.copyWith(
-                      fontSize: 20.sp,
-                      color: MainColor.primary,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  );
-                }),
+                Obx(
+                  () {
+                    final finalHarga = CheckoutController.to.finalHarga.value;
+                    return Text(
+                      formatCurrency.format(finalHarga),
+                      style: GoogleTextStyle.w600.copyWith(
+                        fontSize: 20.sp,
+                        color: MainColor.primary,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
             const Spacer(),
@@ -112,8 +118,9 @@ class CheckoutBottomNavbar extends StatelessWidget {
                           TextSpan(
                             text:
                                 'Penggunaan voucher tidak dapat digabung dengan ',
-                            style:
-                                GoogleTextStyle.w400.copyWith(fontSize: 13.sp),
+                            style: GoogleTextStyle.w400.copyWith(
+                              fontSize: 13.sp,
+                            ),
                             children: [
                               TextSpan(
                                 text: 'discount employee reward program',
@@ -167,8 +174,6 @@ class CheckoutBottomNavbar extends StatelessWidget {
                       voucher!['value'],
                     );
                     Get.back();
-
-                    // Get.until((route) => Get.currentRoute == '/detail-pesanan');
                   } else {
                     Get.back();
                   }

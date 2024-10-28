@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/build_menu_properties.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/build_quantity_button.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/build_reactive_button.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/checkout_bottom_navbar.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
-import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
-import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/custom_quantity_button.dart';
-import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/menu_detail_list.dart';
 
 class MenuDetailView extends StatelessWidget {
   const MenuDetailView({super.key});
@@ -35,15 +35,31 @@ class MenuDetailView extends StatelessWidget {
         bottomNavigationBar: !isCart
             ? Obx(
                 () => CustomBottomnavbar(
-                  currentIndex: ListController.to.currentNavBarIndex.value
+                  currentIndex: ListController.to.currentNavBarIndex.value,
                 ),
               )
-            : const CheckoutBottomNavbar(checkoutNavbarType: 'pesanan'),
+            : const CheckoutBottomNavbar(
+                checkoutNavbarType: 'pesanan',
+              ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ///Build menu image
             SizedBox(height: 20.h),
-            _buildMenuImage(menuItem),
+            SizedBox(
+              height: 181.h,
+              width: 378.w,
+              child: Hero(
+                tag: menuItem['id_menu'],
+                child: CachedNetworkImage(
+                  imageUrl: menuItem['foto'],
+                  useOldImageOnUrlChange: true,
+                  color: Colors.grey[100],
+                  colorBlendMode: BlendMode.darken,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(top: 20.h),
@@ -78,7 +94,11 @@ class MenuDetailView extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          _buildQuantityButton(menuItem, dataSource, isCart),
+                          BuildQuantityButton(
+                            menuItem: menuItem,
+                            dataSource: dataSource,
+                            isCart: isCart,
+                          ),
                         ],
                       ),
                       Padding(
@@ -92,10 +112,13 @@ class MenuDetailView extends StatelessWidget {
                         ),
                       ),
                       const Divider(),
-                      ..._buildMenuProperties(menuItem, isCart),
+                      BuildMenuProperties(menuItem: menuItem, isCart: isCart),
                       SizedBox(height: 15.h),
                       if (!isCart) ...{
-                        _buildReactiveSubmitButton(menuItem, dataSource),
+                        BuildReactiveButton(
+                          menuItem: menuItem,
+                          dataSource: dataSource,
+                        ),
                       },
                     ],
                   ),
@@ -105,160 +128,6 @@ class MenuDetailView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  List<Widget> _buildMenuProperties(
-      Map<String, dynamic> menuItem, bool isCart) {
-    return [
-      if (menuItem['category'] == 'minuman') ...[
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.harga,
-          isCart: isCart,
-        ),
-        const Divider(),
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.level,
-          isCart: isCart,
-        ),
-        const Divider(),
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.catatan,
-          isCart: isCart,
-        )
-      ] else ...[
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.harga,
-          isCart: isCart,
-        ),
-        const Divider(),
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.level,
-          isCart: isCart,
-        ),
-        const Divider(),
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.toping,
-          isCart: isCart,
-        ),
-        const Divider(),
-        MenuDetailList(
-          menuItem: menuItem,
-          detailType: DetailType.catatan,
-          isCart: isCart,
-        )
-      ],
-      const Divider(),
-    ];
-  }
-
-  Widget _buildMenuImage(Map<String, dynamic> menuItem) {
-    return SizedBox(
-      height: 181.h,
-      width: 378.w,
-      child: Hero(
-        tag: menuItem['id_menu'],
-        child: CachedNetworkImage(
-          imageUrl: menuItem['foto'],
-          useOldImageOnUrlChange: true,
-          color: Colors.grey[100],
-          colorBlendMode: BlendMode.darken,
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuantityButton(
-    Map<String, dynamic> menuItem,
-    RxList<Map<String, dynamic>> dataSource,
-    bool isCart,
-  ) {
-    return Container(
-      margin: EdgeInsets.only(right: 10.w),
-      width: menuItem['stok'] == true ? 73.w : 105.w,
-      child: Obx(
-        () {
-          final matchedItem = dataSource
-              .firstWhere((item) => item['id_menu'] == menuItem['id_menu']);
-          return Row(
-            mainAxisAlignment: matchedItem['jumlah'] == 0
-                ? MainAxisAlignment.end
-                : MainAxisAlignment.spaceBetween,
-            children: [
-              if (matchedItem['jumlah'] != 0) ...{
-                CustomQuantityButton(
-                  menu: menuItem,
-                  isAdd: false,
-                  editType: isCart ? EditType.cart : EditType.list,
-                ),
-                Text(
-                  '${matchedItem['jumlah']}',
-                  style: GoogleTextStyle.w500.copyWith(fontSize: 18.sp),
-                ),
-                CustomQuantityButton(
-                  menu: menuItem,
-                  editType: isCart ? EditType.cart : EditType.list,
-                ),
-              } else
-                CustomQuantityButton(
-                  menu: menuItem,
-                  editType: isCart ? EditType.cart : EditType.list,
-                ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildReactiveSubmitButton(
-    Map<String, dynamic> menuItem,
-    RxList<Map<String, dynamic>> dataSource,
-  ) {
-    return Obx(
-      () {
-        final matchedItem = dataSource
-            .firstWhere((item) => item['id_menu'] == menuItem['id_menu']);
-        if (matchedItem['jumlah'] > 0) {
-          return SizedBox(
-            width: double.infinity,
-            height: 42.w,
-            child: ElevatedButton(
-              onPressed: () async {
-                final result =
-                    await CheckoutController.to.addCartItem(menuItem);
-                Get.back();
-                Get.showSnackbar(
-                  GetSnackBar(
-                    message: result,
-                    snackPosition: SnackPosition.TOP,
-                    duration: const Duration(milliseconds: 1500),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                side: const BorderSide(
-                  color: Color(0xFF00717F),
-                  width: 1,
-                ),
-              ),
-              child: Text(
-                'Tambahkan Ke Pesanan',
-                style: GoogleTextStyle.w700.copyWith(fontSize: 14.sp),
-              ),
-            ),
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      },
     );
   }
 }

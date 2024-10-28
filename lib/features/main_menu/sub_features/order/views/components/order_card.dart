@@ -91,7 +91,7 @@ class OrderCard extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: 5.w,
+                        top: 2.w,
                         bottom: isCompleted ? 0.w : 15.w,
                       ),
 
@@ -139,6 +139,7 @@ class OrderCard extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(height: 5.w),
 
                     //menu title
                     SizedBox(

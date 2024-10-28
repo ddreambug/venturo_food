@@ -13,22 +13,23 @@ class OrderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const OrderAppBar(),
-        bottomNavigationBar: Obx(
-          () => CustomBottomnavbar(
-            currentIndex: ListController.to.currentNavBarIndex.value,
-          ),
+      appBar: const OrderAppBar(),
+      bottomNavigationBar: Obx(
+        () => CustomBottomnavbar(
+          currentIndex: ListController.to.currentNavBarIndex.value,
         ),
-        body: Obx(
-          () {
-            final orderData = OrderController.to.orders;
+      ),
+      body: Obx(
+        () {
+          final orderData = OrderController.to.orders;
 
-            if (orderData.isEmpty) {
-              return const EmptyOrder();
-            } else {
-              return const OrderListItem();
-            }
-          },
-        ));
+          if (orderData.isEmpty) {
+            return const EmptyOrder();
+          } else {
+            return const OrderListItem();
+          }
+        },
+      ),
+    );
   }
 }

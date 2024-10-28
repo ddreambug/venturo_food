@@ -34,6 +34,7 @@ class OrderDetailView extends StatelessWidget {
         appBar: const CustomAppbar(
           appBarTitle: 'Pesanan',
           icon: ImageConstant.pesananIcon,
+          isOrder: true,
         ),
         body: Column(
           children: [

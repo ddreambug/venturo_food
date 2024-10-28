@@ -28,9 +28,13 @@ class SectionHeader extends StatelessWidget {
         children: [
           icon!,
           10.horizontalSpace,
-          Text(title,
-              style:
-                  GoogleTextStyle.w700.copyWith(fontSize: 20.sp, color: color)),
+          Text(
+            title,
+            style: GoogleTextStyle.w700.copyWith(
+              fontSize: 20.sp,
+              color: color,
+            ),
+          ),
         ],
       ),
     );

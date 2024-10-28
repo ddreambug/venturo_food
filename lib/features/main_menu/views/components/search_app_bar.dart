@@ -61,9 +61,14 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             isDense: true,
-            prefixIcon: Icon(
-              Icons.search,
-              size: 26.h,
+            prefixIcon: GestureDetector(
+              onTap: () {
+                print(ListController.to.filteredList.length);
+              },
+              child: Icon(
+                Icons.search,
+                size: 26.h,
+              ),
             ),
             prefixIconColor: Theme.of(context).primaryColor,
             hintText: 'Pencarian'.tr,

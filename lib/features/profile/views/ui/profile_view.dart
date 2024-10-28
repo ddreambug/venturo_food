@@ -38,9 +38,10 @@ class ProfileView extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(ImageConstant.patternBackground),
-              fit: BoxFit.fitHeight,
-              alignment: Alignment.center),
+            image: AssetImage(ImageConstant.patternBackground),
+            fit: BoxFit.fitHeight,
+            alignment: Alignment.center,
+          ),
         ),
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 25.r),
@@ -84,8 +85,9 @@ class ProfileView extends StatelessWidget {
                             padding: EdgeInsets.only(top: 10.r, bottom: 15.r),
                             child: Text(
                               "Change".tr,
-                              style: Get.textTheme.labelMedium!
-                                  .copyWith(color: Colors.white),
+                              style: Get.textTheme.labelMedium!.copyWith(
+                                color: Colors.white,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -115,8 +117,9 @@ class ProfileView extends StatelessWidget {
                     7.horizontalSpaceRadius,
                     Text(
                       ' Your have verified your ID card'.tr,
-                      style: Get.textTheme.labelMedium!
-                          .copyWith(color: Colors.blue),
+                      style: Get.textTheme.labelMedium!.copyWith(
+                        color: Colors.blue,
+                      ),
                     )
                   ],
                 ),
@@ -129,8 +132,9 @@ class ProfileView extends StatelessWidget {
                       7.horizontalSpaceRadius,
                       Text(
                         'Verify your ID card now!'.tr,
-                        style: Get.textTheme.labelMedium!
-                            .copyWith(color: Colors.blue),
+                        style: Get.textTheme.labelMedium!.copyWith(
+                          color: Colors.blue,
+                        ),
                       )
                     ],
                   ),
@@ -149,39 +153,45 @@ class ProfileView extends StatelessWidget {
                     padding: EdgeInsets.only(left: 20.w),
                     child: Text(
                       'Account info'.tr,
-                      style: Get.textTheme.titleMedium!
-                          .copyWith(color: Theme.of(context).primaryColor),
+                      style: Get.textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                   14.verticalSpacingRadius,
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 30.h,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30.r),
                       color: Colors.grey[100],
                     ),
                     child: Column(
                       children: [
-                        Obx(() => TileOption(
-                              title: 'Name'.tr,
-                              message:
-                                  ProfileController.to.user.value['nama'] ??
-                                      '-',
-                              onTap: () {
-                                ProfileController.to.updateProfileName();
-                              },
-                            )),
+                        Obx(
+                          () => TileOption(
+                            title: 'Name'.tr,
+                            message:
+                                ProfileController.to.user.value['nama'] ?? '-',
+                            onTap: () {
+                              ProfileController.to.updateProfileName();
+                            },
+                          ),
+                        ),
                         Divider(color: Colors.black45, height: 0.5.h),
-                        Obx(() => TileOption(
-                              title: 'Birth date'.tr,
-                              message: ProfileController
-                                      .to.user.value['tgl_lahir'] ??
-                                  '-',
-                              onTap: () {
-                                ProfileController.to.updateBirthDate();
-                              },
-                            )),
+                        Obx(
+                          () => TileOption(
+                            title: 'Birth date'.tr,
+                            message:
+                                ProfileController.to.user.value['tgl_lahir'] ??
+                                    '-',
+                            onTap: () {
+                              ProfileController.to.updateBirthDate();
+                            },
+                          ),
+                        ),
                         Divider(color: Colors.black45, height: 0.5.h),
                         TileOption(
                           title: 'Phone number'.tr,

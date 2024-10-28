@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/la.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -215,56 +213,6 @@ class OrderPriceDetail extends StatelessWidget {
                 ],
               ),
               const Divider(),
-
-              //button
-              Obx(
-                () {
-                  var orderStatus = OrderController.to.selectedOrder['status'];
-                  if (orderStatus != 2 && orderStatus != 3) {
-                    return Row(
-                      children: [
-                        const Spacer(),
-                        SizedBox(
-                          height: 20.w,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              PanaraConfirmDialog.show(
-                                context,
-                                panaraDialogType: PanaraDialogType.error,
-                                message:
-                                    'Apakah anda ingin membatalkan pesanan?',
-                                confirmButtonText: 'Ya',
-                                cancelButtonText: 'Tidak',
-                                onTapConfirm: () {
-                                  OrderController.to
-                                      .updateOrderStatus(isCancelOrder: true);
-                                  Get.until(
-                                    (route) => route.settings.name == '/order',
-                                  );
-                                },
-                                onTapCancel: () {
-                                  Get.back();
-                                },
-                              );
-                            },
-                            style: const ButtonStyle(
-                              backgroundColor:
-                                  WidgetStatePropertyAll(MainColor.danger),
-                            ),
-                            child: Text(
-                              'batal',
-                              style: GoogleTextStyle.w500
-                                  .copyWith(fontSize: 12.sp),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                },
-              ),
               SizedBox(height: 20.w),
 
               //status bar
