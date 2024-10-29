@@ -25,7 +25,7 @@ class OrderSuccessDialog extends StatelessWidget {
           ),
           SizedBox(height: 15.w),
           Text(
-            'Pesanan Sedang Disiapkan'.tr,
+            'Orders prepared'.tr,
             style: GoogleTextStyle.w500.copyWith(fontSize: 22.sp),
             textAlign: TextAlign.center,
           ),
@@ -33,14 +33,14 @@ class OrderSuccessDialog extends StatelessWidget {
           Text.rich(
             TextSpan(children: [
               TextSpan(
-                text: 'Kamu dapat melacak pesananmu di fitur',
+                text: 'You can track your orders in'.tr,
                 style: GoogleTextStyle.w400.copyWith(
                   color: const Color.fromARGB(255, 147, 146, 146),
                   fontSize: 16.sp,
                 ),
               ),
               TextSpan(
-                text: ' Pesanan',
+                text: ' Orders'.tr,
                 style: GoogleTextStyle.w700.copyWith(
                   color: const Color.fromARGB(255, 147, 146, 146),
                   fontSize: 16.sp,
@@ -78,7 +78,7 @@ class OrderSuccessDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Oke',
+                    'Ok'.tr,
                     textAlign: TextAlign.center,
                     style: GoogleTextStyle.w700.copyWith(fontSize: 16.sp),
                   ),

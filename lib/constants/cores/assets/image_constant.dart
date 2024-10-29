@@ -16,6 +16,7 @@ class ImageConstant {
   static const String voucherKoordinator =
       'assets/images/voucher_koordinator.png';
   static const String bgProfile = 'assets/images/bg_profile.png';
+  static const String icPenilaian = 'assets/images/ic_review.png';
 
   ///svg
   static const String listIconSvg = 'assets/svg/ic_list.svg';

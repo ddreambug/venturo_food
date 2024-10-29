@@ -6,7 +6,7 @@ import 'package:venturo_food/configs/localization/localization.dart';
 import 'locale_card.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
-  const LanguageBottomSheet({Key? key}) : super(key: key);
+  const LanguageBottomSheet({super.key});
 
   @override
   State<LanguageBottomSheet> createState() => _LanguageBottomSheetState();
@@ -49,4 +49,3 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
     );
   }
 }
-

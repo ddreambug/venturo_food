@@ -25,8 +25,8 @@ class CheckoutView extends StatelessWidget {
               : const SizedBox.shrink(),
         ),
         backgroundColor: MainColor.white,
-        appBar: const CustomAppbar(
-          appBarTitle: 'Pesanan',
+        appBar: CustomAppbar(
+          appBarTitle: 'Orders'.tr,
           icon: ImageConstant.pesananIcon,
         ),
         body: Obx(

@@ -52,7 +52,7 @@ class ListItemView extends StatelessWidget {
                       ImageConstant.promoIcon,
                       height: 14.h,
                     ),
-                    title: 'Promo yang Tersedia ',
+                    title: 'Available Promo'.tr,
                     isHeader: true,
                   ),
                 ),

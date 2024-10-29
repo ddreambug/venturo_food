@@ -7,6 +7,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:venturo_food/configs/localization/localization.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:venturo_food/configs/pages/main_page.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/configs/themes/main_theme.dart';
@@ -55,13 +57,22 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         ///debugging purpose
-        // initialRoute: MainRoute.mainMenu,
-        initialRoute: MainRoute.splashScreen,
+        initialRoute: MainRoute.mainMenu,
+        // initialRoute: MainRoute.splashScreen,
         theme: mainTheme,
         defaultTransition: Transition.native,
         getPages: MainPage.main,
         initialBinding: GlobalBinding(),
         builder: EasyLoading.init(),
+        translations: Localization(),
+        locale: Localization.defaultLocale,
+        fallbackLocale: Localization.fallbackLocale,
+        supportedLocales: Localization.locales,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
       ),
     );
   }

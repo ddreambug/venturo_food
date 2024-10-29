@@ -63,7 +63,7 @@ class CustomBottomnavbar extends StatelessWidget {
                         : MainColor.grey,
                     size: 34.w,
                   ),
-                  label: 'Beranda',
+                  label: 'Home'.tr,
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
@@ -74,7 +74,7 @@ class CustomBottomnavbar extends StatelessWidget {
                     width: 34.w,
                     height: 34.w,
                   ),
-                  label: 'Pesanan',
+                  label: 'Orders'.tr,
                 ),
                 BottomNavigationBarItem(
                   icon: Iconify(
@@ -84,7 +84,7 @@ class CustomBottomnavbar extends StatelessWidget {
                         : MainColor.grey,
                     size: 34.w,
                   ),
-                  label: 'Profil',
+                  label: 'Profile'.tr,
                 ),
               ],
             ),

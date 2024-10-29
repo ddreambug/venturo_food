@@ -17,7 +17,7 @@ class OrderController extends GetxController
     symbol: 'Rp. ',
     decimalDigits: 0,
   );
-  RxString filterSelectedValue = 'Semua Status'.obs;
+  RxString filterSelectedValue = 'All Status'.tr.obs;
   RxString filterStartDate = '12/10/24'.obs;
   RxString filterEndDate = '30/12/24'.obs;
 

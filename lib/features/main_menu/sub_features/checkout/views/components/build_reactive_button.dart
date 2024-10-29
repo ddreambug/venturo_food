@@ -41,7 +41,7 @@ class BuildReactiveButton extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Tambahkan Ke Pesanan',
+                'Add to Order'.tr,
                 style: GoogleTextStyle.w700.copyWith(fontSize: 14.sp),
               ),
             ),

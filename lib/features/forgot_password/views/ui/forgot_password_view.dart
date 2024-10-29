@@ -39,7 +39,7 @@ class ForgotPasswordView extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    'Masukkan alamat email untuk mengubah password anda',
+                    'Enter email address to change your password'.tr,
                     style: TextStyle(
                       fontSize: 20.sp,
                       color: MainColor.black,
@@ -71,7 +71,7 @@ class ForgotPasswordView extends StatelessWidget {
                         Get.back();
                       },
                       child: Text(
-                        "Cancel",
+                        "Cancel".tr,
                         style: TextStyle(
                           fontSize: 12.sp,
                           color: MainColor.white,
@@ -89,7 +89,7 @@ class ForgotPasswordView extends StatelessWidget {
                         ForgotPasswordController.to.validateForm(context);
                       },
                       child: Text(
-                        "Ubah Password",
+                        "Change Password".tr,
                         style: TextStyle(
                           fontSize: 12.sp,
                           color: MainColor.white,

@@ -19,8 +19,8 @@ class VoucherDetailView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const CustomAppbar(
-          appBarTitle: 'Detail Voucher',
+        appBar: CustomAppbar(
+          appBarTitle: 'Voucher Detail'.tr,
           useIcon: false,
         ),
         bottomNavigationBar: CheckoutBottomNavbar(

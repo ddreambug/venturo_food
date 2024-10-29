@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/views/components/order_status.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
+import 'package:get/get.dart';
 
 class OrderPriceDetail extends StatelessWidget {
   const OrderPriceDetail({
@@ -48,7 +49,7 @@ class OrderPriceDetail extends StatelessWidget {
                 children: [
                   Text.rich(
                     TextSpan(
-                      text: 'Total Pesanan ',
+                      text: 'Total Orders '.tr,
                       style: GoogleTextStyle.w700.copyWith(
                         fontSize: 16.sp,
                       ),
@@ -90,7 +91,7 @@ class OrderPriceDetail extends StatelessWidget {
                         SizedBox(
                           width: 220.w,
                           child: Text(
-                            'Diskon 20%',
+                            'Discount 20%'.tr,
                             style: GoogleTextStyle.w700.copyWith(
                               fontSize: 16.sp,
                             ),
@@ -130,26 +131,32 @@ class OrderPriceDetail extends StatelessWidget {
                       style: GoogleTextStyle.w700.copyWith(fontSize: 16.sp),
                     ),
                     const Spacer(),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          formatCurrency.format(voucher.values.first),
-                          style: GoogleTextStyle.w400.copyWith(
-                            color: MainColor.danger,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w100,
+                    SizedBox(
+                      width: 200.w,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            formatCurrency.format(voucher.values.first),
+                            style: GoogleTextStyle.w400.copyWith(
+                              color: MainColor.danger,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w100,
+                            ),
+                            textAlign: TextAlign.end,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          textAlign: TextAlign.end,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          voucher.keys.first,
-                          style: GoogleTextStyle.w400.copyWith(fontSize: 10.sp),
-                        ),
-                      ],
+                          Text(
+                            voucher.keys.first,
+                            style:
+                                GoogleTextStyle.w400.copyWith(fontSize: 10.sp),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -167,7 +174,7 @@ class OrderPriceDetail extends StatelessWidget {
                   ),
                   SizedBox(width: 8.w),
                   Text(
-                    'Pembayaran',
+                    'Payment'.tr,
                     style: GoogleTextStyle.w700.copyWith(
                       fontSize: 16.sp,
                     ),
@@ -193,7 +200,7 @@ class OrderPriceDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Total Pembayaran',
+                    'Payment Total'.tr,
                     style: GoogleTextStyle.w700.copyWith(
                       fontSize: 16.sp,
                     ),

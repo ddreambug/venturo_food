@@ -96,9 +96,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                           PanaraConfirmDialog.show(
                             context,
                             panaraDialogType: PanaraDialogType.error,
-                            message: 'Apakah anda ingin membatalkan pesanan?',
-                            confirmButtonText: 'Ya',
-                            cancelButtonText: 'Tidak',
+                            message: 'Are you going to cancel this order?'.tr,
+                            confirmButtonText: 'Yes'.tr,
+                            cancelButtonText: 'No'.tr,
                             onTapConfirm: () {
                               OrderController.to
                                   .updateOrderStatus(isCancelOrder: true);
@@ -116,7 +116,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                               WidgetStatePropertyAll(MainColor.danger),
                         ),
                         child: Text(
-                          'batal',
+                          'Cancel'.tr,
                           style: GoogleTextStyle.w500.copyWith(fontSize: 12.sp),
                         ),
                       ),

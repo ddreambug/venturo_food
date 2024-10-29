@@ -44,7 +44,7 @@ class LoginView extends StatelessWidget {
                 ),
                 SizedBox(height: 100.w),
                 Text(
-                  'Masuk untuk melanjutkan!',
+                  'Login to continue!'.tr,
                   style: TextStyle(fontSize: 22.sp),
                 ),
                 SizedBox(height: 30.w),
@@ -74,7 +74,7 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Masuk',
+                      'Login'.tr,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: MainColor.white,
                           fontWeight: FontWeight.w800,
@@ -91,7 +91,7 @@ class LoginView extends StatelessWidget {
                         Get.toNamed('forgot-password');
                       },
                       child: Text(
-                        'Lupa Password?',
+                        'Forgot Password?'.tr,
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 14.sp,

@@ -26,6 +26,7 @@ class ProfileController extends GetxController {
   Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
 
   File? get imageFile => _imageFile.value;
+  File? ktpFile;
 
   @override
   void onInit() {
@@ -78,7 +79,7 @@ class ProfileController extends GetxController {
   Future<void> pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      File file = File(result.files.single.path!);
+      ktpFile = File(result.files.single.path!);
 
       /// Selanjutnya apa yang ingin diinginkan
       isVerif.value = true;

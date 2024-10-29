@@ -28,9 +28,9 @@ class CustomChoiceChip extends StatelessWidget {
         type == 'toping' ? 4 : 6,
         (int index) {
           final List<String> chipLabels = [
-            'Tanpa Toping',
+            'No Topping'.tr,
             'Mozarella',
-            'Sosis',
+            'Sausage'.tr,
             'Dimsum'
           ];
 

@@ -55,7 +55,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                     children: [
                       Text.rich(
                         TextSpan(
-                          text: 'Total Pesanan ',
+                          text: 'Total Orders'.tr,
                           style: GoogleTextStyle.w700.copyWith(
                             fontSize: 16.sp,
                           ),
@@ -105,7 +105,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                                     SizedBox(
                                       width: 220.w,
                                       child: Text(
-                                        'Diskon 20%',
+                                        'Discount 20%'.tr,
                                         style: GoogleTextStyle.w700.copyWith(
                                           fontSize: 16.sp,
                                         ),
@@ -163,7 +163,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                                       .to.voucherValue.values.isNotEmpty
                                   ? CheckoutController
                                       .to.voucherValue.values.first
-                                  : 'Pilih Voucher';
+                                  : 'Choose Voucher'.tr;
 
                               return Text(
                                 voucherAmount != 'Pilih Voucher'
@@ -202,7 +202,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        'Pembayaran',
+                        'Payment'.tr,
                         style: GoogleTextStyle.w700.copyWith(
                           fontSize: 16.sp,
                         ),

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:venturo_food/utils/enums/enum.dart';
+import 'package:get/get.dart';
 
 /// Used in menu_detail_view.dart
 /// Used in mainfeatures menu_card.dart
@@ -51,8 +52,8 @@ class CustomQuantityButton extends StatelessWidget {
       );
     } else {
       return Text(
-        'Stok Habis',
-        style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
+        'Empty Stock'.tr,
+        style: GoogleTextStyle.w400.copyWith(fontSize: 14.sp),
       );
     }
   }

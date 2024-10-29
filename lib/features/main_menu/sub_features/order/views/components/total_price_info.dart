@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
+import 'package:get/get.dart';
 
 class TotalPriceInfo extends StatelessWidget {
   const TotalPriceInfo({super.key});
@@ -23,7 +24,7 @@ class TotalPriceInfo extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              'Total Pesanan',
+              'Total Orders'.tr,
               style: GoogleTextStyle.w700.copyWith(fontSize: 18.sp),
             ),
             const Spacer(),

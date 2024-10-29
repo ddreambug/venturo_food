@@ -22,7 +22,7 @@ class BuildDiscountDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Info Diskon",
+              "Discount Info".tr,
               style: GoogleTextStyle.w700.copyWith(
                 fontSize: 22.sp,
                 color: MainColor.primary,
@@ -33,7 +33,7 @@ class BuildDiscountDialog extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Mengisi Survey',
+                  'Fill Survey'.tr,
                   style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
                 ),
                 const Spacer(),
@@ -43,7 +43,7 @@ class BuildDiscountDialog extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Terlambat <3x',
+                  'Late <3x'.tr,
                   style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
                 ),
                 const Spacer(),
@@ -70,7 +70,7 @@ class BuildDiscountDialog extends StatelessWidget {
                   Get.back();
                 },
                 child: Text(
-                  'Oke',
+                  'Ok'.tr,
                   style: GoogleTextStyle.w700.copyWith(
                     color: MainColor.white,
                   ),

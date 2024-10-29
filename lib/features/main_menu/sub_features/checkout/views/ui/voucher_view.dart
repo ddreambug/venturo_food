@@ -6,6 +6,7 @@ import 'package:venturo_food/features/main_menu/sub_features/checkout/views/comp
 import 'package:venturo_food/features/main_menu/views/components/custom_appbar.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/voucher_card.dart';
+import 'package:get/get.dart';
 
 class VoucherView extends StatelessWidget {
   const VoucherView({super.key});
@@ -19,8 +20,8 @@ class VoucherView extends StatelessWidget {
         bottomNavigationBar:
             const CheckoutBottomNavbar(checkoutNavbarType: 'voucher'),
         backgroundColor: MainColor.white,
-        appBar: const CustomAppbar(
-          appBarTitle: 'Pilih Voucher',
+        appBar: CustomAppbar(
+          appBarTitle: 'Choose Voucher'.tr,
           icon: ImageConstant.voucherIcon,
         ),
         body: ListView.builder(

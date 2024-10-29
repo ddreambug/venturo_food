@@ -115,10 +115,10 @@ class OrderCard extends StatelessWidget {
                           SizedBox(width: 2.w),
                           Text(
                             orderItem['status'] == 2
-                                ? 'Selesai'
+                                ? 'Done'.tr
                                 : orderItem['status'] == 3
-                                    ? 'Dibatalkan'
-                                    : 'Sedang disiapkan',
+                                    ? 'Canceled'.tr
+                                    : 'Prepared'.tr,
                             style: GoogleTextStyle.w600.copyWith(
                               fontSize: 12.sp,
                               color: orderItem['status'] == 2

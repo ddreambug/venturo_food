@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/controllers/order_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
+import 'package:get/get.dart';
 
 class OrderAppBar extends StatelessWidget implements PreferredSizeWidget {
   const OrderAppBar({super.key});
@@ -27,9 +28,9 @@ class OrderAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: TabBar(
           controller: OrderController.to.tabController,
-          tabs: const [
-            Tab(text: 'Sedang Berjalan'),
-            Tab(text: 'Riwayat'),
+          tabs: [
+            Tab(text: 'On Progress'.tr),
+            Tab(text: 'History'.tr),
           ],
           indicatorColor: Theme.of(context).primaryColor,
           indicatorWeight: 1.w,

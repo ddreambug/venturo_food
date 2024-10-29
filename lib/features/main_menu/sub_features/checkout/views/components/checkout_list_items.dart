@@ -36,7 +36,7 @@ class CheckoutListItems extends StatelessWidget {
                   ),
                   child: SectionHeader(
                     color: MainColor.primary,
-                    title: 'Makanan',
+                    title: 'Food'.tr,
                     icon: SvgPicture.asset(
                       ImageConstant.makananIconSvg,
                       height: 14.h,
@@ -60,7 +60,7 @@ class CheckoutListItems extends StatelessWidget {
                 margin: EdgeInsets.only(top: 15.w),
                 child: SectionHeader(
                   color: MainColor.primary,
-                  title: 'Minuman',
+                  title: 'Beverages'.tr,
                   icon: SvgPicture.asset(
                     ImageConstant.minumanIconSvg,
                   ),

@@ -28,14 +28,14 @@ class ListController extends GetxController {
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
   final RxBool canLoadMore = true.obs;
-  final RxString selectedCategory = 'semua menu'.obs;
+  final RxString selectedCategory = 'all menu'.tr.obs;
   final RxString keyword = ''.obs;
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
   final List<String> categories = [
-    'Semua Menu',
-    'Makanan',
-    'Minuman',
+    'All Menu'.tr,
+    'Food'.tr,
+    'Beverages'.tr,
   ];
 
   @override

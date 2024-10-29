@@ -42,20 +42,20 @@ class MenuDetailList extends StatelessWidget {
     //conditionaly render list
     if (detailType.name == 'harga') {
       listIcon = Bi.cash_coin;
-      listTitle = 'Harga';
+      listTitle = 'Price'.tr;
     } else if (detailType.name == 'level' &&
         menuItem['category'] == 'minuman') {
       listIcon = Ri.fire_line;
-      listTitle = 'Level Gula';
+      listTitle = 'Sugar Level'.tr;
     } else if (detailType.name == 'level') {
       listIcon = Ri.fire_line;
-      listTitle = 'Level';
+      listTitle = 'Level'.tr;
     } else if (detailType.name == 'toping') {
       listIcon = La.cheese;
-      listTitle = 'Toping';
+      listTitle = 'Topping'.tr;
     } else {
       listIcon = Ic.round_edit_note;
-      listTitle = 'Catatan';
+      listTitle = 'Notes'.tr;
     }
 
     //ontap bottomdialog
@@ -95,7 +95,7 @@ class MenuDetailList extends StatelessWidget {
               ),
               const Spacer(),
               SizedBox(
-                width: 230.w,
+                width: 200.w,
                 child: Text(
                   detailType.name == 'catatan'
                       ? matchedItem['catatan']

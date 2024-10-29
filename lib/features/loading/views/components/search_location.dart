@@ -21,7 +21,7 @@ class SearchLocation extends StatelessWidget {
               () {
                 if (loadingController.isLoading.value) {
                   return Text(
-                    'Mencari Lokasimu${loadingController.loadingDots.value}',
+                    'Searching your location${loadingController.loadingDots.value}'.tr,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: MainColor.grey,
@@ -29,10 +29,10 @@ class SearchLocation extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return const Text(
-                    'Data Lokasi Ditemukan!',
+                  return Text(
+                    'Location Data Found'.tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: MainColor.primary,
                       fontWeight: FontWeight.w800,
                     ),
@@ -84,7 +84,7 @@ class SearchLocation extends StatelessWidget {
                         onPressed: () {
                           Get.back();
                         },
-                        child: const Text('Cancel'),
+                        child: Text('Cancel'.tr),
                       ),
                     );
                   } else {
@@ -99,12 +99,13 @@ class SearchLocation extends StatelessWidget {
                           onPressed: () {
                             loadingController.toNextScreen();
                           },
-                          child: const Text('Okay'),
+                          child: Text('Ok'.tr),
                         ),
                       ),
                       SizedBox(height: 10.w),
                       Text(
-                        'auto next dalam ${loadingController.loadingNextPage.value}',
+                        'Auto Next In ${loadingController.loadingNextPage.value}'
+                            .tr,
                         style: TextStyle(
                           color: MainColor.grey,
                           fontSize: 12.sp,

@@ -50,8 +50,8 @@ class ListItem extends StatelessWidget {
                           title: ListController.to.filteredList[0]
                                       ["category"] ==
                                   'makanan'
-                              ? 'Makanan'
-                              : 'Minuman',
+                              ? 'Food'.tr
+                              : 'Beverages'.tr,
                           icon: SvgPicture.asset(
                             ListController.to.filteredList[0]["category"] ==
                                     'makanan'
@@ -67,10 +67,10 @@ class ListItem extends StatelessWidget {
                         child: SectionHeader(
                           color: MainColor.primary,
                           title: currentCategory == 'semua menu'
-                              ? 'Makanan'
+                              ? 'Food'.tr
                               : currentCategory == 'makanan'
-                                  ? 'Makanan'
-                                  : 'Minuman',
+                                  ? 'Food'.tr
+                                  : 'Beverages'.tr,
                           icon: SvgPicture.asset(
                             currentCategory == 'semua menu' ||
                                     currentCategory == 'makanan'
@@ -88,7 +88,7 @@ class ListItem extends StatelessWidget {
                       margin: EdgeInsets.only(top: 15.w),
                       child: SectionHeader(
                         color: MainColor.primary,
-                        title: 'Minuman',
+                        title: 'Beverages',
                         icon: SvgPicture.asset(
                           ImageConstant.minumanIconSvg,
                           height: 14.h,

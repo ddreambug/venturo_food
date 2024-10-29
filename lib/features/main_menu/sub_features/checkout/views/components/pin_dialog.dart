@@ -25,7 +25,9 @@ class _PinDialogState extends State<PinDialog> {
   int tries = 3;
 
   Future<void> processPin(String? pin) async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(
+      const Duration(milliseconds: 500),
+    );
 
     if (pin == '123456') {
       Get.back<bool>(result: true);
@@ -63,12 +65,12 @@ class _PinDialogState extends State<PinDialog> {
         children: [
           // title
           Text(
-            'Verifikasi Pesanan',
+            'Order Verification'.tr,
             style: GoogleTextStyle.w600.copyWith(fontSize: 22.sp),
           ),
 
           Text(
-            'Masukkan kode PIN',
+            'Enter your PIN'.tr,
             style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
           ),
           24.verticalSpacingRadius,

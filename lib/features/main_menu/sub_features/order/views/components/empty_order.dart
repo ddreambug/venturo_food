@@ -49,11 +49,12 @@ class EmptyOrder extends StatelessWidget {
                         emptyOrderText = customMessage;
                       } else {
                         emptyOrderText =
-                            'Mulai buat pesanan.\n\nMakanan yang kamu pesan\nakan muncul di sini agar\nkamu bisa menemukan\nmenu favoritmu lagi!';
+                            'Start making orders.\n\nYour order\nwill show up here so\nyou can find\nyour favourite menu again!'
+                                .tr;
                       }
                     } else {
                       emptyOrderText =
-                          'Sudah Pesan?\nLacak pesananmu\ndi sini.';
+                          'Already Order?\nTrace your orders\nhere'.tr;
                     }
 
                     return SizedBox(

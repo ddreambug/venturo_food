@@ -26,10 +26,10 @@ class OrderStatus extends StatelessWidget {
               final orderStatus = OrderController.to.selectedOrder['status'];
               return Text(
                 orderStatus == 3
-                    ? 'Pesanan Dibatalkan'
+                    ? 'Order Canceled'.tr
                     : orderStatus == 2
-                        ? 'Pesanan Selesai'
-                        : 'Pesanan Kamu Sedang Disiapkan',
+                        ? 'Order Complete'.tr
+                        : 'Order Prepared'.tr,
                 style: GoogleTextStyle.w600.copyWith(
                   fontSize: 16.sp,
                   color: Colors.black,
@@ -44,9 +44,9 @@ class OrderStatus extends StatelessWidget {
             PanaraConfirmDialog.show(
               context,
               title: "Update Status",
-              message: "Apakah anda yakin akan mengubah status Pesanan ini?",
-              confirmButtonText: "Oke",
-              cancelButtonText: 'Tidak',
+              message: "Are you sure to update this order status?".tr,
+              confirmButtonText: "Yes".tr,
+              cancelButtonText: 'No'.tr,
               onTapConfirm: () {
                 Navigator.pop(context);
                 OrderController.to.updateOrderStatus();
@@ -94,7 +94,7 @@ class OrderStatus extends StatelessWidget {
               width: 60.w,
               height: 35.w,
               child: Text(
-                'Pesanan Diterima',
+                'Order Recieved'.tr,
                 style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
                 textAlign: TextAlign.center,
               ),
@@ -104,19 +104,19 @@ class OrderStatus extends StatelessWidget {
               width: 60.w,
               height: 35.w,
               child: Text(
-                'Silahkan Diambil',
+                'Please Take'.tr,
                 style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
                 textAlign: TextAlign.center,
               ),
             ),
             const Spacer(),
             SizedBox(
-              width: 60.w,
+              width: 64.w,
               height: 35.w,
               child: Text(
-                'Pesanan Selesai',
+                'Order Complete'.tr,
                 style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.right,
               ),
             ),
           ],

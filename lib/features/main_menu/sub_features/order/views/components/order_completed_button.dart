@@ -41,7 +41,7 @@ class OrderCompletedButton extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Beri Penilaian',
+                      'Give Rating'.tr,
                       style: GoogleTextStyle.w700.copyWith(
                         fontSize: 10.sp,
                       ),
@@ -64,8 +64,8 @@ class OrderCompletedButton extends StatelessWidget {
 
               PanaraInfoDialog.show(
                 context,
-                message: 'Order Ditambahkan',
-                buttonText: 'Oke',
+                message: 'Order Added'.tr,
+                buttonText: 'Ok'.tr,
                 onTapDismiss: () {
                   Get.until(
                     (route) => route.settings.name == '/main-menu',
@@ -89,7 +89,7 @@ class OrderCompletedButton extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Pesan Lagi',
+                    'Order Again'.tr,
                     style: GoogleTextStyle.w700.copyWith(
                       fontSize: 10.sp,
                     ),

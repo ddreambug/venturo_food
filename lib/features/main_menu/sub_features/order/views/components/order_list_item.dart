@@ -72,8 +72,8 @@ class OrderListItem extends StatelessWidget {
                   if (completedOrders.isEmpty) ...{
                     SizedBox(
                       height: 530.h,
-                      child: const EmptyOrder(
-                        customMessage: 'Belum ada pesanan Selesai',
+                      child: EmptyOrder(
+                        customMessage: 'No Order Completed Yet'.tr,
                       ),
                     ),
                   } else ...{
@@ -104,8 +104,8 @@ class OrderListItem extends StatelessWidget {
                   if (canceledOrders.isEmpty) ...{
                     SizedBox(
                       height: 584.h,
-                      child: const EmptyOrder(
-                        customMessage: 'Belum ada pesanan Dibatalkan',
+                      child: EmptyOrder(
+                        customMessage: 'No Order Canceled Yet'.tr,
                       ),
                     ),
                   } else ...{

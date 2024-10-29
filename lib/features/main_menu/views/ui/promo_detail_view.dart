@@ -74,7 +74,7 @@ class PromoDetailView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nama Promo',
+                        'Promo Name'.tr,
                         style: TextStyle(fontSize: 16.h),
                       ),
                       SizedBox(height: 10.h),
@@ -96,7 +96,7 @@ class PromoDetailView extends StatelessWidget {
                           const Icon(Icons.format_list_bulleted_rounded),
                           SizedBox(width: 10.w),
                           Text(
-                            'Syarat dan Ketentuan',
+                            'Terms and Conditions'.tr,
                             style: GoogleTextStyle.w600.copyWith(
                               fontSize: 16.sp,
                             ),

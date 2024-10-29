@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 
@@ -54,7 +55,7 @@ class SocialLoginButton extends StatelessWidget {
                     color: platformTextColor,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500),
-                text: 'Masuk Menggunakan ',
+                text: 'Login With '.tr,
                 children: <TextSpan>[
                   TextSpan(
                     text: platformName,

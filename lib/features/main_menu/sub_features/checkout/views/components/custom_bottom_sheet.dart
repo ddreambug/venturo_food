@@ -27,11 +27,11 @@ class CustomBottomSheet extends StatelessWidget {
     String bottomSheetTitle;
 
     if (detailType.name == 'catatan') {
-      bottomSheetTitle = 'Buat Catatan';
+      bottomSheetTitle = 'Add Note'.tr;
     } else if (detailType.name == 'toping') {
-      bottomSheetTitle = 'Pilih Toping';
+      bottomSheetTitle = 'Choose Topping'.tr;
     } else {
-      bottomSheetTitle = 'Pilih Level';
+      bottomSheetTitle = 'Choose Levels'.tr;
     }
 
     return Wrap(

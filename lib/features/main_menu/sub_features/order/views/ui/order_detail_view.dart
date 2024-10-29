@@ -31,8 +31,8 @@ class OrderDetailView extends StatelessWidget {
           ),
         ),
         backgroundColor: MainColor.white,
-        appBar: const CustomAppbar(
-          appBarTitle: 'Pesanan',
+        appBar: CustomAppbar(
+          appBarTitle: 'Orders'.tr,
           icon: ImageConstant.pesananIcon,
           isOrder: true,
         ),
@@ -57,7 +57,7 @@ class OrderDetailView extends StatelessWidget {
                         ),
                         child: SectionHeader(
                           color: MainColor.primary,
-                          title: 'Makanan',
+                          title: 'Food'.tr,
                           icon: SvgPicture.asset(
                             ImageConstant.makananIconSvg,
                             height: 14.h,
@@ -80,7 +80,7 @@ class OrderDetailView extends StatelessWidget {
                       margin: EdgeInsets.only(top: 15.w),
                       child: SectionHeader(
                         color: MainColor.primary,
-                        title: 'Minuman',
+                        title: 'Beverages'.tr,
                         icon: SvgPicture.asset(
                           ImageConstant.minumanIconSvg,
                         ),

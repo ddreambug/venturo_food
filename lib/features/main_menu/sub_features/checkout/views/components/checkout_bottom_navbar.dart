@@ -54,7 +54,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Total Pembayaran',
+                  'Payment Total'.tr,
                   style: GoogleTextStyle.w400.copyWith(fontSize: 12.sp),
                 ),
                 Obx(
@@ -88,7 +88,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Pesan Sekarang',
+                  'Order Now'.tr,
                   style: GoogleTextStyle.w600.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w900,
@@ -116,8 +116,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
                         width: 360.w,
                         child: Text.rich(
                           TextSpan(
-                            text:
-                                'Penggunaan voucher tidak dapat digabung dengan ',
+                            text: 'Voucher cannot be combined with '.tr,
                             style: GoogleTextStyle.w400.copyWith(
                               fontSize: 13.sp,
                             ),
@@ -150,7 +149,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'Oke',
+                        'Ok'.tr,
                         style: GoogleTextStyle.w600.copyWith(
                           fontSize: 18.sp,
                           color: MainColor.white,
@@ -187,8 +186,8 @@ class CheckoutBottomNavbar extends StatelessWidget {
                 ),
                 child: Text(
                   checkoutNavbarType == 'detail_voucher'
-                      ? 'Pakai Voucher'
-                      : 'Simpan',
+                      ? 'Use Voucher'.tr
+                      : 'Save'.tr,
                   style: GoogleTextStyle.w600.copyWith(
                     fontSize: 14.sp,
                     color: MainColor.white,

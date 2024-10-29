@@ -20,7 +20,7 @@ class TileOption extends StatelessWidget {
   final int? messageMaxLines;
 
   const TileOption({
-    Key? key,
+    super.key,
     this.icon,
     required this.title,
     this.subtitle,
@@ -33,7 +33,7 @@ class TileOption extends StatelessWidget {
     this.onTap,
     this.iconSize,
     this.messageMaxLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -127,4 +127,3 @@ class TileOption extends StatelessWidget {
     );
   }
 }
-

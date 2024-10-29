@@ -71,7 +71,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             prefixIconColor: Theme.of(context).primaryColor,
-            hintText: 'Pencarian'.tr,
+            hintText: 'Search'.tr,
             hintStyle: GoogleTextStyle.w500.copyWith(
               fontSize: 16.sp,
               color: MainColor.grey,

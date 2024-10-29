@@ -14,9 +14,9 @@ class CustomDropdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> items = [
-      'Semua Status',
-      'Selesai',
-      'Dibatalkan',
+      'All Status'.tr,
+      'Done'.tr,
+      'Canceled'.tr,
     ];
 
     return DropdownButtonHideUnderline(

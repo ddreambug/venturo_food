@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DividerCustom extends StatelessWidget {
@@ -18,7 +19,7 @@ class DividerCustom extends StatelessWidget {
           ),
         ),
         Text(
-          'atau',
+          'Or'.tr,
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
                 fontSize: 14.sp,
               ),
