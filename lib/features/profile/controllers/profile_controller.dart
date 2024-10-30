@@ -4,16 +4,19 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 import '../../../../configs/localization/localization.dart';
 import '../views/components/image_picker_dialog.dart';
 import '../views/components/language_bottom_sheet.dart';
-import '../views/components/name_bottom_sheet.dart';
+import '../views/components/custom_bottom_sheet.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get to => Get.find();
@@ -23,7 +26,14 @@ class ProfileController extends GetxController {
   RxString deviceVersion = ''.obs;
   RxBool isVerif = false.obs;
   RxString currentLang = Localization.currentLanguage.obs;
-  Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({});
+  Rx<Map<String, dynamic>> user = Rx<Map<String, dynamic>>({
+    'nama': '-',
+    'tanggalLahir': '-',
+    'nomorTelepon': '-',
+    'alamatEmail': '-',
+    'pin': '-',
+    'foto': '-',
+  });
 
   File? get imageFile => _imageFile.value;
   File? ktpFile;
@@ -32,20 +42,30 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
 
-    /// Load Device Info
+    loadUser();
     getDeviceInformation();
   }
 
-  /// Pilih image untuk update photo
+  void loadUser() async {
+    var box = Hive.box('venturo');
+
+    user.value = {
+      'nama': box.get('nama', defaultValue: ''),
+      'tanggalLahir': box.get('tanggalLahir', defaultValue: ''),
+      'nomorTelepon': box.get('nomorTelepon', defaultValue: ''),
+      'alamatEmail': box.get('alamatEmail', defaultValue: ''),
+      'pin': box.get('pin', defaultValue: ''),
+      'foto': box.get('foto', defaultValue: ''),
+      'token': box.get('token', defaultValue: ''),
+    };
+  }
+
   Future<void> pickImage() async {
-    /// Buka dialog untuk sumber gambar
     ImageSource? imageSource = await Get.defaultDialog(
       title: '',
       titleStyle: const TextStyle(fontSize: 0),
       content: const ImagePickerDialog(),
     );
-
-    /// pengecekan sumber gambar
     if (imageSource == null) return;
 
     final pickedFile = await ImagePicker().pickImage(
@@ -55,21 +75,21 @@ class ProfileController extends GetxController {
       imageQuality: 75,
     );
 
-    /// setelah dipilih, akan terbuka crop gambar
     if (pickedFile != null) {
       _imageFile.value = File(pickedFile.path);
-      final croppedFile = await ImageCropper()
-          .cropImage(sourcePath: _imageFile.value!.path, uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: 'Cropper'.tr,
-          toolbarColor: MainColor.primary,
-          toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.square,
-          lockAspectRatio: true,
-        )
-      ]);
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: _imageFile.value!.path,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Cropper'.tr,
+            toolbarColor: MainColor.primary,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true,
+          )
+        ],
+      );
 
-      /// Jika gambar telah dipilih, maka akan dimasukkan ke variabel image file, karena ini masih menggunakan local file
       if (croppedFile != null) {
         _imageFile.value = File(croppedFile.path);
       }
@@ -81,7 +101,6 @@ class ProfileController extends GetxController {
     if (result != null) {
       ktpFile = File(result.files.single.path!);
 
-      /// Selanjutnya apa yang ingin diinginkan
       isVerif.value = true;
     }
   }
@@ -111,33 +130,28 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> updateUser({
-    String? nama,
-    DateTime? tglLahir,
-    String? telepon,
-    String? email,
-    String? pin,
-  }) async {
-    final reqData = <String, String>{};
-
-    if (nama != null) reqData["nama"] = nama;
-    if (tglLahir != null) {
-      reqData["tgl_lahir"] = DateFormat('yyy-MM-dd').format(tglLahir);
+  Future<void> updateUser(String title) async {
+    var value = user.value['nama'];
+    var key = '';
+    if (title == 'Name'.tr) {
+      value = user.value['nama'];
+      key = 'nama';
+    } else if (title == 'Phone number'.tr) {
+      value = user.value['nomorTelepon'];
+      key = 'nomorTelepon';
+    } else if (title == 'Email'.tr) {
+      value = user.value['alamatEmail'];
+      key = 'alamatEmail';
+    } else {
+      value = user.value['pin'];
+      key = 'pin';
     }
 
-    if (telepon != null) reqData["telepon"] = telepon;
-    if (email != null) reqData["email"] = email;
-    if (pin != null) reqData["pin"] = pin;
-
-    // update user data
-    user.update((val) {
-      val?.addAll(reqData);
-    });
-  }
-
-  Future<void> updateProfileName() async {
     String? nameInput = await Get.bottomSheet(
-      NameBottomSheet(nama: user.value['nama'] ?? '-'),
+      CustomBottomSheet(
+        value: value,
+        title: title,
+      ),
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -148,20 +162,60 @@ class ProfileController extends GetxController {
     );
 
     if (nameInput != null && nameInput.isNotEmpty) {
-      await updateUser(nama: nameInput);
+      user.value = {
+        ...user.value,
+        key: nameInput,
+      };
     }
   }
 
-  Future<void> updateBirthDate() async {
-    DateTime? birthDate = await showDatePicker(
-      context: Get.context!,
-      initialDate: DateTime(DateTime.now().year - 21),
-      firstDate: DateTime(DateTime.now().year - 100),
-      lastDate: DateTime.now(),
-    );
+  Future<void> updateBirthDate(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: Container(
+            height: 300.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.r),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.r),
+              child: SfDateRangePicker(
+                showNavigationArrow: true,
+                maxDate: DateTime.now(),
+                monthViewSettings: DateRangePickerMonthViewSettings(
+                  viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                    textStyle: GoogleTextStyle.w600.copyWith(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
+                monthCellStyle: DateRangePickerMonthCellStyle(
+                  textStyle: GoogleTextStyle.w400.copyWith(
+                    fontSize: 14.sp,
+                  ),
+                ),
+                backgroundColor: Colors.white,
+                onSelectionChanged: (dateRangePickerSelectionChangedArgs) {
+                  var value = dateRangePickerSelectionChangedArgs.value;
 
-    if (birthDate != null) {
-      await updateUser(tglLahir: birthDate);
-    }
+                  if (value != null) {
+                    user.value = {
+                      ...user.value,
+                      'tanggalLahir': DateFormat('dd/MM/yyy').format(value),
+                    };
+                  }
+                  Get.back();
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

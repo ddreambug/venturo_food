@@ -55,4 +55,3 @@ class ImagePickerDialog extends StatelessWidget {
     );
   }
 }
-

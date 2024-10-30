@@ -60,6 +60,7 @@ abstract class MainPage {
         ListBinding(),
         CheckoutBinding(),
         OrderBinding(),
+        ProfileBinding(),
       ],
       transition: Transition.circularReveal,
       transitionDuration: const Duration(seconds: 2),
@@ -107,7 +108,6 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.profil,
       page: () => const ProfileView(),
-      binding: ProfileBinding(),
       transition: Transition.fadeIn,
     ),
   ];

@@ -11,12 +11,12 @@ class LocaleCard extends StatelessWidget {
   final void Function()? onTap;
 
   const LocaleCard({
-    Key? key,
+    super.key,
     required this.isSelected,
     required this.flag,
     required this.language,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,4 +62,3 @@ class LocaleCard extends StatelessWidget {
     );
   }
 }
-

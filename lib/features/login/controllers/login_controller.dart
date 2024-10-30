@@ -1,5 +1,6 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
@@ -45,6 +46,15 @@ class LoginController extends GetxController {
             .login(emailController.text, passwordController.text);
 
         if (response['status_code'] == 200) {
+          await addUser(
+            nama: response['data']['user']['nama'],
+            tanggalLahir: '12/12/2012',
+            nomorTelepon: '08224111400',
+            alamatEmail: response['data']['user']['email'],
+            pin: response['data']['user']['pin'],
+            foto: response['data']['user']['foto'],
+            token: response['data']['token'],
+          );
           EasyLoading.dismiss();
           Get.offNamed('/search-location');
         } else if (response['status_code'] == 422) {
@@ -89,5 +99,27 @@ class LoginController extends GetxController {
     Get.bottomSheet(
       const LoginFlavor(),
     );
+  }
+
+  Future<void> addUser({
+    required String nama,
+    required String tanggalLahir,
+    required String nomorTelepon,
+    required String alamatEmail,
+    required String pin,
+    required String foto,
+    required String token,
+  }) async {
+    // Open the Hive box
+    var box = Hive.box('venturo');
+
+    // Store user data in the Hive box
+    await box.put('nama', nama);
+    await box.put('tanggalLahir', tanggalLahir);
+    await box.put('nomorTelepon', nomorTelepon);
+    await box.put('alamatEmail', alamatEmail);
+    await box.put('pin', pin);
+    await box.put('foto', foto);
+    await box.put('token', token);
   }
 }

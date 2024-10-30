@@ -105,4 +105,5 @@ const Map<String, String> translationsIdId = {
   "Discount Info": "Info Diskon",
   "Fill Survey": 'Mengisi Survey',
   "Late <3x": 'Terlambat <3x',
+  'Value is required': 'Data harus diisi',
 };

@@ -10,8 +10,12 @@ import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDatepickerButton extends StatelessWidget {
-  const CustomDatepickerButton({super.key});
+  const CustomDatepickerButton({
+    super.key,
+    this.isProfile = false,
+  });
 
+  final bool isProfile;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,6 +36,12 @@ class CustomDatepickerButton extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.r),
                   child: SfDateRangePicker(
+                    monthViewSettings: DateRangePickerMonthViewSettings(
+                      viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                        textStyle:
+                            GoogleTextStyle.w600.copyWith(fontSize: 14.sp),
+                      ),
+                    ),
                     selectionMode: DateRangePickerSelectionMode.range,
                     backgroundColor: Colors.white,
                     onSelectionChanged: (dateRangePickerSelectionChangedArgs) {
