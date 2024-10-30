@@ -22,6 +22,8 @@ class ListItem extends StatelessWidget {
           final String listType = ListController.to.selectedCategory.value;
           final itemCount = ListController.to.filteredList.length;
 
+          print('itemcount $itemCount');
+
           if (itemCount == 0) {
             return const Center(
               child: Text('Item Tidak Ditemukan'),
@@ -51,7 +53,10 @@ class ListItem extends StatelessWidget {
                                       ["category"] ==
                                   'makanan'
                               ? 'Food'.tr
-                              : 'Beverages'.tr,
+                              : ListController.to.filteredList[0]["category"] ==
+                                      'snack'
+                                  ? 'Snack'.tr
+                                  : 'Beverages'.tr,
                           icon: SvgPicture.asset(
                             ListController.to.filteredList[0]["category"] ==
                                     'makanan'
@@ -70,12 +75,16 @@ class ListItem extends StatelessWidget {
                               ? 'Food'.tr
                               : currentCategory == 'makanan'
                                   ? 'Food'.tr
-                                  : 'Beverages'.tr,
+                                  : currentCategory == 'snack'
+                                      ? 'Snack'.tr
+                                      : 'Beverages'.tr,
                           icon: SvgPicture.asset(
                             currentCategory == 'semua menu' ||
                                     currentCategory == 'makanan'
                                 ? ImageConstant.makananIconSvg
-                                : ImageConstant.minumanIconSvg,
+                                : currentCategory == 'snack'
+                                    ? ImageConstant.makananIconSvg
+                                    : ImageConstant.minumanIconSvg,
                             height: 14.h,
                           ),
                         ),
@@ -88,9 +97,25 @@ class ListItem extends StatelessWidget {
                       margin: EdgeInsets.only(top: 15.w),
                       child: SectionHeader(
                         color: MainColor.primary,
-                        title: 'Beverages',
+                        title: 'Beverages'.tr,
                         icon: SvgPicture.asset(
                           ImageConstant.minumanIconSvg,
+                          height: 14.h,
+                        ),
+                      ),
+                    );
+                  } else if (listType == 'semua menu' &&
+                      index ==
+                          ListController.to.minumanList.length +
+                              ListController.to.makananList.length &&
+                      ListController.to.snackList.isNotEmpty) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 15.w),
+                      child: SectionHeader(
+                        color: MainColor.primary,
+                        title: 'Snack'.tr,
+                        icon: SvgPicture.asset(
+                          ImageConstant.makananIconSvg,
                           height: 14.h,
                         ),
                       ),

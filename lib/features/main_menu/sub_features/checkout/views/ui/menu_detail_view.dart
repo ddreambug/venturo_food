@@ -49,15 +49,15 @@ class MenuDetailView extends StatelessWidget {
             SizedBox(
               height: 181.h,
               width: 378.w,
-              child: Hero(
-                tag: menuItem['id_menu'],
-                child: CachedNetworkImage(
-                  imageUrl: menuItem['foto'],
-                  useOldImageOnUrlChange: true,
-                  color: Colors.grey[100],
-                  colorBlendMode: BlendMode.darken,
-                  fit: BoxFit.contain,
-                ),
+              child: CachedNetworkImage(
+                imageUrl: menuItem['foto'] ??
+                    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+                useOldImageOnUrlChange: true,
+                errorWidget: (context, url, error) => Image.network(
+                    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png'),
+                color: Colors.grey[100],
+                colorBlendMode: BlendMode.darken,
+                fit: BoxFit.contain,
               ),
             ),
             Expanded(

@@ -17,15 +17,11 @@ class CheckoutListItems extends StatelessWidget {
       () {
         final makananItems = CheckoutController.to.makananCart;
         final minumanItems = CheckoutController.to.minumanCart;
-        final cartItem = CheckoutController.to.cart;
+        final snackItems = CheckoutController.to.snackCart;
 
         return ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 25.w),
-          itemCount: minumanItems.isNotEmpty
-              ? (makananItems.isNotEmpty
-                  ? cartItem.length + 2
-                  : minumanItems.length + 1)
-              : makananItems.length + 1,
+          itemCount: CheckoutController.to.getItemCount(),
           itemBuilder: (context, index) {
             if (makananItems.isNotEmpty) {
               if (index == 0) {
@@ -52,6 +48,7 @@ class CheckoutListItems extends StatelessWidget {
               }
             }
 
+            /// Minuman
             final minumanStartIndex =
                 makananItems.isNotEmpty ? makananItems.length + 1 : 0;
 
@@ -68,11 +65,40 @@ class CheckoutListItems extends StatelessWidget {
               );
             } else if (minumanItems.isNotEmpty && index > minumanStartIndex) {
               final minumanIndex = index - (minumanStartIndex + 1);
-              final item = minumanItems[minumanIndex];
-              return CheckoutCart(
-                context: context,
-                item: item,
+              if (minumanIndex < minumanItems.length) {
+                final item = minumanItems[minumanIndex];
+                return CheckoutCart(
+                  context: context,
+                  item: item,
+                );
+              }
+            }
+
+            /// Snack
+            final snackStartIndex =
+                (makananItems.isNotEmpty ? makananItems.length + 1 : 0) +
+                    (minumanItems.isNotEmpty ? minumanItems.length + 1 : 0);
+
+            if (snackItems.isNotEmpty && index == snackStartIndex) {
+              return Container(
+                margin: EdgeInsets.only(top: 15.w),
+                child: SectionHeader(
+                  color: MainColor.primary,
+                  title: 'Snack'.tr,
+                  icon: SvgPicture.asset(
+                    ImageConstant.makananIconSvg,
+                  ),
+                ),
               );
+            } else if (snackItems.isNotEmpty && index > snackStartIndex) {
+              final snackIndex = index - (snackStartIndex + 1);
+              if (snackIndex < snackItems.length) {
+                final item = snackItems[snackIndex];
+                return CheckoutCart(
+                  context: context,
+                  item: item,
+                );
+              }
             }
 
             return const SizedBox.shrink();

@@ -104,4 +104,5 @@ const Map<String, String> translationsEnUs = {
   "Fill Survey": 'Fill Survey',
   "Late <3x": 'Late <3x',
   'Value is required': 'Value is required',
+  'Snack': 'Snack',
 };

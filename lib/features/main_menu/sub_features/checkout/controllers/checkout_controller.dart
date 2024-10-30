@@ -242,6 +242,11 @@ class CheckoutController extends GetxController {
         (element) => element['category'] == 'minuman',
       )
       .toList();
+  List<Map<String, dynamic>> get snackCart => cart
+      .where(
+        (element) => element['category'] == 'snack',
+      )
+      .toList();
 
   num get totalHarga {
     num hargaTotal = 0;
@@ -376,5 +381,23 @@ class CheckoutController extends GetxController {
         stackTrace: stacktrace,
       );
     }
+  }
+
+  int getItemCount() {
+    int count = 0;
+
+    if (minumanCart.isNotEmpty) {
+      count += minumanCart.length + 1;
+    }
+
+    if (makananCart.isNotEmpty) {
+      count += makananCart.length + 1;
+    }
+
+    if (snackCart.isNotEmpty) {
+      count += snackCart.length + 1;
+    }
+
+    return count;
   }
 }

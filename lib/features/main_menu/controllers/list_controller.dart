@@ -36,6 +36,7 @@ class ListController extends GetxController {
     'All Menu'.tr,
     'Food'.tr,
     'Beverages'.tr,
+    'Snack'.tr,
   ];
 
   @override
@@ -43,7 +44,7 @@ class ListController extends GetxController {
     super.onInit();
 
     repository = ListRepository();
-    // await repository.fetchApiData();
+    await repository.fetchApiData();
     await getListOfData();
 
     focusNode.addListener(() {
@@ -67,7 +68,6 @@ class ListController extends GetxController {
   void onRefresh() async {
     page(0);
     canLoadMore(true);
-
     final result = await getListOfData();
 
     if (result) {
@@ -108,6 +108,17 @@ class ListController extends GetxController {
                 .toLowerCase()
                 .contains(keyword.value.toLowerCase()) &&
             element['category'] == 'minuman',
+      )
+      .toList();
+
+  List<Map<String, dynamic>> get snackList => items
+      .where(
+        (element) =>
+            element['name']
+                .toString()
+                .toLowerCase()
+                .contains(keyword.value.toLowerCase()) &&
+            element['category'] == 'snack',
       )
       .toList();
 

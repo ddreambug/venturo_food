@@ -34,7 +34,9 @@ class ListCategory extends StatelessWidget {
                   ? ImageConstant.listIconSvg
                   : index == 1
                       ? ImageConstant.makananIconSvg
-                      : ImageConstant.minumanIconSvg,
+                      : index == 2
+                          ? ImageConstant.minumanIconSvg
+                          : ImageConstant.makananIconSvg,
             ),
           );
         },

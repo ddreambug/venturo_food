@@ -17,11 +17,10 @@ class OrderDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<dynamic> selectedOrder =
-        OrderController.to.selectedOrder['item'] as List<dynamic>;
     var voucher = OrderController.to.selectedOrder['voucher'] as Map;
     final foodOrder = OrderController.to.foodOrders;
     final drinkOrder = OrderController.to.drinkOrders;
+    final snackOrder = OrderController.to.snackOrders;
 
     return SafeArea(
       child: Scaffold(
@@ -42,19 +41,13 @@ class OrderDetailView extends StatelessWidget {
               height: voucher.isNotEmpty ? 300.h : 310.h,
               child: ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
-                itemCount: drinkOrder.isNotEmpty
-                    ? foodOrder.isNotEmpty
-                        ? selectedOrder.length + 2
-                        : drinkOrder.length + 1
-                    : foodOrder.length + 1,
+                itemCount: OrderController.to.getItemCount(),
                 itemBuilder: (context, index) {
+                  // Check for Food Orders
                   if (foodOrder.isNotEmpty) {
                     if (index == 0) {
                       return Container(
-                        margin: EdgeInsets.only(
-                          top: 15.w,
-                          bottom: 4.w,
-                        ),
+                        margin: EdgeInsets.only(top: 15.w, bottom: 4.w),
                         child: SectionHeader(
                           color: MainColor.primary,
                           title: 'Food'.tr,
@@ -74,7 +67,6 @@ class OrderDetailView extends StatelessWidget {
 
                   final drinkStartIndex =
                       foodOrder.isNotEmpty ? foodOrder.length + 1 : 0;
-
                   if (drinkOrder.isNotEmpty && index == drinkStartIndex) {
                     return Container(
                       margin: EdgeInsets.only(top: 15.w),
@@ -88,10 +80,36 @@ class OrderDetailView extends StatelessWidget {
                     );
                   } else if (drinkOrder.isNotEmpty && index > drinkStartIndex) {
                     final minumanIndex = index - (drinkStartIndex + 1);
-                    final item = drinkOrder[minumanIndex];
-                    return OrderDetailCard(
-                      menu: item,
+                    if (minumanIndex < drinkOrder.length) {
+                      final item = drinkOrder[minumanIndex];
+                      return OrderDetailCard(
+                        menu: item,
+                      );
+                    }
+                  }
+
+                  final snackStartIndex =
+                      (foodOrder.isNotEmpty ? foodOrder.length + 1 : 0) +
+                          (drinkOrder.isNotEmpty ? drinkOrder.length + 1 : 0);
+                  if (snackOrder.isNotEmpty && index == snackStartIndex) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 15.w),
+                      child: SectionHeader(
+                        color: MainColor.primary,
+                        title: 'Snack'.tr,
+                        icon: SvgPicture.asset(
+                          ImageConstant.makananIconSvg,
+                        ),
+                      ),
                     );
+                  } else if (snackOrder.isNotEmpty && index > snackStartIndex) {
+                    final snackIndex = index - (snackStartIndex + 1);
+                    if (snackIndex < snackOrder.length) {
+                      final item = snackOrder[snackIndex];
+                      return OrderDetailCard(
+                        menu: item,
+                      );
+                    }
                   }
 
                   return const SizedBox.shrink();

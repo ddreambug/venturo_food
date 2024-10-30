@@ -23,16 +23,15 @@ class BuildMenuImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         color: const Color.fromARGB(255, 223, 223, 223),
       ),
-      child: Hero(
-        tag: idMenu,
-        child: CachedNetworkImage(
-          imageUrl: fotoMenu ??
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
-          useOldImageOnUrlChange: true,
-          color: const Color.fromARGB(255, 223, 223, 223),
-          colorBlendMode: BlendMode.darken,
-          fit: BoxFit.contain,
-        ),
+      child: CachedNetworkImage(
+        imageUrl: fotoMenu ??
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+        useOldImageOnUrlChange: true,
+        errorWidget: (context, url, error) => Image.network(
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png'),
+        color: const Color.fromARGB(255, 223, 223, 223),
+        colorBlendMode: BlendMode.darken,
+        fit: BoxFit.contain,
       ),
     );
   }

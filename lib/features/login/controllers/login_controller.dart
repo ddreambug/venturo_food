@@ -26,7 +26,7 @@ class LoginController extends GetxController {
   }
 
   /// Form Validate & Submited
-  void validateForm(context) async {
+  void validateForm(BuildContext context, {bool isGoogle = false}) async {
     await GlobalController.to.checkConnection();
 
     var isValid = formKey.currentState!.validate();
@@ -42,10 +42,14 @@ class LoginController extends GetxController {
       formKey.currentState!.save();
 
       try {
-        var response = await LoginRepository()
-            .login(emailController.text, passwordController.text);
+        var response = await LoginRepository().login(
+          emailController.text,
+          passwordController.text,
+          isGoogle,
+        );
 
         if (response['status_code'] == 200) {
+          print(response);
           await addUser(
             nama: response['data']['user']['nama'],
             tanggalLahir: '12/12/2012',
@@ -60,6 +64,7 @@ class LoginController extends GetxController {
         } else if (response['status_code'] == 422) {
           EasyLoading.dismiss();
           PanaraInfoDialog.show(
+            // ignore: use_build_context_synchronously
             context,
             title: "Warning",
             message: response['errors'][0],
@@ -73,6 +78,7 @@ class LoginController extends GetxController {
         } else {
           EasyLoading.dismiss();
           PanaraInfoDialog.show(
+            // ignore: use_build_context_synchronously
             context,
             title: "Warning",
             message: response['message'],

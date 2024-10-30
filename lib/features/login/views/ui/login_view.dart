@@ -105,7 +105,10 @@ class LoginView extends StatelessWidget {
                 SizedBox(height: 60.w),
                 const DividerCustom(),
                 SizedBox(height: 10.w),
-                SocialLoginButton(onPress: () {})
+                SocialLoginButton(onPress: () {
+                  analyticsController.logButtonClick('Button Masuk Google');
+                  loginController.validateForm(context, isGoogle: true);
+                })
               ],
             ),
           ),

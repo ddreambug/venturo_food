@@ -33,6 +33,24 @@ class OrderController extends GetxController
     super.onClose();
   }
 
+  int getItemCount() {
+    int count = 0;
+
+    if (drinkOrders.isNotEmpty) {
+      count += drinkOrders.length + 1;
+    }
+
+    if (foodOrders.isNotEmpty) {
+      count += foodOrders.length + 1;
+    }
+
+    if (snackOrders.isNotEmpty) {
+      count += snackOrders.length + 1;
+    }
+
+    return count;
+  }
+
   List<Map<String, dynamic>> get ongoingOrders {
     return orders
         .where((order) => order['status'] == 0 || order['status'] == 1)
@@ -118,6 +136,18 @@ class OrderController extends GetxController
 
     for (var item in items) {
       if (item['category'] == 'minuman') {
+        drinks.add(item);
+      }
+    }
+    return drinks;
+  }
+
+  List<Map<String, dynamic>> get snackOrders {
+    List<Map<String, dynamic>> drinks = [];
+    List<dynamic> items = selectedOrder['item'] as List<dynamic>;
+
+    for (var item in items) {
+      if (item['category'] == 'snack') {
         drinks.add(item);
       }
     }
