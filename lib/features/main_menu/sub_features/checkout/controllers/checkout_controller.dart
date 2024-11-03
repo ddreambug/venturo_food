@@ -358,12 +358,18 @@ class CheckoutController extends GetxController {
   }
 
   void saveOrder() async {
+    var repository = CartRepository();
     try {
       List<Map<String, dynamic>> newOrders =
           cart.map((item) => Map<String, dynamic>.from(item)).toList();
       final RxMap<String, int> newVoucher = RxMap<String, int>.from(
         voucherValue,
       );
+
+      final List<Map<String, dynamic>> menu = transformedCart();
+      final num potongan = totalHarga - finalHarga.value;
+      //POST ke api
+      await repository.postOrder(potongan, finalHarga.value, menu);
 
       final saveOrder = await OrderController.to.addOrder(
         newOrders,
@@ -381,6 +387,25 @@ class CheckoutController extends GetxController {
         stackTrace: stacktrace,
       );
     }
+  }
+
+  List<Map<String, dynamic>> transformedCart() {
+    final masterData = ListController.to.allItems;
+
+    return cart.map((cartItem) {
+      var matchingMasterItem = masterData.firstWhere(
+        (masterItem) => masterItem["name"] == cartItem["name"],
+      );
+
+      return {
+        "id_menu": matchingMasterItem["id_menu"],
+        "harga": cartItem["harga"],
+        "level": cartItem["level"] == 0 ? 1 : cartItem["level"],
+        "topping": cartItem["toping"] == "Tanpa Toping" ? [] : [1],
+        "jumlah": cartItem["jumlah"],
+        "catatan": cartItem["catatan"],
+      };
+    }).toList();
   }
 
   int getItemCount() {

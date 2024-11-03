@@ -25,6 +25,7 @@ class ListController extends GetxController {
   final RxInt page = 0.obs;
   final RxList<Map<String, dynamic>> promo = <Map<String, dynamic>>[].obs;
   final RxList<Map<String, dynamic>> items = <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> allItems = <Map<String, dynamic>>[].obs;
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
   final RxBool canLoadMore = true.obs;
@@ -124,6 +125,7 @@ class ListController extends GetxController {
 
   Future<bool> getListOfData() async {
     try {
+      allItems.value = repository.data;
       final result = repository.getListOfData(
         offset: page.value,
       );

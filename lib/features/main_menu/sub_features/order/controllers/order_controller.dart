@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:venturo_food/features/main_menu/sub_features/order/repositories/order_repository.dart';
 
 class OrderController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -20,9 +20,11 @@ class OrderController extends GetxController
   RxString filterSelectedValue = 'All Status'.tr.obs;
   RxString filterStartDate = '12/10/24'.obs;
   RxString filterEndDate = '30/12/24'.obs;
+  var repository = OrderRepository();
 
   @override
   void onInit() {
+    repository.getOrders();
     super.onInit();
     tabController = TabController(length: 2, vsync: this);
   }
@@ -87,6 +89,8 @@ class OrderController extends GetxController
           'status': 0 //0=ongoing, 1=ready, 2=success, 3=canceled
         },
       );
+
+      repository.getOrders();
 
       return true;
     } catch (exception, stacktrace) {
