@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,6 +18,8 @@ import 'package:venturo_food/firebase_options.dart';
 import 'package:venturo_food/global_bindings/global_binding.dart';
 import 'package:venturo_food/global_controllers/analytics_controller.dart';
 import 'package:venturo_food/utils/services/hive_service.dart';
+import 'package:venturo_food/utils/services/firebase_messaging_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,10 +31,20 @@ void main() async {
   await Hive.openBox("venturo");
   HiveService.initHiveUser();
 
-  //firebase init
+  //firebase analytic init
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(AnalyticsController());
 
+  //firebase notif init
+  await FirebaseMessagingService().initialize();
+  String? token = await FirebaseMessaging.instance.getToken();
+  log('FCM Token: $token');
+  await FirebaseMessaging.instance.subscribeToTopic('order');
+  FirebaseMessaging.onBackgroundMessage(
+    FirebaseMessagingService.handleBackgroundNotif,
+  );
+
+  //sentry init
   await SentryFlutter.init(
     (options) {
       options.dsn =
