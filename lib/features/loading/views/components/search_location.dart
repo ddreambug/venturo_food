@@ -21,7 +21,7 @@ class SearchLocation extends StatelessWidget {
               () {
                 if (loadingController.isLoading.value) {
                   return Text(
-                    'Searching your location${loadingController.loadingDots.value}'.tr,
+                    'Mencari Lokasimu${loadingController.loadingDots.value}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: MainColor.grey,
@@ -29,10 +29,10 @@ class SearchLocation extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Text(
-                    'Location Data Found'.tr,
+                  return const Text(
+                    'Lokasi Ditemukan',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: MainColor.primary,
                       fontWeight: FontWeight.w800,
                     ),
@@ -84,7 +84,7 @@ class SearchLocation extends StatelessWidget {
                         onPressed: () {
                           Get.back();
                         },
-                        child: Text('Cancel'.tr),
+                        child: const Text('Batal'),
                       ),
                     );
                   } else {
@@ -104,8 +104,7 @@ class SearchLocation extends StatelessWidget {
                       ),
                       SizedBox(height: 10.w),
                       Text(
-                        'Auto Next In ${loadingController.loadingNextPage.value}'
-                            .tr,
+                        'Lanjut Dalam ${loadingController.loadingNextPage.value}',
                         style: TextStyle(
                           color: MainColor.grey,
                           fontSize: 12.sp,

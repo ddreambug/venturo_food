@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_food/features/main_menu/sub_features/order/repositories/order_repository.dart';
+import 'package:venturo_food/utils/services/firebase_messaging_service.dart';
 
 class OrderController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -181,12 +182,29 @@ class OrderController extends GetxController
       if (isMatch) {
         if (cancel) {
           orders[i]['status'] = 3;
+          FirebaseMessagingService.showNotification(
+            title: 'Success'.tr,
+            body: 'Order Canceled'.tr,
+          );
+          orders.refresh();
+          selectedOrder.refresh();
+        } else if (orders[i]['status'] == 2) {
+          FirebaseMessagingService.showNotification(
+            title: 'Success'.tr,
+            body: 'Order Completed'.tr,
+          );
           orders.refresh();
           selectedOrder.refresh();
         } else {
           orders[i]['status']++;
           orders.refresh();
           selectedOrder.refresh();
+          if (orders[i]['status'] == 2) {
+            FirebaseMessagingService.showNotification(
+              title: 'Success'.tr,
+              body: 'Order Completed'.tr,
+            );
+          }
         }
       }
     }

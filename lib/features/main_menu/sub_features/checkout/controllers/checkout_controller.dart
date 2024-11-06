@@ -16,6 +16,7 @@ import 'package:venturo_food/utils/enums/enum.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/custom_bottom_sheet.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:venturo_food/utils/services/firebase_messaging_service.dart';
 
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find<CheckoutController>();
@@ -380,6 +381,10 @@ class CheckoutController extends GetxController {
       if (saveOrder) {
         emptyCartItem();
         voucherValue.clear();
+        FirebaseMessagingService.showNotification(
+          title: 'Success'.tr,
+          body: 'Order Created Succesfully'.tr,
+        );
       }
     } catch (exception, stacktrace) {
       await Sentry.captureException(

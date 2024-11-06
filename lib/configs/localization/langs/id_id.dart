@@ -30,7 +30,6 @@ const Map<String, String> translationsIdId = {
       'Masukkan alamat email untuk mengubah password anda',
   'Cancel': 'Batal',
   'Change Password': 'Ubah Password',
-  'Searching your location': 'Mencari Lokasimu',
   'Location Data Found': 'Data Lokasi Ditemukan',
   'Auto Next In': 'Otomatis Lanjut Dalam',
   'Available Promo': 'Promo yang Tersedia',
@@ -107,4 +106,7 @@ const Map<String, String> translationsIdId = {
   "Late <3x": 'Terlambat <3x',
   'Value is required': 'Data harus diisi',
   'Snack': 'Snack',
+  'Order Created Succesfully': 'Pesanan Berhasil Dibuat',
+  'Success': 'Berhasil',
+  'Order Completed': 'Pesanan Selesai',
 };

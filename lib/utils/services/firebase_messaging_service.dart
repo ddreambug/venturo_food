@@ -134,4 +134,31 @@ class FirebaseMessagingService {
       Get.toNamed('${MainRoute.order}/$idOrder');
     }
   }
+
+  // Local Notification
+  static Future<void> showNotification({
+    required String title,
+    required String body,
+    String? payload,
+  }) async {
+    const androidNotificationDetails = AndroidNotificationDetails(
+      'order_notification_channel',
+      'order channel',
+      channelDescription: 'order data channel',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    const notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+    );
+
+    await localNotification.show(
+      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+      title,
+      body,
+      notificationDetails,
+      payload: payload,
+    );
+  }
 }

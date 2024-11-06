@@ -85,6 +85,7 @@ const Map<String, String> translationsEnUs = {
       "Are you sure to update this order status?",
   'No Order Canceled Yet': 'No Order Canceled Yet',
   'No Order Completed Yet': 'No Order Completed Yet',
+  'Order Completed': 'Order Completed',
   'Order Added': 'Order Added',
   'Prepared': 'Prepared',
   'Voucher Detail': 'Voucher Detail',
@@ -105,4 +106,6 @@ const Map<String, String> translationsEnUs = {
   "Late <3x": 'Late <3x',
   'Value is required': 'Value is required',
   'Snack': 'Snack',
+  'Order Created Succesfully': 'Order Created Succesfully',
+  'Success': 'Success',
 };
