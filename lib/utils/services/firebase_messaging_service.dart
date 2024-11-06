@@ -22,7 +22,7 @@ class FirebaseMessagingService {
 
     // Initialize local notification settings
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('custom_icon');
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings();
     const InitializationSettings initializationSettings =
