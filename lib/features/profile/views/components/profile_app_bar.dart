@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
+import 'package:get/get.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ProfileAppBar({super.key});
@@ -42,7 +43,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
             Align(
               alignment: Alignment.center, // Center the text horizontally
               child: Text(
-                'Profil',
+                'Profile'.tr,
                 style: GoogleTextStyle.w600.copyWith(
                   fontSize: 20.sp,
                   color: MainColor.primary,

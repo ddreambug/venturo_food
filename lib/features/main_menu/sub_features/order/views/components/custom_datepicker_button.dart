@@ -38,8 +38,9 @@ class CustomDatepickerButton extends StatelessWidget {
                   child: SfDateRangePicker(
                     monthViewSettings: DateRangePickerMonthViewSettings(
                       viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                        textStyle:
-                            GoogleTextStyle.w600.copyWith(fontSize: 14.sp),
+                        textStyle: GoogleTextStyle.w600.copyWith(
+                          fontSize: 14.sp,
+                        ),
                       ),
                     ),
                     selectionMode: DateRangePickerSelectionMode.range,

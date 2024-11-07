@@ -22,8 +22,6 @@ class ListItem extends StatelessWidget {
           final String listType = ListController.to.selectedCategory.value;
           final itemCount = ListController.to.filteredList.length;
 
-          print('itemcount $itemCount');
-
           if (itemCount == 0) {
             return const Center(
               child: Text('Item Tidak Ditemukan'),
@@ -71,16 +69,16 @@ class ListItem extends StatelessWidget {
                         margin: EdgeInsets.only(top: 15.w, bottom: 4.w),
                         child: SectionHeader(
                           color: MainColor.primary,
-                          title: currentCategory == 'semua menu'
+                          title: currentCategory == 'all menu'
                               ? 'Food'.tr
-                              : currentCategory == 'makanan'
+                              : currentCategory == 'food'
                                   ? 'Food'.tr
                                   : currentCategory == 'snack'
                                       ? 'Snack'.tr
                                       : 'Beverages'.tr,
                           icon: SvgPicture.asset(
-                            currentCategory == 'semua menu' ||
-                                    currentCategory == 'makanan'
+                            currentCategory == 'all menu' ||
+                                    currentCategory == 'food'
                                 ? ImageConstant.makananIconSvg
                                 : currentCategory == 'snack'
                                     ? ImageConstant.makananIconSvg
@@ -90,7 +88,7 @@ class ListItem extends StatelessWidget {
                         ),
                       );
                     }
-                  } else if (listType == 'semua menu' &&
+                  } else if (listType == 'all menu' &&
                       index == ListController.to.makananList.length &&
                       ListController.to.minumanList.isNotEmpty) {
                     return Container(
@@ -104,7 +102,7 @@ class ListItem extends StatelessWidget {
                         ),
                       ),
                     );
-                  } else if (listType == 'semua menu' &&
+                  } else if (listType == 'all menu' &&
                       index ==
                           ListController.to.minumanList.length +
                               ListController.to.makananList.length &&

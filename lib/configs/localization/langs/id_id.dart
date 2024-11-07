@@ -109,4 +109,9 @@ const Map<String, String> translationsIdId = {
   'Order Created Succesfully': 'Pesanan Berhasil Dibuat',
   'Success': 'Berhasil',
   'Order Completed': 'Pesanan Selesai',
+  'makanan': 'food',
+  'minuman': 'beverages',
+  'snack': 'snack',
+  'Tambahkan Catatan': 'Tambahkan Catatan',
+  'Tanpa Toping': 'Tanpa Toping'
 };

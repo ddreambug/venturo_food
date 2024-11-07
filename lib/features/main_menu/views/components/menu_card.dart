@@ -56,7 +56,7 @@ class MenuCard extends StatelessWidget {
                     nameMenu: menu['name'],
                     priceMenu: menu['harga'],
                     matchedItem: matchedItem,
-                    catatanMenu: menu['catatan'],
+                    catatanMenu: menu['catatan'].toString().tr,
                     menu: menu,
                     isCart: isCart,
                   ),

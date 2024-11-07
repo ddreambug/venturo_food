@@ -29,15 +29,15 @@ class ListController extends GetxController {
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
   final RxBool canLoadMore = true.obs;
-  final RxString selectedCategory = 'all menu'.tr.obs;
+  final RxString selectedCategory = 'all menu'.obs;
   final RxString keyword = ''.obs;
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
   final List<String> categories = [
-    'All Menu'.tr,
-    'Food'.tr,
-    'Beverages'.tr,
-    'Snack'.tr,
+    'All Menu',
+    'Food',
+    'Beverages',
+    'Snack',
   ];
 
   @override
@@ -85,8 +85,8 @@ class ListController extends GetxController {
                 .toString()
                 .toLowerCase()
                 .contains(keyword.value.toLowerCase()) &&
-            (selectedCategory.value == 'semua menu' ||
-                element['category'] == selectedCategory.value),
+            (selectedCategory.value == 'all menu' ||
+                element['category'].toString().tr == selectedCategory.value),
       )
       .toList();
 

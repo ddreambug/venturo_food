@@ -19,25 +19,29 @@ class ListCategory extends StatelessWidget {
         itemCount: ListController.to.categories.length,
         padding: EdgeInsets.symmetric(horizontal: 25.w),
         itemBuilder: (context, index) {
-          final category = ListController.to.categories[index];
           return Obx(
-            () => MenuChip(
-              onTap: () {
-                ListController.to.selectedCategory(
-                  category.toLowerCase(),
-                );
-              },
-              isSelected: ListController.to.selectedCategory.value ==
-                  category.toLowerCase(),
-              text: category,
-              icon: index == 0
-                  ? ImageConstant.listIconSvg
-                  : index == 1
-                      ? ImageConstant.makananIconSvg
-                      : index == 2
-                          ? ImageConstant.minumanIconSvg
-                          : ImageConstant.makananIconSvg,
-            ),
+            () {
+              final category = ListController.to.categories[index];
+
+              return MenuChip(
+                onTap: () {
+                  ListController.to.selectedCategory(
+                    category.toLowerCase(),
+                  );
+                  print(ListController.to.selectedCategory);
+                },
+                isSelected: ListController.to.selectedCategory.value ==
+                    category.toLowerCase(),
+                text: category.tr,
+                icon: index == 0
+                    ? ImageConstant.listIconSvg
+                    : index == 1
+                        ? ImageConstant.makananIconSvg
+                        : index == 2
+                            ? ImageConstant.minumanIconSvg
+                            : ImageConstant.makananIconSvg,
+              );
+            },
           );
         },
         separatorBuilder: (context, index) => 13.horizontalSpace,

@@ -29,7 +29,7 @@ class MenuDetailView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: CustomAppbar(
-          appBarTitle: isCart ? 'Edit Menu' : 'Detail Menu',
+          appBarTitle: isCart ? 'Edit Menu' : 'Menu Detail'.tr,
           useIcon: false,
         ),
         bottomNavigationBar: !isCart
@@ -112,7 +112,10 @@ class MenuDetailView extends StatelessWidget {
                         ),
                       ),
                       const Divider(),
-                      BuildMenuProperties(menuItem: menuItem, isCart: isCart),
+                      BuildMenuProperties(
+                        menuItem: menuItem,
+                        isCart: isCart,
+                      ),
                       SizedBox(height: 15.h),
                       if (!isCart) ...{
                         BuildReactiveButton(

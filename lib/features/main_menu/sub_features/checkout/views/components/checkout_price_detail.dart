@@ -166,7 +166,7 @@ class CheckoutPriceDetail extends StatelessWidget {
                                   : 'Choose Voucher'.tr;
 
                               return Text(
-                                voucherAmount != 'Pilih Voucher'
+                                voucherAmount != 'Choose Voucher'.tr
                                     ? formatCurrency.format(voucherAmount)
                                     : voucherAmount.toString(),
                                 style: GoogleTextStyle.w400.copyWith(

@@ -49,7 +49,7 @@ class OrderListItem extends StatelessWidget {
             return Column(
               children: [
                 const OrderFilter(),
-                if (filterValue == 'Semua Status') ...{
+                if (filterValue == 'All Status') ...{
                   SizedBox(
                     height: 530.h,
                     child: SingleChildScrollView(
@@ -68,7 +68,7 @@ class OrderListItem extends StatelessWidget {
                   ),
                   const Spacer(),
                   const TotalPriceInfo(),
-                } else if (filterValue == 'Selesai') ...{
+                } else if (filterValue == 'Done') ...{
                   if (completedOrders.isEmpty) ...{
                     SizedBox(
                       height: 530.h,
@@ -100,7 +100,7 @@ class OrderListItem extends StatelessWidget {
                     const Spacer(),
                     const TotalPriceInfo(),
                   },
-                } else if (filterValue == 'Dibatalkan') ...{
+                } else if (filterValue == 'Canceled') ...{
                   if (canceledOrders.isEmpty) ...{
                     SizedBox(
                       height: 584.h,

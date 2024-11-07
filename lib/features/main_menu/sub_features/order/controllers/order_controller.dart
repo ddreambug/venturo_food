@@ -18,9 +18,9 @@ class OrderController extends GetxController
     symbol: 'Rp. ',
     decimalDigits: 0,
   );
-  RxString filterSelectedValue = 'All Status'.tr.obs;
-  RxString filterStartDate = '12/10/24'.obs;
-  RxString filterEndDate = '30/12/24'.obs;
+  RxString filterSelectedValue = 'All Status'.obs;
+  RxString filterStartDate = '22/11/22'.obs;
+  RxString filterEndDate = DateFormat('dd/MM/yy').format(DateTime.now()).obs;
   var repository = OrderRepository();
 
   @override

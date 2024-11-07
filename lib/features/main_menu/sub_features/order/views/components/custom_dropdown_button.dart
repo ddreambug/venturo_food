@@ -14,9 +14,9 @@ class CustomDropdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> items = [
-      'All Status'.tr,
-      'Done'.tr,
-      'Canceled'.tr,
+      'All Status',
+      'Done',
+      'Canceled',
     ];
 
     return DropdownButtonHideUnderline(
@@ -37,7 +37,7 @@ class CustomDropdownButton extends StatelessWidget {
                   (String item) => DropdownMenuItem<String>(
                     value: item,
                     child: Text(
-                      item,
+                      item.tr,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,

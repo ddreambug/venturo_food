@@ -98,9 +98,9 @@ class MenuDetailList extends StatelessWidget {
                 width: 200.w,
                 child: Text(
                   detailType.name == 'catatan'
-                      ? matchedItem['catatan']
+                      ? matchedItem['catatan'].toString().tr
                       : detailType.name == 'toping'
-                          ? matchedItem['toping']
+                          ? matchedItem['toping'].toString().tr
                           : detailType.name == 'level'
                               ? matchedItem['level'].toString()
                               : listPrice,
