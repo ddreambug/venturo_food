@@ -116,4 +116,5 @@ const Map<String, String> translationsEnUs = {
   'Tidak ada order ditemukan di tanggal tersebut':
       'No order found in that date',
   'Privacy Policy': 'Privacy Policy',
+  'Anda Yakin Untuk Logout?': 'Are You Sure?',
 };

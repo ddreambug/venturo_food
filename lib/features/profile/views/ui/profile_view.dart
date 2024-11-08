@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
 import 'package:venturo_food/features/profile/views/components/user_device_info.dart';
+import 'package:venturo_food/features/profile/views/components/user_logout_button.dart';
 import 'package:venturo_food/features/profile/views/components/user_rating.dart';
 import 'package:venturo_food/features/profile/views/components/profile_app_bar.dart';
 import 'package:venturo_food/features/profile/views/components/user_avatar.dart';
@@ -53,7 +54,8 @@ class ProfileView extends StatelessWidget {
               /// Device Info
               const UserDeviceInfo(),
 
-              
+              /// Logout Button
+              const UserLogoutButton(),
             ],
           ),
         ),
