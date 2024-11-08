@@ -112,5 +112,6 @@ const Map<String, String> translationsEnUs = {
   'minuman': 'beverages',
   'snack': 'snack',
   'Tambahkan Catatan': 'Add Notes',
-  'Tanpa Toping': 'Without Topping'
+  'Tanpa Toping': 'Without Topping',
+  'Tidak ada order ditemukan di tanggal tersebut': 'No order found in that date'
 };

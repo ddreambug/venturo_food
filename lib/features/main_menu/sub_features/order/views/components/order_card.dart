@@ -28,10 +28,6 @@ class OrderCard extends StatelessWidget {
       symbol: 'Rp. ',
       decimalDigits: 0,
     );
-    final formatDate = DateFormat(
-      "d MMM yyyy",
-      "id_ID",
-    );
 
     final menuTitles = OrderController.to.extractMenuTitles(orderItem);
 
@@ -132,7 +128,7 @@ class OrderCard extends StatelessWidget {
                           ),
                           const Spacer(),
                           Text(
-                            formatDate.format(orderItem['date']),
+                            orderItem['date'],
                             style: GoogleTextStyle.w500.copyWith(
                               fontSize: 12.sp,
                               color: MainColor.grey,

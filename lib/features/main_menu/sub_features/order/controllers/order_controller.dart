@@ -19,7 +19,7 @@ class OrderController extends GetxController
     decimalDigits: 0,
   );
   RxString filterSelectedValue = 'All Status'.obs;
-  RxString filterStartDate = '22/11/22'.obs;
+  RxString filterStartDate = '17/09/24'.obs;
   RxString filterEndDate = DateFormat('dd/MM/yy').format(DateTime.now()).obs;
   var repository = OrderRepository();
 
@@ -64,14 +64,41 @@ class OrderController extends GetxController
     bool completed = false,
     bool canceled = false,
   }) {
+    DateTime startDate = DateFormat('dd/MM/yy').parse(filterStartDate.value);
+    DateTime endDate = DateFormat('dd/MM/yy').parse(filterEndDate.value);
+    List<Map<String, dynamic>> filteredOrders;
+
     if (completed) {
-      return orders.where((order) => order['status'] == 2).toList();
+      filteredOrders = orders.where((order) => order['status'] == 2).toList();
     } else if (canceled) {
-      return orders.where((order) => order['status'] == 3).toList();
+      filteredOrders = orders.where((order) => order['status'] == 3).toList();
     } else {
-      return orders
+      filteredOrders = orders
           .where((order) => order['status'] == 2 || order['status'] == 3)
           .toList();
+    }
+
+    filteredOrders = filteredOrders.where((order) {
+      DateTime orderDate = DateFormat('dd/MM/yy').parse(order['date']);
+      return orderDate.isAfter(startDate) &&
+          orderDate.isBefore(
+            endDate.add(
+              const Duration(
+                days: 1,
+              ),
+            ),
+          );
+    }).toList();
+
+    if (filteredOrders.isEmpty && filterStartDate.value != '17/09/24') {
+      return [
+        {
+          'status': 4,
+          'keterangan': 'Tidak ada order ditemukan di tanggal tersebut',
+        }
+      ];
+    } else {
+      return filteredOrders;
     }
   }
 
@@ -86,7 +113,7 @@ class OrderController extends GetxController
           'item': newOrder,
           'voucher': voucher,
           'harga': harga,
-          'date': DateTime.now(),
+          'date': DateFormat('dd/MM/yy').format(DateTime.now()),
           'status': 0 //0=ongoing, 1=ready, 2=success, 3=canceled
         },
       );

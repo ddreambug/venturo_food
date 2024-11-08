@@ -68,19 +68,37 @@ class OrderStatus extends StatelessWidget {
                   for (int i = 0; i < status.length; i++) ...[
                     if (i > 0)
                       Expanded(
-                        child: Divider(thickness: 3.h),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 35.w),
+                          child: Divider(thickness: 3.h),
+                        ),
                       ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Iconify(
-                        orderItem['status'] == status[i]
-                            ? Ic.baseline_check_circle
-                            : Ic.baseline_circle,
-                        size: orderItem['status'] == status[i] ? 22.h : 12.h,
-                        color: orderItem['status'] == status[i]
-                            ? MainColor.primary
-                            : const Color.fromARGB(255, 150, 150, 150),
-                      ),
+                    Column(
+                      children: [
+                        Iconify(
+                          orderItem['status'] == status[i]
+                              ? Ic.baseline_check_circle
+                              : Ic.baseline_circle,
+                          size: orderItem['status'] == status[i] ? 22.h : 12.h,
+                          color: orderItem['status'] == status[i]
+                              ? MainColor.primary
+                              : const Color.fromARGB(255, 150, 150, 150),
+                        ),
+                        SizedBox(
+                          width: 62.w,
+                          height: 35.w,
+                          child: Text(
+                            i == 0
+                                ? 'Order Recieved'.tr
+                                : i == 1
+                                    ? 'Please Take'.tr
+                                    : 'Order Complete'.tr,
+                            style:
+                                GoogleTextStyle.w400.copyWith(fontSize: 12.w),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ],
@@ -88,39 +106,39 @@ class OrderStatus extends StatelessWidget {
             },
           ),
         ),
-        Row(
-          children: [
-            SizedBox(
-              width: 60.w,
-              height: 35.w,
-              child: Text(
-                'Order Recieved'.tr,
-                style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const Spacer(),
-            SizedBox(
-              width: 60.w,
-              height: 35.w,
-              child: Text(
-                'Please Take'.tr,
-                style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const Spacer(),
-            SizedBox(
-              width: 64.w,
-              height: 35.w,
-              child: Text(
-                'Order Complete'.tr,
-                style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ],
-        )
+        // Row(
+        //   children: [
+        // SizedBox(
+        //   width: 60.w,
+        //   height: 35.w,
+        //   child: Text(
+        //     'Order Recieved'.tr,
+        //     style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
+        //     textAlign: TextAlign.center,
+        //   ),
+        // ),
+        //     const Spacer(),
+        //     SizedBox(
+        //       width: 60.w,
+        //       height: 35.w,
+        //       child: Text(
+        //         'Please Take'.tr,
+        //         style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
+        //         textAlign: TextAlign.center,
+        //       ),
+        //     ),
+        //     const Spacer(),
+        //     SizedBox(
+        //       width: 64.w,
+        //       height: 35.w,
+        //       child: Text(
+        //         'Order Complete'.tr,
+        //         style: GoogleTextStyle.w400.copyWith(fontSize: 12.w),
+        //         textAlign: TextAlign.right,
+        //       ),
+        //     ),
+        //   ],
+        // )
       ],
     );
   }

@@ -113,5 +113,7 @@ const Map<String, String> translationsIdId = {
   'minuman': 'beverages',
   'snack': 'snack',
   'Tambahkan Catatan': 'Tambahkan Catatan',
-  'Tanpa Toping': 'Tanpa Toping'
+  'Tanpa Toping': 'Tanpa Toping',
+  'Tidak ada order ditemukan di tanggal tersebut':
+      'Tidak ada order ditemukan di tanggal tersebut'
 };

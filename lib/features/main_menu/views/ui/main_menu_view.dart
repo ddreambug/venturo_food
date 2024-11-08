@@ -5,6 +5,7 @@ import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:venturo_food/constants/cores/assets/image_constant.dart';
 import 'package:venturo_food/features/main_menu/controllers/list_controller.dart';
 import 'package:venturo_food/features/main_menu/views/components/custom_bottomnavbar.dart';
+import 'package:venturo_food/features/main_menu/views/components/custom_floating_action_button.dart';
 import 'package:venturo_food/features/main_menu/views/components/list_category.dart';
 import 'package:venturo_food/features/main_menu/views/components/list_item.dart';
 import 'package:venturo_food/features/main_menu/views/components/list_promo.dart';
@@ -23,15 +24,7 @@ class ListItemView extends StatelessWidget {
       child: GestureDetector(
         onTap: ListController.to.focusNode.unfocus,
         child: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Get.toNamed('/detail-pesanan');
-            },
-            backgroundColor: MainColor.primary,
-            shape: const CircleBorder(),
-            mini: true,
-            child: const Icon(Icons.shopping_cart),
-          ),
+          floatingActionButton: const CustomFloatingActionButton(),
           backgroundColor: MainColor.white,
           appBar: SearchAppBar(
             onChange: (value) => ListController.to.keyword(value),
