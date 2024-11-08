@@ -12,13 +12,14 @@ class CartRepository {
   Future<Response<dynamic>> postOrder(
     num potongan,
     num total,
+    num idVoucher,
     List<Map<String, dynamic>> menu,
   ) async {
     try {
       var requestBody = {
         "order": {
           "id_user": 1001,
-          "id_voucher": 1,
+          "id_voucher": idVoucher,
           "potongan": potongan,
           "total_bayar": total
         },

@@ -14,7 +14,7 @@ class ListController extends GetxController {
 
   /// Appbar property
   final FocusNode focusNode = FocusNode();
-  var isFocused = false.obs;
+  RxBool isFocused = false.obs;
   RxString appbarType = 'main'.obs;
   Widget appBar = SearchAppBar(
     onChange: (value) => ListController.to.keyword(value),
@@ -46,11 +46,23 @@ class ListController extends GetxController {
 
     repository = ListRepository();
     await repository.fetchApiData();
+    await repository.fetchApiPromo();
     await getListOfData();
+    promo.value = repository.promo;
+    CheckoutController.to.voucher.value = promo
+        .where((item) => item['promo_name'] == 'voucher')
+        .map<Map<String, dynamic>>((item) => Map<String, dynamic>.from(item))
+        .toList();
+    CheckoutController.to.discounts.value = promo
+        .where((item) => item['promo_name'] == 'diskon')
+        .map<Map<String, dynamic>>((item) => Map<String, dynamic>.from(item))
+        .toList();
 
-    focusNode.addListener(() {
-      isFocused.value = focusNode.hasFocus;
-    });
+    focusNode.addListener(
+      () {
+        isFocused.value = focusNode.hasFocus;
+      },
+    );
 
     CheckoutController.to.catatanTextController.addListener(
       () {

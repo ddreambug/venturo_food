@@ -31,7 +31,6 @@ class CheckoutPriceDetail extends StatelessWidget {
         () {
           var isUsingVoucher = CheckoutController.to.voucherValue.isNotEmpty;
           num totalHarga = CheckoutController.to.totalHarga;
-          final double discount = (20 / 100) * totalHarga;
 
           return Container(
             margin: isUsingVoucher
@@ -89,6 +88,11 @@ class CheckoutPriceDetail extends StatelessWidget {
                   if (!isUsingVoucher) ...{
                     Obx(
                       () {
+                        final discountValue =
+                            CheckoutController.to.discountValue.toInt();
+                        final double discount =
+                            (discountValue / 100) * totalHarga;
+
                         if (CheckoutController.to.voucherValue.isEmpty) {
                           return Column(
                             children: [
@@ -104,11 +108,30 @@ class CheckoutPriceDetail extends StatelessWidget {
                                     SizedBox(width: 8.w),
                                     SizedBox(
                                       width: 220.w,
-                                      child: Text(
-                                        'Discount 20%'.tr,
-                                        style: GoogleTextStyle.w700.copyWith(
-                                          fontSize: 16.sp,
-                                        ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Discount '.tr,
+                                            style:
+                                                GoogleTextStyle.w700.copyWith(
+                                              fontSize: 16.sp,
+                                            ),
+                                          ),
+                                          Text(
+                                            '$discountValue',
+                                            style:
+                                                GoogleTextStyle.w700.copyWith(
+                                              fontSize: 16.sp,
+                                            ),
+                                          ),
+                                          Text(
+                                            '%',
+                                            style:
+                                                GoogleTextStyle.w700.copyWith(
+                                              fontSize: 16.sp,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     const Spacer(),

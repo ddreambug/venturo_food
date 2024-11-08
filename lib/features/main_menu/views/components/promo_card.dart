@@ -65,7 +65,7 @@ class PromoCard extends StatelessWidget {
                 softWrap: true,
                 textAlign: TextAlign.center,
                 TextSpan(
-                  text: promoName,
+                  text: promoName == 'diskon' ? promoName : '$promoName\n',
                   style: GoogleTextStyle.w800.copyWith(
                     fontSize: 20.sp,
                     color: MainColor.white,
@@ -75,7 +75,7 @@ class PromoCard extends StatelessWidget {
                       text: ' $discountNominal',
                       style: Get.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w800,
-                        fontSize: discountNominal.length > 4 ? 25.sp : 38.sp,
+                        fontSize: discountNominal.length > 4 ? 28.sp : 38.sp,
                         foreground: Paint()
                           ..style = PaintingStyle.stroke
                           ..strokeWidth = 0.1

@@ -67,6 +67,7 @@ class OrderController extends GetxController
     DateTime startDate = DateFormat('dd/MM/yy').parse(filterStartDate.value);
     DateTime endDate = DateFormat('dd/MM/yy').parse(filterEndDate.value);
     List<Map<String, dynamic>> filteredOrders;
+    String defaultStartDate = '17/09/24';
 
     if (completed) {
       filteredOrders = orders.where((order) => order['status'] == 2).toList();
@@ -90,7 +91,7 @@ class OrderController extends GetxController
           );
     }).toList();
 
-    if (filteredOrders.isEmpty && filterStartDate.value != '17/09/24') {
+    if (filteredOrders.isEmpty && filterStartDate.value != defaultStartDate) {
       return [
         {
           'status': 4,

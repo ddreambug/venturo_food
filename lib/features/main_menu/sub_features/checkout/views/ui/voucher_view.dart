@@ -14,6 +14,8 @@ class VoucherView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final voucherList = CheckoutController.to.voucher;
+    final discountList = CheckoutController.to.discounts;
+    final bool isDiscount = Get.arguments ?? false;
 
     return SafeArea(
       child: Scaffold(
@@ -21,21 +23,26 @@ class VoucherView extends StatelessWidget {
             const CheckoutBottomNavbar(checkoutNavbarType: 'voucher'),
         backgroundColor: MainColor.white,
         appBar: CustomAppbar(
-          appBarTitle: 'Choose Voucher'.tr,
-          icon: ImageConstant.voucherIcon,
+          appBarTitle: isDiscount ? 'Choose Discount'.tr : 'Choose Voucher'.tr,
+          icon: isDiscount
+              ? ImageConstant.discountIcon
+              : ImageConstant.voucherIcon,
         ),
         body: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 25.w),
-          itemCount: voucherList.length,
+          itemCount: isDiscount ? discountList.length : voucherList.length,
           itemBuilder: (context, index) {
-            final voucher = voucherList[index];
+            final items = isDiscount ? discountList[index] : voucherList[index];
 
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 10.w),
               child: Material(
                 borderRadius: BorderRadius.circular(20.r),
                 elevation: 2,
-                child: VoucherCard(voucher: voucher),
+                child: VoucherCard(
+                  voucher: items,
+                  isDiscount: isDiscount,
+                ),
               ),
             );
           },

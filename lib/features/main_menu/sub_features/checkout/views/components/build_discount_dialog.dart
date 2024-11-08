@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
+import 'package:venturo_food/features/main_menu/sub_features/checkout/controllers/checkout_controller.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
 
 class BuildDiscountDialog extends StatelessWidget {
@@ -9,9 +10,10 @@ class BuildDiscountDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var discountList = CheckoutController.to.discounts;
     return Center(
       child: Container(
-        height: 205.h,
+        height: 280.h,
         width: 340.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -30,25 +32,35 @@ class BuildDiscountDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 25.w),
-            Row(
-              children: [
-                Text(
-                  'Fill Survey'.tr,
-                  style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
-                ),
-                const Spacer(),
-                const Text('10%'),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  'Late <3x'.tr,
-                  style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
-                ),
-                const Spacer(),
-                const Text('10%'),
-              ],
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: discountList.length,
+              itemBuilder: (context, index) {
+                var discount = discountList[index];
+                return Row(
+                  children: [
+                    Text(
+                      discount['promo_description'].toString(),
+                      style: GoogleTextStyle.w400.copyWith(fontSize: 16.sp),
+                    ),
+                    const Spacer(),
+                    Text('${discount['value'].toString()}%'),
+                    Obx(() {
+                      var controllerValue =
+                          CheckoutController.to.discountValue.value;
+
+                      return Checkbox(
+                        value: discount['value'] == controllerValue,
+                        onChanged: (bool? value) {
+                          int value = discount['value'] as int;
+                          CheckoutController.to
+                              .changeDiscountValue(value.toDouble());
+                        },
+                      );
+                    }),
+                  ],
+                );
+              },
             ),
             SizedBox(height: 25.w),
             SizedBox(
@@ -76,7 +88,7 @@ class BuildDiscountDialog extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/material_symbols.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
-import 'package:venturo_food/features/main_menu/repositories/list_repository.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/repositories/cart_repository.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/fingerprint_dialog.dart';
 import 'package:venturo_food/features/main_menu/sub_features/checkout/views/components/order_success_dialog.dart';
@@ -22,7 +21,6 @@ class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find<CheckoutController>();
   final CartRepository _cartRepository = CartRepository();
   final TextEditingController catatanTextController = TextEditingController();
-  RxInt catatanLength = 0.obs;
   final RxList<Map<String, dynamic>> items = ListController.to.items;
   final RxList<Map<String, dynamic>> cart = <Map<String, dynamic>>[].obs;
   final RxMap<String, dynamic> editCart = {
@@ -33,20 +31,25 @@ class CheckoutController extends GetxController {
   }.obs;
   final RxList<Map<String, dynamic>> selectedItems =
       <Map<String, dynamic>>[].obs;
-  final List<Map<String, dynamic>> voucher = [];
+  final RxList<Map<String, dynamic>> voucher = <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> discounts = <Map<String, dynamic>>[].obs;
+
   final RxNum finalHarga = RxNum(0);
-  final RxDouble discount = (20 / 100).obs;
+  final RxDouble discountValue = 20.0.obs;
   final RxMap<String, int> voucherValue = <String, int>{}.obs;
+  RxInt catatanLength = 0.obs;
 
   @override
   void onInit() async {
     super.onInit();
-    getVoucherList();
     await getListOfCart();
   }
 
   void showMenuProperty(
-      Map<String, dynamic> menuItem, DetailType detailType, EditType editType) {
+    Map<String, dynamic> menuItem,
+    DetailType detailType,
+    EditType editType,
+  ) {
     Get.bottomSheet(
       barrierColor: const Color.fromARGB(40, 55, 55, 55),
       CustomBottomSheet(
@@ -172,8 +175,13 @@ class CheckoutController extends GetxController {
       cart.add(cartItem);
       changeFinalHarga();
       return 'Success';
-    } catch (e) {
-      return 'Error: $e';
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
+
+      return 'error $exception';
     }
   }
 
@@ -223,9 +231,9 @@ class CheckoutController extends GetxController {
   }
 
   void getVoucherList() {
-    final List<Map<String, dynamic>> promo = ListRepository().promo;
+    final List<Map<String, dynamic>> promo = ListController.to.promo;
     for (var item in promo) {
-      if (item['promo_name'] == 'Voucher') {
+      if (item['promo_name'] == 'voucher') {
         voucher.add(item);
       }
     }
@@ -259,6 +267,8 @@ class CheckoutController extends GetxController {
   }
 
   void changeFinalHarga() {
+    final RxDouble discount = (discountValue / 100).obs;
+
     if (voucherValue.isNotEmpty) {
       if (totalHarga - voucherValue.values.first < 0) {
         finalHarga.value = 0;
@@ -270,7 +280,7 @@ class CheckoutController extends GetxController {
     }
   }
 
-  void changeVoucherValue(String desc, int newValue) {
+  void changeVoucherValue(int id, String desc, int newValue) {
     if (voucherValue.containsKey(desc)) {
       voucherValue.remove(desc);
       changeFinalHarga();
@@ -278,6 +288,12 @@ class CheckoutController extends GetxController {
       voucherValue.value = {desc: newValue};
       changeFinalHarga();
     }
+  }
+
+  void changeDiscountValue(double newValue) {
+    discountValue.value = newValue;
+    discountValue.refresh();
+    changeFinalHarga();
   }
 
   Future<void> verify() async {
@@ -303,8 +319,11 @@ class CheckoutController extends GetxController {
       } else {
         await showPinDialog();
       }
-    } catch (e) {
-      await showPinDialog();
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stacktrace,
+      );
     }
   }
 
@@ -360,36 +379,46 @@ class CheckoutController extends GetxController {
 
   void saveOrder() async {
     var repository = CartRepository();
-    try {
-      List<Map<String, dynamic>> newOrders =
-          cart.map((item) => Map<String, dynamic>.from(item)).toList();
-      final RxMap<String, int> newVoucher = RxMap<String, int>.from(
-        voucherValue,
+    int? index;
+
+    List<Map<String, dynamic>> newOrders =
+        cart.map((item) => Map<String, dynamic>.from(item)).toList();
+
+    final RxMap<String, int> newVoucher = RxMap<String, int>.from(
+      voucherValue,
+    );
+
+    final List<Map<String, dynamic>> menu = transformedCart();
+    final num potongan = totalHarga - finalHarga.value;
+
+    if (newVoucher.isNotEmpty) {
+      index = voucher.indexWhere(
+        (voucherItem) =>
+            voucherItem['promo_description'] ==
+            newVoucher.keys.first.toString(),
       );
+    }
 
-      final List<Map<String, dynamic>> menu = transformedCart();
-      final num potongan = totalHarga - finalHarga.value;
-      //POST ke api
-      await repository.postOrder(potongan, finalHarga.value, menu);
+    //POST ke api
+    await repository.postOrder(
+      potongan,
+      finalHarga.value,
+      index == null ? 1 : voucher[index]['id_promo'] as num,
+      menu,
+    );
 
-      final saveOrder = await OrderController.to.addOrder(
-        newOrders,
-        newVoucher,
-        finalHarga.value,
-      );
+    final saveOrder = await OrderController.to.addOrder(
+      newOrders,
+      newVoucher,
+      finalHarga.value,
+    );
 
-      if (saveOrder) {
-        emptyCartItem();
-        voucherValue.clear();
-        FirebaseMessagingService.showNotification(
-          title: 'Success'.tr,
-          body: 'Order Created Succesfully'.tr,
-        );
-      }
-    } catch (exception, stacktrace) {
-      await Sentry.captureException(
-        exception,
-        stackTrace: stacktrace,
+    if (saveOrder) {
+      emptyCartItem();
+      voucherValue.clear();
+      FirebaseMessagingService.showNotification(
+        title: 'Success'.tr,
+        body: 'Order Created Succesfully'.tr,
       );
     }
   }

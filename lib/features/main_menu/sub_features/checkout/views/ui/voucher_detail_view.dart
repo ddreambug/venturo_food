@@ -35,7 +35,7 @@ class VoucherDetailView extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
               child: SizedBox(
                 width: 364.w,
-                child: Image.asset(
+                child: Image.network(
                   voucherItem['promo_image'],
                 ),
               ),

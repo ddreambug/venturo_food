@@ -9,10 +9,11 @@ class VoucherCard extends StatelessWidget {
   const VoucherCard({
     required this.voucher,
     super.key,
+    this.isDiscount = false,
   });
 
   final Map<String, dynamic> voucher;
-  
+  final bool isDiscount;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -62,6 +63,7 @@ class VoucherCard extends StatelessWidget {
                         value: usedPromo.contains(voucher['promo_description']),
                         onChanged: (value) {
                           CheckoutController.to.changeVoucherValue(
+                            voucher['id_promo'],
                             voucher['promo_description'],
                             voucher['value'],
                           );
@@ -79,7 +81,7 @@ class VoucherCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10).r,
                 child: SizedBox(
                   width: 364.w,
-                  child: Image.asset(
+                  child: Image.network(
                     voucher['promo_image'],
                     fit: BoxFit.cover,
                   ),

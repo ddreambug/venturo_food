@@ -16,7 +16,10 @@ class BuildOngoingOrders extends StatelessWidget {
         if (ongoingOrders.isEmpty) return const EmptyOrder();
 
         return SingleChildScrollView(
-          padding: EdgeInsets.only(top: 10.w, bottom: 50.w),
+          padding: EdgeInsets.only(
+            top: 10.w,
+            bottom: 50.w,
+          ),
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

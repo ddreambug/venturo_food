@@ -7,12 +7,10 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
+import 'package:venturo_food/features/profile/views/components/update_birth_date_dialog.dart';
 
 import '../../../../configs/localization/localization.dart';
 import '../views/components/image_picker_dialog.dart';
@@ -174,54 +172,12 @@ class ProfileController extends GetxController {
     showDialog(
       context: context,
       builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.r),
-          ),
-          child: Container(
-            height: 300.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.r),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15.r),
-              child: SfDateRangePicker(
-                showNavigationArrow: true,
-                maxDate: DateTime.now(),
-                monthViewSettings: DateRangePickerMonthViewSettings(
-                  viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                    textStyle: GoogleTextStyle.w600.copyWith(
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                ),
-                monthCellStyle: DateRangePickerMonthCellStyle(
-                  textStyle: GoogleTextStyle.w400.copyWith(
-                    fontSize: 14.sp,
-                  ),
-                ),
-                backgroundColor: Colors.white,
-                onSelectionChanged: (dateRangePickerSelectionChangedArgs) {
-                  var value = dateRangePickerSelectionChangedArgs.value;
-
-                  if (value != null) {
-                    user.value = {
-                      ...user.value,
-                      'tanggalLahir': DateFormat('dd/MM/yyy').format(value),
-                    };
-                  }
-                  Get.back();
-                },
-              ),
-            ),
-          ),
-        );
+        return const UpdateBirthDateDialog();
       },
     );
   }
 
   void privacyPolicyWebView() {
-   Get.toNamed(MainRoute.privacyPolicy);
- }
-
+    Get.toNamed(MainRoute.privacyPolicy);
+  }
 }

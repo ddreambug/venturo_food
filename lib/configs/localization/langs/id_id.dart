@@ -118,4 +118,6 @@ const Map<String, String> translationsIdId = {
       'Tidak ada order ditemukan di tanggal tersebut',
   'Privacy Policy': 'Syarat dan Ketentuan',
   'Anda Yakin Untuk Logout?': 'Anda Yakin Untuk Logout?',
+  'Choose Discount': 'Pilih Diskon',
+  'Discount ': 'Diskon ',
 };

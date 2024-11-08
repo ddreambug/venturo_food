@@ -140,6 +140,11 @@ class CheckoutBottomNavbar extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {
                         Get.back();
+                        final RxMap<String, int> newVoucher =
+                            RxMap<String, int>.from(
+                          CheckoutController.to.voucherValue,
+                        );
+                        print(newVoucher);
                       },
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.black, width: 0.5),
@@ -169,6 +174,7 @@ class CheckoutBottomNavbar extends StatelessWidget {
                 onPressed: () {
                   if (checkoutNavbarType == 'detail_voucher') {
                     CheckoutController.to.changeVoucherValue(
+                      voucher!['id_promo'],
                       voucher!['promo_description'],
                       voucher!['value'],
                     );
