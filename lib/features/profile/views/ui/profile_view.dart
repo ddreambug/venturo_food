@@ -52,6 +52,8 @@ class ProfileView extends StatelessWidget {
 
               /// Device Info
               const UserDeviceInfo(),
+
+              
             ],
           ),
         ),

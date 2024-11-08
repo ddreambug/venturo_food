@@ -115,5 +115,6 @@ const Map<String, String> translationsIdId = {
   'Tambahkan Catatan': 'Tambahkan Catatan',
   'Tanpa Toping': 'Tanpa Toping',
   'Tidak ada order ditemukan di tanggal tersebut':
-      'Tidak ada order ditemukan di tanggal tersebut'
+      'Tidak ada order ditemukan di tanggal tersebut',
+  'Privacy Policy': 'Syarat dan Ketentuan'
 };

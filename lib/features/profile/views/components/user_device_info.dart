@@ -68,6 +68,20 @@ class UserDeviceInfo extends StatelessWidget {
                     ),
                   ),
                 ),
+                Divider(color: Colors.black45, height: 0.5.h),
+                TileOption(
+                  title: 'Privacy Policy'.tr,
+                  titleStyle: GoogleTextStyle.w600.copyWith(
+                    fontSize: 16.sp,
+                    color: MainColor.black,
+                  ),
+                  message: 'Here',
+                  messageStyle: GoogleTextStyle.w400.copyWith(
+                    fontSize: 16.sp,
+                    color: MainColor.black,
+                  ),
+                  onTap: ProfileController.to.privacyPolicyWebView,
+                ),
               ],
             ),
           ),

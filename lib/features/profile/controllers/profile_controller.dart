@@ -9,6 +9,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:venturo_food/configs/routes/main_route.dart';
 import 'package:venturo_food/configs/themes/main_color.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:venturo_food/shared/widgets/styles/google_text_style.dart';
@@ -218,4 +219,9 @@ class ProfileController extends GetxController {
       },
     );
   }
+
+  void privacyPolicyWebView() {
+   Get.toNamed(MainRoute.privacyPolicy);
+ }
+
 }

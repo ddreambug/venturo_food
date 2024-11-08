@@ -13,4 +13,5 @@ abstract class MainRoute {
   static const String order = '/order';
   static const String detailOrder = '/detail-order';
   static const String profil = '/profil';
+  static const String privacyPolicy = '/privacy_policy';
 }

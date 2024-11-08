@@ -15,6 +15,7 @@ import 'package:venturo_food/features/main_menu/sub_features/checkout/views/ui/m
 import 'package:venturo_food/features/main_menu/views/ui/promo_detail_view.dart';
 import 'package:venturo_food/features/login/bindings/login_binding.dart';
 import 'package:venturo_food/features/profile/bindings/profile_binding.dart';
+import 'package:venturo_food/features/profile/views/components/privacy_policy_view.dart';
 import 'package:venturo_food/features/profile/views/ui/profile_view.dart';
 import 'package:venturo_food/features/splash_screen/bindings/splash_binding.dart';
 import 'package:venturo_food/features/login/views/ui/login_view.dart';
@@ -110,5 +111,9 @@ abstract class MainPage {
       page: () => const ProfileView(),
       transition: Transition.fadeIn,
     ),
+    GetPage(
+      name: MainRoute.privacyPolicy,
+      page: () => const PrivacyPolicyView(),
+    )
   ];
 }

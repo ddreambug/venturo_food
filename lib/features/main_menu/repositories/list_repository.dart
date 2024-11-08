@@ -141,7 +141,7 @@ class ListRepository {
 
   // Get list of data
   Map<String, dynamic> getListOfData({int offset = 0}) {
-    int limit = 35 + offset;
+    int limit = 5 + offset;
     sortData(data);
 
     if (limit > data.length) limit = data.length;

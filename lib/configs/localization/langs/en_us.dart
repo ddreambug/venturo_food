@@ -113,5 +113,7 @@ const Map<String, String> translationsEnUs = {
   'snack': 'snack',
   'Tambahkan Catatan': 'Add Notes',
   'Tanpa Toping': 'Without Topping',
-  'Tidak ada order ditemukan di tanggal tersebut': 'No order found in that date'
+  'Tidak ada order ditemukan di tanggal tersebut':
+      'No order found in that date',
+  'Privacy Policy': 'Privacy Policy',
 };
