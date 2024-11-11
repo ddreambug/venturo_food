@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -8,6 +9,7 @@ import 'package:venturo_food/features/login/repositories/login_repository.dart';
 import 'package:venturo_food/features/login/views/components/login_flavor.dart';
 import 'package:venturo_food/global_controllers/global_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
   static LoginController get to => Get.find();
@@ -19,6 +21,82 @@ class LoginController extends GetxController {
   var passwordController = TextEditingController();
   var passwordValue = "".obs;
   var obscureText = true.obs;
+
+  Future<dynamic> signInWithGoogle(BuildContext context) async {
+    if (GlobalController.to.isConnect.value == true) {
+      try {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        if (googleUser == null) return "modal dialog closed";
+
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        UserCredential userData =
+            await FirebaseAuth.instance.signInWithCredential(
+          credential,
+        );
+        var response = await LoginRepository().login(
+          userData.user!.email!,
+          userData.user!.displayName!,
+          true,
+        );
+
+        if (response['status_code'] == 200) {
+          await addUser(
+            nama: userData.user!.displayName!,
+            tanggalLahir: '12/12/2012',
+            nomorTelepon: '08224111400',
+            alamatEmail: userData.user!.email!,
+            pin: '111111',
+            foto: userData.user!.photoURL!,
+            token: userData.credential!.token.toString(),
+          );
+          Get.offNamed('/search-location');
+        } else if (response['status_code'] == 422) {
+          EasyLoading.dismiss();
+          PanaraInfoDialog.show(
+            // ignore: use_build_context_synchronously
+            context,
+            title: "Warning",
+            message: response['errors'][0],
+            buttonText: "Coba lagi",
+            onTapDismiss: () {
+              Get.back();
+            },
+            panaraDialogType: PanaraDialogType.warning,
+            barrierDismissible: false,
+          );
+        } else {
+          EasyLoading.dismiss();
+          PanaraInfoDialog.show(
+            // ignore: use_build_context_synchronously
+            context,
+            title: "Warning",
+            message: response['message'],
+            buttonText: "Coba lagi",
+            onTapDismiss: () {
+              Get.back();
+            },
+            panaraDialogType: PanaraDialogType.warning,
+            barrierDismissible: false,
+          );
+        }
+
+        return response;
+      } catch (exception, stacktrace) {
+        await Sentry.captureException(
+          exception,
+          stackTrace: stacktrace,
+        );
+      }
+    } else if (GlobalController.to.isConnect.value == false) {
+      Get.toNamed(MainRoute.noConnection);
+    }
+  }
 
   /// Form Password show
   void changePasswordVisibility() {

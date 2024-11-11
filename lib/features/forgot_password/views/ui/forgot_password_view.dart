@@ -60,8 +60,8 @@ class ForgotPasswordView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 45.h,
-                    width: 170.h,
+                    height: 35.h,
+                    width: 140.w,
                     child: ElevatedButton(
                       style: const ButtonStyle(
                         backgroundColor:
@@ -82,8 +82,8 @@ class ForgotPasswordView extends StatelessWidget {
                   ),
                   const Spacer(),
                   SizedBox(
-                    height: 45.h,
-                    width: 170.h,
+                    height: 35.h,
+                    width: 140.w,
                     child: ElevatedButton(
                       onPressed: () {
                         ForgotPasswordController.to.validateForm(context);
