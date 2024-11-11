@@ -4,6 +4,58 @@
 
 ---
 
+## Some Plugin i use
+  cached_network_image: ^3.4.1
+  device_info_plus: ^11.1.0
+  dio: ^5.7.0
+  dropdown_button2: ^2.3.9
+  file_picker: ^8.1.3
+  firebase_analytics: ^11.3.2
+  firebase_auth: ^5.3.2
+  firebase_core: ^3.5.0
+  firebase_messaging: ^15.1.3
+  firebase_ui_auth: ^1.16.0
+  firebase_ui_oauth_google: ^1.4.0
+  flutter_conditional_rendering: ^2.1.0
+  flutter_easyloading: ^3.0.5
+  flutter_inappwebview: ^6.1.5
+  flutter_launcher_icons: ^0.14.1
+  flutter_local_notifications: ^18.0.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_screenutil: ^5.9.3
+  flutter_slidable: ^3.1.1
+  flutter_svg: ^2.0.14
+  geocoding: ^3.0.0
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  google_fonts: ^6.2.1
+  google_sign_in: ^6.2.2
+  hive_flutter: ^1.1.0
+  iconify_flutter: ^0.0.5
+  image_cropper: ^8.0.2
+  image_picker: ^1.1.2
+  intl: ^0.19.0
+  loadmore: ^2.1.0
+  local_auth: ^2.3.0
+  location: ^6.0.2
+  panara_dialogs: ^0.1.5
+  path_provider: ^2.1.4
+  pinput: ^5.0.0
+  pull_to_refresh: ^2.0.0
+  sentry_flutter: ^8.9.0
+  syncfusion_flutter_datepicker: ^27.1.56
+  uuid: ^4.5.1
+
+---
+
+## Full Demo
+
+Watch the full demo on YouTube:  
+[**Venturo Food App Demo**](https://youtu.be/yS_J6v7chNw)
+
+---
+
 ## Screenshots:
 
 ### 1. **Login Screen**  
@@ -39,11 +91,4 @@
 ### 11. **Localization**  
 <img src="https://github.com/user-attachments/assets/77cb34c2-100f-4cf3-94d2-442f0dd87388" width="300" height="auto">
 
----
 
-## Full Demo
-
-Watch the full demo on YouTube:  
-[**Venturo Food App Demo**](https://youtu.be/yS_J6v7chNw)
-
----
